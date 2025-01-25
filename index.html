@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Anish Dudeja</title>
+  <title>Anish Dudeja - Personal Website</title>
   <style>
     /* General Styling */
     body {
@@ -12,13 +12,21 @@
       padding: 0;
       color: #333;
       line-height: 1.6;
-      background: url('woodbg.jpeg') no-repeat center center fixed; /* Replace with your image name */
+      background: url('woodbg.jpeg') no-repeat center center fixed;
       background-size: cover;
     }
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.8); /* Translucent overlay */
+      z-index: -1;
+    }
     header {
-      background: rgba(243, 248, 252, 0.9); /* Semi-transparent background over image */
-      padding: 20px;
       text-align: center;
+      padding: 20px;
     }
     header img {
       width: 150px;
@@ -44,9 +52,6 @@
       justify-content: center;
       gap: 20px;
     }
-    nav ul li {
-      display: inline;
-    }
     nav ul li a {
       text-decoration: none;
       color: #007bff;
@@ -56,31 +61,21 @@
     section {
       max-width: 1000px;
       margin: 20px auto;
-      padding: 20px;
-      background: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
       display: none; /* Hide all sections initially */
     }
     section.active {
       display: block; /* Show the active section */
     }
-    .projects-grid, .experience-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
+    .content-box {
+      background: #fff; /* White box */
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s, box-shadow 0.2s;
     }
-    .card {
-      background: #fff;
-      padding: 15px;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      text-align: center;
-    }
-    .card img {
-      max-width: 100%;
-      border-radius: 8px;
-      margin-bottom: 10px;
+    .content-box:hover {
+      transform: translateY(-5px); /* Lift effect */
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
     }
     footer {
       background: #333;
@@ -91,10 +86,12 @@
   </style>
 </head>
 <body>
+  <div class="overlay"></div> <!-- Translucent overlay -->
+  
   <header>
     <img src="profile.jpg" alt="Profile Picture">
     <h1>Anish Dudeja</h1>
-    <p>Computer Science @ UMD</p>
+    <p>Computer Science @ UMD | LLM Research</p>
     <nav>
       <ul>
         <li><a onclick="showSection('about')">About</a></li>
@@ -107,63 +104,55 @@
 
   <!-- About Section -->
   <section id="about" class="active">
-    <h2>About</h2>
-    <p>
-      As a <strong>computer science student</strong> at the <strong>University of Maryland - College Park</strong>, I am passionate about
-      using technology to tackle everyday problems. I focus on <strong>deep learning</strong> and the <strong>intersection of technology and business</strong>.
-      My goal is to make a meaningful impact by leveraging technology.
-    </p>
-    <p>
-      <strong>Contact Info:</strong><br>
-      Email: <a href="mailto:anishd17@umd.edu">anishd17@umd.edu</a><br>
-      Phone: <a href="tel:+13025841403">302-584-1403</a><br>
-      <a href="https://www.linkedin.com/in/anishd17/" target="_blank">LinkedIn</a> | <a href="https://github.com" target="_blank">GitHub</a>
-    </p>
+    <div class="content-box">
+      <h2>About</h2>
+      <p>
+        As a <strong>computer science student</strong> at the <strong>University of Maryland - College Park</strong>, I am passionate about
+        using technology to tackle everyday problems. I focus on <strong>deep learning</strong> and the <strong>intersection of technology and business</strong>.
+        My goal is to make a meaningful impact by leveraging technology.
+      </p>
+      <p>
+        <strong>Contact Info:</strong><br>
+        Email: <a href="mailto:anishd17@umd.edu">anishd17@umd.edu</a><br>
+        Phone: <a href="tel:+13025841403">302-584-1403</a><br>
+        <a href="https://www.linkedin.com/in/anishd17/" target="_blank">LinkedIn</a> | <a href="https://github.com" target="_blank">GitHub</a>
+      </p>
+    </div>
   </section>
 
   <!-- Projects Section -->
   <section id="projects">
-    <h2>Projects</h2>
-    <div class="projects-grid">
-      <div class="card">
-        <img src="project1.jpg" alt="Project 1">
-        <h3>Project 1</h3>
-        <p>Skills: Python, React, LLMs</p>
-      </div>
-      <div class="card">
-        <img src="project2.jpg" alt="Project 2">
-        <h3>Project 2</h3>
-        <p>Skills: Rest APIs, Firebase</p>
+    <div class="content-box">
+      <h2>Projects</h2>
+      <div>
+        <p><strong>Project 1:</strong> LLM-Powered Chatbot</p>
+        <p><strong>Project 2:</strong> Data Analytics Dashboard</p>
       </div>
     </div>
   </section>
 
   <!-- Experience Section -->
   <section id="experience">
-    <h2>Experience</h2>
-    <div class="experience-grid">
-      <div class="card">
-        <img src="experience1.jpg" alt="Experience 1">
-        <h3>Technology Intern at XYZ</h3>
-        <p>Worked on AI solutions and data pipelines.</p>
-      </div>
-      <div class="card">
-        <img src="experience2.jpg" alt="Experience 2">
-        <h3>Teaching Assistant at UMD</h3>
-        <p>Supported students in programming courses.</p>
+    <div class="content-box">
+      <h2>Experience</h2>
+      <div>
+        <p><strong>Role 1:</strong> Software Intern</p>
+        <p><strong>Role 2:</strong> Research Assistant</p>
       </div>
     </div>
   </section>
 
   <!-- Education Section -->
   <section id="education">
-    <h2>Education</h2>
-    <p><strong>B.S. (Honors)</strong> in Computer Science - Machine Learning (Aug 2022 - Present)</p>
-    <ul>
-      <li>CMSC421: Intro to AI</li>
-      <li>CMSC414: Networks & Security</li>
-      <li>CMSC422: Machine Learning</li>
-    </ul>
+    <div class="content-box">
+      <h2>Education</h2>
+      <p><strong>B.S. (Honors)</strong> in Computer Science - Machine Learning (Aug 2022 - Present)</p>
+      <ul>
+        <li>CMSC421: Intro to AI</li>
+        <li>CMSC414: Networks & Security</li>
+        <li>CMSC422: Machine Learning</li>
+      </ul>
+    </div>
   </section>
 
   <footer>
