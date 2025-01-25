@@ -18,6 +18,7 @@
       line-height: 1.6;
       background: url('woodbg.jpeg') no-repeat center center fixed;
       background-size: cover;
+      text-align: center; /* Center everything horizontally */
     }
     .overlay {
       position: absolute;
@@ -29,10 +30,9 @@
       z-index: -1;
     }
     header {
-      display: flex;
-      align-items: center;
-      padding: 20px 50px; /* Add padding for left alignment */
-      text-align: left;
+      display: inline-block; /* Center the block itself */
+      text-align: left; /* Left-align content within the centered block */
+      padding: 20px;
       margin-top: 50px; /* Lowering the header further */
     }
     header img {
@@ -40,10 +40,7 @@
       height: 120px;
       border-radius: 50%;
       border: 2px solid #ddd;
-      margin-right: 20px; /* Add space between image and text */
-    }
-    header div {
-      text-align: left;
+      margin-bottom: 20px;
     }
     header h1 {
       font-size: 3em; /* Larger size for name */
@@ -129,10 +126,8 @@
 
   <header>
     <img src="profile.jpg" alt="Profile Picture">
-    <div>
-      <h1>Anish Dudeja</h1>
-      <p>Computer Science @ UMD | LLM Research</p>
-    </div>
+    <h1>Anish Dudeja</h1>
+    <p>Computer Science @ UMD | LLM Research</p>
   </header>
 
   <nav>
