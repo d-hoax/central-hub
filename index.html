@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Anish Dudeja - Personal Website</title>
+  <title>Anish Dudeja</title>
   <style>
     /* General Styling */
     body {
@@ -21,7 +21,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(255, 255, 255, 0.8); /* Translucent overlay */
+      background: rgba(255, 255, 255, 0.6); /* Reduced opacity of overlay */
       z-index: -1;
     }
     header {
@@ -66,8 +66,18 @@
     section.active {
       display: block; /* Show the active section */
     }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #444;
+    }
+    .content-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
     .content-box {
-      background: #fff; /* White box */
+      background: rgba(255, 255, 255, 0.8); /* Nearly opaque white box */
       border-radius: 10px;
       padding: 20px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -77,21 +87,15 @@
       transform: translateY(-5px); /* Lift effect */
       box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
     }
-    footer {
-      background: #333;
-      color: #fff;
-      text-align: center;
-      padding: 15px;
-    }
   </style>
 </head>
 <body>
   <div class="overlay"></div> <!-- Translucent overlay -->
-  
+
   <header>
     <img src="profile.jpg" alt="Profile Picture">
     <h1>Anish Dudeja</h1>
-    <p>Computer Science @ UMD | LLM Research</p>
+    <p>Computer Science @ UMD</p>
     <nav>
       <ul>
         <li><a onclick="showSection('about')">About</a></li>
@@ -104,8 +108,8 @@
 
   <!-- About Section -->
   <section id="about" class="active">
+    <h2>About</h2>
     <div class="content-box">
-      <h2>About</h2>
       <p>
         As a <strong>computer science student</strong> at the <strong>University of Maryland - College Park</strong>, I am passionate about
         using technology to tackle everyday problems. I focus on <strong>deep learning</strong> and the <strong>intersection of technology and business</strong>.
@@ -122,42 +126,52 @@
 
   <!-- Projects Section -->
   <section id="projects">
-    <div class="content-box">
-      <h2>Projects</h2>
-      <div>
-        <p><strong>Project 1:</strong> LLM-Powered Chatbot</p>
-        <p><strong>Project 2:</strong> Data Analytics Dashboard</p>
+    <h2>Projects</h2>
+    <div class="content-grid">
+      <div class="content-box">
+        <h3>Project 1</h3>
+        <p>LLM-Powered Chatbot</p>
+      </div>
+      <div class="content-box">
+        <h3>Project 2</h3>
+        <p>Data Analytics Dashboard</p>
       </div>
     </div>
   </section>
 
   <!-- Experience Section -->
   <section id="experience">
-    <div class="content-box">
-      <h2>Experience</h2>
-      <div>
-        <p><strong>Role 1:</strong> Software Intern</p>
-        <p><strong>Role 2:</strong> Research Assistant</p>
+    <h2>Experience</h2>
+    <div class="content-grid">
+      <div class="content-box">
+        <h3>Software Intern</h3>
+        <p>Worked on AI solutions and data pipelines.</p>
+      </div>
+      <div class="content-box">
+        <h3>Teaching Assistant</h3>
+        <p>Supported students in programming courses.</p>
       </div>
     </div>
   </section>
 
   <!-- Education Section -->
   <section id="education">
-    <div class="content-box">
-      <h2>Education</h2>
-      <p><strong>B.S. (Honors)</strong> in Computer Science - Machine Learning (Aug 2022 - Present)</p>
-      <ul>
-        <li>CMSC421: Intro to AI</li>
-        <li>CMSC414: Networks & Security</li>
-        <li>CMSC422: Machine Learning</li>
-      </ul>
+    <h2>Education</h2>
+    <div class="content-grid">
+      <div class="content-box">
+        <h3>B.S. in Computer Science</h3>
+        <p>University of Maryland, College Park</p>
+      </div>
+      <div class="content-box">
+        <h3>Courses</h3>
+        <ul>
+          <li>CMSC421: Intro to AI</li>
+          <li>CMSC414: Networks & Security</li>
+          <li>CMSC422: Machine Learning</li>
+        </ul>
+      </div>
     </div>
   </section>
-
-  <footer>
-    <p>&copy; 2024 Anish Dudeja</p>
-  </footer>
 
   <script>
     function showSection(sectionId) {
