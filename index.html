@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Personal Website</title>
+  <title>Anish Dudeja - Personal Website</title>
   <style>
     /* General Styling */
     body {
@@ -32,79 +32,48 @@
       font-size: 1.2em;
       color: #555;
     }
-
     nav {
       margin-top: 20px;
     }
     nav ul {
       list-style: none;
       padding: 0;
-    }
-    nav ul li {
-      display: inline;
-      margin: 0 15px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
     }
     nav ul li a {
       text-decoration: none;
       color: #007bff;
+      font-weight: bold;
+      cursor: pointer;
     }
-
     section {
       max-width: 1000px;
       margin: 20px auto;
       padding: 20px;
+      display: none; /* Hide all sections initially */
     }
-    section h2 {
-      margin-bottom: 15px;
-      font-size: 1.8em;
-      border-bottom: 2px solid #ddd;
-      padding-bottom: 10px;
+    section.active {
+      display: block; /* Show the active section */
     }
-    section p, ul {
-      margin: 10px 0;
-    }
-
-    /* Projects Section */
-    .projects-grid {
+    .projects-grid, .experience-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 20px;
     }
-    .project-card {
+    .card {
       background: #fff;
       padding: 15px;
       border-radius: 8px;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
       text-align: center;
     }
-    .project-card h3 {
-      font-size: 1.2em;
-      margin-bottom: 10px;
-    }
-    .project-card p {
-      font-size: 0.9em;
-      color: #666;
-    }
-
-    /* Education Section */
-    .education-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 20px;
-    }
-    .education-item {
-      background: #f3f8fc;
-      padding: 15px;
-      text-align: center;
+    .card img {
+      max-width: 100%;
       border-radius: 8px;
-      border: 1px solid #ddd;
-    }
-    .education-item h4 {
-      font-size: 1em;
       margin-bottom: 10px;
     }
-
-    /* Footer */
     footer {
       background: #333;
       color: #fff;
@@ -120,14 +89,16 @@
     <p>Computer Science @ UMD | LLM Research</p>
     <nav>
       <ul>
-        <li><a href="#about">About</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#education">Education</a></li>
+        <li><a onclick="showSection('about')">About</a></li>
+        <li><a onclick="showSection('projects')">Projects</a></li>
+        <li><a onclick="showSection('experience')">Experience</a></li>
+        <li><a onclick="showSection('education')">Education</a></li>
       </ul>
     </nav>
   </header>
 
-  <section id="about">
+  <!-- About Section -->
+  <section id="about" class="active">
     <h2>About</h2>
     <p>
       As a <strong>computer science student</strong> at the <strong>University of Maryland - College Park</strong>, I am passionate about
@@ -142,48 +113,31 @@
     </p>
   </section>
 
+  <!-- Projects Section -->
   <section id="projects">
     <h2>Projects</h2>
     <div class="projects-grid">
-      <div class="project-card">
-        <h3>p1</h3>
-        <p>idk</p>
-        <p>Skills: Python, Large Language Models, React</p>
+      <div class="card">
+        <img src="project1.jpg" alt="Project 1">
+        <h3>Project 1</h3>
+        <p>Skills: Python, React, LLMs</p>
       </div>
-      <div class="project-card">
-        <h3>p2</h3>
-        <p>idk</p>
-        <p>Skills: Rest APIs</p>
-      </div>
-      <div class="project-card">
-        <h3>p3</h3>
-        <p>1idk</p>
-        <p>Skills: Python, PyTorch</p>
+      <div class="card">
+        <img src="project2.jpg" alt="Project 2">
+        <h3>Project 2</h3>
+        <p>Skills: Rest APIs, Firebase</p>
       </div>
     </div>
   </section>
 
-  <section id="education">
-    <h2>Education</h2>
-    <p><strong>B.S. (Honors)</strong> in Computer Science - Machine Learning (Aug 2022 - Present)</p>
-    <div class="education-grid">
-      <div class="education-item">
-        <h4>CMSC421</h4>
-        <p>Intro to AI</p>
+  <!-- Experience Section -->
+  <section id="experience">
+    <h2>Experience</h2>
+    <div class="experience-grid">
+      <div class="card">
+        <img src="experience1.jpg" alt="Experience 1">
+        <h3>Technology Intern at XYZ</h3>
+        <p>Worked on AI solutions and data pipelines.</p>
       </div>
-      <div class="education-item">
-        <h4>CMSC414</h4>
-        <p>Networks & Security</p>
-      </div>
-      <div class="education-item">
-        <h4>CMSC422</h4>
-        <p>ML</p>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <p>&copy; 2024 Anish Dudeja</p>
-  </footer>
-</body>
-</html>
+      <div class="card">
+        <img src="experience2.jpg" alt="Experience 2
