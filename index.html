@@ -42,6 +42,9 @@
       justify-content: center;
       gap: 20px;
     }
+    nav ul li {
+      display: inline;
+    }
     nav ul li a {
       text-decoration: none;
       color: #007bff;
@@ -109,7 +112,7 @@
       <strong>Contact Info:</strong><br>
       Email: <a href="mailto:anishd17@umd.edu">anishd17@umd.edu</a><br>
       Phone: <a href="tel:+13025841403">302-584-1403</a><br>
-      <a href="https://www.linkedin.com/in/anishd17/" target="_blank">LinkedIn</a> | <a href="https://github.com/d-hoax" target="_blank">GitHub</a>
+      <a href="https://www.linkedin.com/in/anishd17/" target="_blank">LinkedIn</a> | <a href="https://github.com" target="_blank">GitHub</a>
     </p>
   </section>
 
@@ -140,4 +143,37 @@
         <p>Worked on AI solutions and data pipelines.</p>
       </div>
       <div class="card">
-        <img src="experience2.jpg" alt="Experience 2
+        <img src="experience2.jpg" alt="Experience 2">
+        <h3>Teaching Assistant at UMD</h3>
+        <p>Supported students in programming courses.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Education Section -->
+  <section id="education">
+    <h2>Education</h2>
+    <p><strong>B.S. (Honors)</strong> in Computer Science - Machine Learning (Aug 2022 - Present)</p>
+    <ul>
+      <li>CMSC421: Intro to AI</li>
+      <li>CMSC414: Networks & Security</li>
+      <li>CMSC422: Machine Learning</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p>&copy; 2024 Anish Dudeja</p>
+  </footer>
+
+  <script>
+    function showSection(sectionId) {
+      // Hide all sections
+      const sections = document.querySelectorAll('section');
+      sections.forEach(section => section.classList.remove('active'));
+
+      // Show the clicked section
+      document.getElementById(sectionId).classList.add('active');
+    }
+  </script>
+</body>
+</html>
