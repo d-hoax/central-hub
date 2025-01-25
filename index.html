@@ -31,9 +31,8 @@
     header {
       display: flex;
       align-items: center;
-      justify-content: center;
-      padding: 20px;
-      text-align: center;
+      padding: 20px 50px; /* Add padding for left alignment */
+      text-align: left;
       margin-top: 50px; /* Lowering the header further */
     }
     header img {
@@ -42,6 +41,9 @@
       border-radius: 50%;
       border: 2px solid #ddd;
       margin-right: 20px; /* Add space between image and text */
+    }
+    header div {
+      text-align: left;
     }
     header h1 {
       font-size: 3em; /* Larger size for name */
@@ -110,6 +112,16 @@
       transform: translateY(-5px); /* Lift effect */
       box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
     }
+    .contact-info {
+      text-align: center;
+      margin-top: 50px;
+    }
+    footer {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 0.9em;
+      color: #555;
+    }
   </style>
 </head>
 <body>
@@ -140,12 +152,6 @@
         As a <strong>computer science student</strong> at the <strong>University of Maryland - College Park</strong>, I am passionate about
         using technology to tackle everyday problems. I focus on <strong>deep learning</strong> and the <strong>intersection of technology and business</strong>.
         My goal is to make a meaningful impact by leveraging technology.
-      </p>
-      <p>
-        <strong>Contact Info:</strong><br>
-        Email: <a href="mailto:anishd17@umd.edu">anishd17@umd.edu</a><br>
-        Phone: <a href="tel:+13025841403">302-584-1403</a><br>
-        <a href="https://www.linkedin.com/in/anishd17/" target="_blank">LinkedIn</a> | <a href="https://github.com" target="_blank">GitHub</a>
       </p>
     </div>
   </section>
@@ -198,6 +204,22 @@
       </div>
     </div>
   </section>
+
+  <!-- Contact Info -->
+  <div class="contact-info">
+    <p><strong>Contact Info:</strong></p>
+    <p>Email: <a href="mailto:anishd17@umd.edu">anishd17@umd.edu</a></p>
+    <p>Phone: <a href="tel:+13025841403">302-584-1403</a></p>
+    <p>
+      <a href="https://www.linkedin.com/in/anishd17/" target="_blank">LinkedIn</a> |
+      <a href="https://github.com" target="_blank">GitHub</a>
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2024 Anish Dudeja
+  </footer>
 
   <script>
     function showSection(sectionId) {
