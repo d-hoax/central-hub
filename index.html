@@ -80,6 +80,7 @@
       flex-direction: column;
       z-index: 2;
     }
+   
     .left-sidebar h1 {
       font-size: 3.5rem;
       color: #e6f1ff;
@@ -100,6 +101,37 @@
       margin-bottom: 3rem;
       max-width: 290px;
     }
+   .logos-lower {
+  /* Instead of just 50vh, do some combination of vh + vw so 
+     it scales better across different aspect ratios. */
+  margin-top: calc(30vh + 5vw);
+  /* '30vh' means 30% of viewport height, plus '5vw' = 5% of viewport width. 
+     Adjust these numbers as you want to push the logos further/lower. */
+
+  display: flex;
+  gap: 1.5rem;
+}
+
+/* If you want to absolutely pin them inside the sidebar, you could do:
+.logos-lower {
+  position: absolute;
+  top: calc(50vh + 5vw);
+  left: 0;
+  ...
+}
+But typically you'd keep them in normal flow with a margin.
+*/
+
+/* Sample styling for icons */
+.logos-lower a img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  transition: opacity 0.2s;
+}
+.logos-lower a:hover img {
+  opacity: 0.8;
+}
 
     /* TABLE OF CONTENTS */
     .nav-links {
@@ -145,22 +177,7 @@
       background: #BB86FC;
     }
 
-    /* LOGOS ~50% below last link => margin-top: 50vh */
-    .logos-lower {
-      margin-top: 30vh;
-      display: flex;
-      gap: 1.5rem;
-    }
-    .logos-lower a img {
-      width: 24px;
-      height: 24px;
-      object-fit: contain;
-      transition: opacity 0.2s;
-    }
-    .logos-lower a:hover img {
-      opacity: 0.8;
-    }
-
+    
     /*
       RIGHT CONTENT pinned fluidly:
       top: 6vh
