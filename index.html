@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
+  <link rel="icon" href="customa.jpg" type="image/jpg">	
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-  <link rel="icon" href="customa.jpg" type="image/jpg">
 
   <title>Anish Dudeja</title>
 
@@ -24,7 +24,7 @@
     html, body {
       width: 100%;
       height: 100%;
-      background: #0A0A0F; /* off-black/dark background */
+      background: #0A0A0F; /* dark/near-black background */
       color: #a8acc6;     /* slightly lighter text than pure gray */
       font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
         Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
@@ -34,11 +34,11 @@
       text-decoration: none;
       cursor: pointer;
       transition: opacity 0.2s;
-      color: inherit; /* by default, take parent's color, we can adjust below */
+      color: inherit; /* by default, take parent's color */
     }
     a:hover { opacity: 0.8; }
 
-    /* HEADINGS & TEXT SIZES (adjusted) */
+    /* HEADINGS & TEXT SIZES */
     h1 {
       font-size: 3.5rem;
       color: #e3e8ff; /* near-white for name */
@@ -46,7 +46,7 @@
       margin-bottom: 0.5rem;
     }
     h2 {
-      font-size: 1.4rem;
+      font-size: 1.2rem; /* smaller for sidebar text */
       color: #e3e8ff;
       font-weight: 400;
       margin-bottom: 1.5rem;
@@ -75,19 +75,36 @@
       display: flex;
       max-width: 1200px;
       margin: 0 auto;
-      padding: 60px 20px; /* bigger top/bottom padding */
+      padding: 60px 20px; 
       min-height: 100vh;
-      /* Additional spacing between sidebar and main */
-      gap: 60px; 
+      gap: 80px; /* more spacing between sidebar & main */
     }
     .sidebar {
-      flex: 0 0 25%; /* narrower sidebar */
+      flex: 0 0 25%;
     }
 
     /* SIDEBAR CONTENT */
     .sidebar p {
+      font-size: 0.9rem; /* smaller paragraphs on left side */
       max-width: 270px;
-      margin-bottom: 2.5rem;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+    .resume-button {
+      display: inline-block;
+      margin-bottom: 3rem;
+      padding: 0.5rem 1rem;
+      background: #BB86FC; 
+      color: #0A0A0F; 
+      border: none;
+      border-radius: 4px;
+      text-transform: uppercase;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .resume-button:hover {
+      opacity: 0.85;
     }
 
     /* NAV LINKS with active highlight & “expanding line” effect */
@@ -95,12 +112,11 @@
       list-style: none;
     }
     .nav-links li {
-      margin-bottom: 1.5rem;
-      font-size: 1rem;
+      margin-bottom: 1.2rem;
+      font-size: 0.9rem;
       text-transform: uppercase;
       letter-spacing: 2px;
     }
-
     .nav-links a {
       display: inline-flex;
       align-items: center;
@@ -108,7 +124,6 @@
       color: #fff; /* White for table of contents text */
       font-weight: 500;
     }
-    /* The small horizontal line before the link text */
     .nav-links a::before {
       content: "";
       display: block;
@@ -135,21 +150,20 @@
     /* MAIN AREA */
     .main {
       flex: 1;
-      /* Optional spacing around content */
     }
     section {
       margin-bottom: 5rem;
     }
 
-    /* We'll wrap each group of items in a "section-container" so we can do a group hover effect. */
-    .experience-section:hover .experience-item,
-    .project-section:hover .project-item {
-      opacity: 0.5; /* dim them by default on section hover */
-      transition: opacity 0.3s;
+    /* DIMMING: only non-hovered items get dimmed */
+    .experience-section:hover .experience-item:not(:hover) {
+      opacity: 0.5;
     }
-    .experience-item:hover, 
-    .project-item:hover {
-      opacity: 1;  /* fully visible on hover */
+    .project-section:hover .project-item:not(:hover) {
+      opacity: 0.5;
+    }
+    .education-section:hover .course-item:not(:hover) {
+      opacity: 0.5;
     }
 
     /* EXPERIENCE “ITEM” CARDS */
@@ -157,27 +171,29 @@
       margin-bottom: 2rem;
       padding: 1.2rem;
       border-radius: 8px;
-      transition: background 0.3s, box-shadow 0.3s, opacity 0.3s;
-      background: rgba(255,255,255,0.02); /* slight subtle background at all times */
+      transition: background 0.3s, box-shadow 0.3s;
+      background: rgba(255,255,255,0.02);
     }
     .experience-item:hover {
-      background: rgba(255,255,255,0.07); 
+      background: rgba(255,255,255,0.07);
       box-shadow: 0 4px 15px -5px rgba(0,0,0,0.4);
     }
+    /* Heading highlight when the entire box is hovered */
+    .experience-item:hover .role-title {
+      color: #BB86FC;
+    }
+
     .date-range {
       font-size: 0.85rem;
       text-transform: uppercase;
-      color: #BB86FC; /* purple highlight */
+      color: #BB86FC; 
       margin-bottom: 0.4rem;
     }
     .role-title {
       font-size: 1.15rem;
-      color: #FFFFFF;  /* white unless hovered */
+      color: #FFFFFF;  
       margin-bottom: 0.3rem;
       transition: color 0.3s;
-    }
-    .role-title:hover {
-      color: #BB86FC; /* purple on hover */
     }
     .role-company {
       font-size: 1rem;
@@ -215,27 +231,51 @@
       margin-bottom: 2rem;
       padding: 1.2rem;
       border-radius: 8px;
-      transition: background 0.3s, box-shadow 0.3s, opacity 0.3s;
+      transition: background 0.3s, box-shadow 0.3s;
       background: rgba(255,255,255,0.02);
     }
     .project-item:hover {
       background: rgba(255,255,255,0.07);
       box-shadow: 0 4px 15px -5px rgba(0,0,0,0.4);
     }
-    .project-item h4 a {
-      color: #e3e8ff;
-      transition: color 0.2s;
-    }
-    .project-item h4 a:hover {
+    .project-item:hover h4 a {
       color: #BB86FC;
     }
     .project-item p {
       font-size: 1rem;
     }
 
-    /* EDUCATION SECTION */
-    #education {
-      margin-bottom: 5rem;
+    .projects-button {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      background: #BB86FC; 
+      color: #0A0A0F; 
+      border: none;
+      border-radius: 4px;
+      text-transform: uppercase;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .projects-button:hover {
+      opacity: 0.85;
+    }
+
+    /* EDUCATION SECTION with “course-item” boxes */
+    .education-section {
+      /* to match the .experience-section or .project-section */
+    }
+    .course-item {
+      margin-bottom: 2rem;
+      padding: 1.2rem;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.02);
+      transition: background 0.3s, box-shadow 0.3s;
+    }
+    .course-item:hover {
+      background: rgba(255,255,255,0.07);
+      box-shadow: 0 4px 15px -5px rgba(0,0,0,0.4);
     }
 
     /* FOOTER W/ TINY SOCIAL ICONS */
@@ -250,7 +290,7 @@
       gap: 1.2rem;
     }
     .social-icons a svg {
-      width: 18px; /* smaller icons */
+      width: 18px; 
       height: 18px;
       fill: #a8acc6;
       transition: fill 0.2s;
@@ -298,6 +338,9 @@
       <p>
         I build accessible, pixel-perfect digital experiences for the web.
       </p>
+      <!-- Resume button placeholder -->
+      <a class="resume-button" href="#" target="_blank">Resume</a>
+
       <ul class="nav-links">
         <li><a href="#about">About</a></li>
         <li><a href="#experience">Experience</a></li>
@@ -330,7 +373,7 @@
         </p>
         <p>
           In my spare time, I’m usually climbing, reading, hanging out with my wife and two cats, or
-          running around Hyrule searching for secret seeds.
+          running around a fantasy realm searching for secrets.
         </p>
       </section>
 
@@ -338,6 +381,7 @@
       <section id="experience" class="experience-section">
         <h3>Experience</h3>
 
+        <!-- EXPERIENCE ITEM 1 -->
         <div class="experience-item">
           <div class="date-range">2024 — Present</div>
           <div class="role-title">Senior Frontend Engineer, Accessibility</div>
@@ -356,6 +400,7 @@
           </div>
         </div>
 
+        <!-- EXPERIENCE ITEM 2 -->
         <div class="experience-item">
           <div class="date-range">2018 — 2024</div>
           <div class="role-title">Lead Engineer</div>
@@ -379,12 +424,49 @@
             <span class="tag">PHP</span>
           </div>
         </div>
-        <!-- More experience items as needed -->
+
+        <!-- EXPERIENCE ITEM 3 (placeholder) -->
+        <div class="experience-item">
+          <div class="date-range">2016 — 2018</div>
+          <div class="role-title">Front End Engineer</div>
+          <div class="role-company">Placeholder Corp</div>
+          <div class="experience-desc">
+            Developed interactive user interfaces, focusing on performance and accessibility. 
+            Collaborated with cross-functional teams in an agile environment.
+          </div>
+          <div class="skills">Skills: ES6, Vue.js, CSS, Web Performance</div>
+          <div class="tags">
+            <span class="tag">Vue.js</span>
+            <span class="tag">ES6</span>
+            <span class="tag">CSS</span>
+            <span class="tag">Performance</span>
+          </div>
+        </div>
+
+        <!-- EXPERIENCE ITEM 4 (placeholder) -->
+        <div class="experience-item">
+          <div class="date-range">2014 — 2016</div>
+          <div class="role-title">Junior Developer</div>
+          <div class="role-company">Generic Tech</div>
+          <div class="experience-desc">
+            Assisted in developing and maintaining various web applications while learning best 
+            practices for code quality, security, and design patterns.
+          </div>
+          <div class="skills">Skills: HTML, CSS, jQuery, Git</div>
+          <div class="tags">
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+            <span class="tag">jQuery</span>
+            <span class="tag">Git</span>
+          </div>
+        </div>
       </section>
 
       <!-- PROJECTS -->
       <section id="projects" class="project-section">
         <h3>Projects</h3>
+
+        <!-- PROJECT ITEM 1 -->
         <div class="project-item">
           <h4><a href="#">Project 1</a></h4>
           <p>
@@ -392,6 +474,8 @@
             top tracks, and recommended tracks to create new playlists.
           </p>
         </div>
+
+        <!-- PROJECT ITEM 2 -->
         <div class="project-item">
           <h4><a href="#">Project 2</a></h4>
           <p>
@@ -399,13 +483,57 @@
             Sublime Text, Atom, and more.
           </p>
         </div>
+
+        <!-- PROJECT ITEM 3 (placeholder) -->
+        <div class="project-item">
+          <h4><a href="#">Project 3</a></h4>
+          <p>
+            A personal portfolio website featuring dynamic animations and interactive case studies.
+          </p>
+        </div>
+
+        <!-- PROJECT ITEM 4 (placeholder) -->
+        <div class="project-item">
+          <h4><a href="#">Project 4</a></h4>
+          <p>
+            A collaborative note-taking app with real-time syncing and offline support.
+          </p>
+        </div>
+
+        <!-- PROJECT ITEM 5 (placeholder) -->
+        <div class="project-item">
+          <h4><a href="#">Project 5</a></h4>
+          <p>
+            A lightweight e-commerce site prototype using an experimental headless CMS approach.
+          </p>
+        </div>
+
+        <!-- Button placeholder to see more projects -->
+        <button class="projects-button">See More Projects</button>
       </section>
 
-      <!-- EDUCATION -->
-      <section id="education">
+      <!-- EDUCATION (with separate boxes for courses) -->
+      <section id="education" class="education-section">
         <h3>Education</h3>
         <p>Bachelor of Science in Computer Science, Generic University (2014-2018)</p>
-        <p>Relevant Courses: Data Structures, Algorithms, Web Development, Database Systems</p>
+
+        <!-- Course items in boxes (like experience) -->
+        <div class="course-item">
+          <h4>Data Structures</h4>
+          <p>Learned fundamentals of linked lists, trees, graphs, and more with efficient implementations.</p>
+        </div>
+        <div class="course-item">
+          <h4>Algorithms</h4>
+          <p>Studied algorithmic complexity, sorting, searching, graph algorithms, and dynamic programming.</p>
+        </div>
+        <div class="course-item">
+          <h4>Web Development</h4>
+          <p>Covered modern front-end frameworks, RESTful APIs, and deployment best practices.</p>
+        </div>
+        <div class="course-item">
+          <h4>Database Systems</h4>
+          <p>Focused on SQL, normalization, indexing, transactions, and distributed databases.</p>
+        </div>
       </section>
 
     </div>
@@ -414,6 +542,7 @@
   <!-- FOOTER -->
   <footer>
     <div class="social-icons">
+      <!-- GitHub -->
       <a href="#" aria-label="GitHub" target="_blank" rel="noopener">
         <svg viewBox="0 0 16 16" role="img">
           <title>GitHub icon</title>
@@ -447,6 +576,7 @@
           ></path>
         </svg>
       </a>
+      <!-- LinkedIn -->
       <a href="#" aria-label="LinkedIn" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" role="img">
           <title>LinkedIn icon</title>
@@ -474,6 +604,7 @@
           ></path>
         </svg>
       </a>
+      <!-- Instagram -->
       <a href="#" aria-label="Instagram" target="_blank" rel="noopener">
         <svg viewBox="0 0 512 512" role="img">
           <title>Instagram icon</title>
@@ -513,6 +644,24 @@
           />
         </svg>
       </a>
+      <!-- Gmail placeholder (envelope icon) -->
+      <a href="#" aria-label="Gmail" target="_blank" rel="noopener">
+        <svg viewBox="0 0 512 512" role="img">
+          <title>Gmail icon</title>
+          <path
+            d="M467 61H45C20.2 61 0 81.2 
+               0 106v300c0 24.8 20.2 
+               45 45 45h422c24.8 0 45-20.2 
+               45-45V106c0-24.8-20.2-45-45-45zM464 
+               118.7l-198.2 148c-5.3 4-12.4 
+               4-17.6 0L50 
+               118.7V106l206.2 
+               154.2c3.5 2.6 7.7 3.8 
+               11.8 3.8s8.3-1.3 
+               11.8-3.8L464 106v12.7z"
+          />
+        </svg>
+      </a>
     </div>
   </footer>
 
@@ -536,11 +685,11 @@
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('.nav-links a');
 
-    // Adjust threshold & rootMargin so shorter sections also get recognized
+    // Adjust threshold so each section is recognized in turn
     const options = {
       root: null,
-      rootMargin: '-100px 0px -100px 0px', /* Slight offset top/bottom */
-      threshold: 0.2 /* 20% visible to mark active */
+      rootMargin: '0px',
+      threshold: 0.15 // ~15% visible
     };
 
     const observer = new IntersectionObserver((entries) => {
