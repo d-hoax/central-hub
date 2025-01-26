@@ -355,53 +355,73 @@
       transform: translate(2px, -2px);
     }
 
-   /* =========================
+   /* ============
        MEDIA QUERIES
-       ========================= */
+       ============ */
 
-    /* 1) MEDIUM SCREENS: under 1200px, above 900px 
-       => reduce left pinned or widths as needed */
-    @media (max-width: 1200px) and (min-width: 901px) {
+    /*
+      1) SCREENS 1200px to 1600px 
+         => reduce left sidebar spacing a bit so no overlap
+    */
+    @media (max-width: 1600px) and (min-width: 1201px) {
       .left-sidebar {
-        left: 18%;    /* reduce spacing so it doesn't get cramped */
+        left: 20%;  /* was 25%, reduce so it doesn't overlap at 1600 wide */
         width: 280px; /* a bit narrower if needed */
       }
       .right-content {
-        left: 35%;
+        left: 35%;   /* was 40%, shift so we keep about 15% gap if needed */
+        right: 10%;  /* was 12%, more space for content? */
+      }
+    }
+
+    /*
+      2) SCREENS 900px to 1200px
+         => reduce pinned spacing further so layout fits
+    */
+    @media (max-width: 1200px) and (min-width: 901px) {
+      .left-sidebar {
+        left: 15%; 
+        width: 280px;
+      }
+      .right-content {
+        left: 30%;  
         right: 10%;
       }
     }
 
-    /* 2) SMALL SCREENS: under 900px => stacked layout */
+    /* 
+      3) SCREENS BELOW 900px => stacked layout 
+         => we remove pinned positioning
+    */
     @media (max-width: 900px) {
       html, body {
-        overflow: auto; /* let the entire page scroll normally */
+        overflow: auto; /* let entire page scroll */
       }
 
       .left-sidebar {
-        position: static;  /* no longer pinned */
+        position: static;
         top: auto;
         left: auto;
         width: auto;
-        margin: 20px;      /* some margin around it */
+        margin: 20px; 
       }
       .logos-lower {
-        margin-top: 2rem;  /* place icons below nav links, not at 50vh */
+        margin-top: 2rem; 
       }
 
       .right-content {
-        position: static; /* unpin */
+        position: static;
         top: auto;
         left: auto;
         right: auto;
-        margin: 20px; 
+        margin: 20px;
         padding: 20px;
         bottom: auto;
-        overflow-y: auto; /* fallback normal scrolling */
+        overflow-y: auto; 
       }
 
       .content-inner {
-        max-width: 100%; /* let it fill screen width */
+        max-width: 100%;
       }
     }
   </style>
