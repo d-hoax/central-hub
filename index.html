@@ -6,9 +6,9 @@
   <title>Anish Dudeja</title>
 
   <!-- Favicon -->
-  <link rel="icon" href="customm.jpg" type="image/jpeg" />
+  <link rel="icon" href="customa.jpg" type="image/jpeg" />
 
-  <!-- Inter font -->
+  <!-- Load Inter font -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
@@ -16,7 +16,7 @@
   />
 
   <style>
-    /* GLOBAL RESET */
+    /* RESET / GLOBAL */
     * {
       margin: 0;
       padding: 0;
@@ -25,11 +25,11 @@
     html, body {
       width: 100%;
       height: 100%;
-      background: #0A192F; /* navy background */
-      color: #8892B0;      /* typical text color */
-      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        Roboto, "Helvetica Neue", sans-serif;
-      overflow: hidden; /* We'll manually scroll the right content only */
+      background: #2A0A3B; /* purple background, tweak if you like another shade */
+      color: #a8acc6;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, 
+        "Helvetica Neue", sans-serif;
+      overflow: hidden; /* We'll scroll only the main content */
     }
     a {
       text-decoration: none;
@@ -40,36 +40,33 @@
       opacity: 0.8;
     }
 
-    /* SPOTLIGHT for cursor hover */
+    /* SPOTLIGHT BACKGROUND */
     .spotlight {
       pointer-events: none;
       position: fixed;
-      top: 0; 
-      left: 0; 
-      right: 0; 
-      bottom: 0;
+      top: 0; left: 0; right: 0; bottom: 0;
       z-index: 1;
       background: radial-gradient(700px at 50% 50%, rgba(187,134,252,0.1), transparent 80%);
       transition: background 0.2s;
     }
 
-    /* LEFT SIDEBAR */
+    /* LEFT SIDEBAR (25% of width, pinned, logos at bottom) */
     .left-sidebar {
       position: fixed;
-      top: 60px;    /* some space from top */
-      left: 40px;   /* near the left edge, but not hugging */
-      width: 320px; /* wide enough so name stays on one line */
+      top: 40px;
+      left: 5%;
+      width: 25%;
       display: flex;
       flex-direction: column;
-      z-index: 2; /* above main content */
+      z-index: 2;
     }
     .left-sidebar h1 {
-      font-size: 3.5rem; /* large so it’s still one line, given the 320px width */
-      color: #e6f1ff;    /* slightly lighter for name */
+      font-size: 3.5rem; 
+      color: #e6f1ff; 
       font-weight: 700;
+      white-space: nowrap; /* keep it on one line */
       margin-bottom: 1rem;
       line-height: 1.2;
-      white-space: nowrap; /* force one line */
     }
     .left-sidebar h2 {
       font-size: 1.3rem;
@@ -81,7 +78,7 @@
       font-size: 1rem;
       line-height: 1.6;
       margin-bottom: 3rem;
-      max-width: 290px;
+      max-width: 90%; /* so it doesn't exceed the sidebar */
     }
 
     /* NAV LINKS (TABLE OF CONTENTS) */
@@ -91,106 +88,121 @@
     }
     .nav-links li {
       margin-bottom: 1rem;
-      font-size: 0.8rem; /* smaller nav text */
+      font-size: 0.8rem; 
       text-transform: uppercase;
       letter-spacing: 2px;
     }
+    /* Default nav link is dim, only active is fully opaque */
     .nav-links a {
       display: inline-flex;
       align-items: center;
       font-weight: 500;
-      color: #fff;
       position: relative;
+      color: #fff;
+      opacity: 0.5; /* dim by default */
+      transition: opacity 0.2s, color 0.2s;
     }
     .nav-links a::before {
       content: "";
       display: block;
       height: 1px;
       width: 20px;
-      background: #ffffff;
+      background: #fff;
       margin-right: 8px;
       transition: width 0.3s, background 0.3s;
     }
     .nav-links a:hover::before {
       width: 40px;
-      background: #BB86FC; /* highlight color */
+      background: #BB86FC;
+    }
+    .nav-links a:hover {
+      opacity: 0.8; 
+    }
+    /* Active nav link => fully visible, highlight line */
+    .nav-links a.active {
+      opacity: 1.0; 
     }
     .nav-links a.active::before {
       width: 40px;
       background: #BB86FC;
     }
-    .nav-links a.active {
-      opacity: 1;
-    }
 
-    /* FOOTER SOCIAL ICONS AT THE BOTTOM OF SIDEBAR */
+    /* FOOTER LOGOS AT VERY BOTTOM OF SIDEBAR */
     .sidebar-footer {
-      margin-top: auto; /* push to bottom */
+      margin-top: auto;
       padding-top: 2rem;
       display: flex;
-      gap: 1.5rem;
+      flex-direction: column;
+      gap: 1rem;
     }
-    .sidebar-footer a svg {
-      width: 20px;
-      height: 20px;
-      fill: #8892b0;
-      transition: fill 0.2s;
+    .sidebar-footer a img {
+      width: 24px; 
+      height: 24px; 
+      /* or just placeholders for now */
+      object-fit: contain;
     }
-    .sidebar-footer a:hover svg {
-      fill: #BB86FC;
+    .sidebar-footer a:hover img {
+      opacity: 0.8;
     }
 
-    /* RIGHT CONTENT SCROLLABLE */
+    /* RIGHT CONTENT SCROLLABLE (the rest 70% or so) */
     .right-content {
       position: absolute;
       top: 0;
-      left: 400px; /* 320 + ~80 margin = 400 */
-      right: 50px; /* some margin on the right */
+      left: 30%; /* starts after left sidebar + some gap */
+      width: 60%; /* or 65% if you want more space to the right */
+      right: 0;
       bottom: 0;
       overflow-y: auto;
-      padding: 100px 0 80px 0; /* top & bottom padding */
+      padding: 80px 0; /* top/bottom padding */
       z-index: 1;
     }
     .content-inner {
-      max-width: 800px;
+      max-width: 700px; /* narrower text column if desired */
       margin: 0 auto;
       line-height: 1.8;
     }
-    section {
-      margin-bottom: 6rem;
+
+    /* INTRO TEXT LARGER (the top part) */
+    #about p:first-of-type {
+      font-size: 1.15rem; /* bigger introduction paragraph */
     }
 
-    /* HOVER-DIMMING: experience, project, education placeholders */
+    section {
+      margin-bottom: 5rem;
+    }
+
+    /* EXPERIENCE, PROJECTS, EDUCATION hover dimming placeholders */
     .experience-section:hover .experience-item:not(:hover),
     .project-section:hover .project-item:not(:hover),
     .education-section:hover .course-item:not(:hover) {
       opacity: 0.4;
     }
 
-    /* EXPERIENCE ITEM: date on left, no box unless hovered */
+    /* EXPERIENCE ITEM (includes date in box) => single hover area */
     .experience-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 20px;
       margin-bottom: 2rem;
-    }
-    .experience-date {
-      flex: 0 0 100px;
-      font-size: 0.9rem;
-      color: #a8acc6; /* grey date color */
-      text-transform: uppercase;
-      margin-top: 0.4rem;
-    }
-    .experience-content {
-      flex: 1;
-      padding: 1rem;
-      border-radius: 4px;
-      background: none;
+      display: flex;
       transition: background 0.3s, box-shadow 0.3s;
+      background: none;
+      align-items: flex-start;
+      border-radius: 6px;
     }
-    .experience-content:hover {
+    .experience-item:hover {
       background: rgba(255,255,255,0.07);
       box-shadow: 0 4px 15px -5px rgba(0,0,0,0.4);
+    }
+    /* date + content stacked horizontally => let's do a small left container for date */
+    .exp-date {
+      padding: 1rem;
+      flex: 0 0 100px;
+      font-size: 0.9rem;
+      color: #a8acc6;
+      text-transform: uppercase;
+    }
+    .exp-main {
+      flex: 1;
+      padding: 1rem;
     }
     .experience-title {
       display: inline-flex;
@@ -202,17 +214,18 @@
       margin-bottom: 0.4rem;
       transition: color 0.2s;
     }
+    .experience-title-text {}
     .experience-arrow {
       width: 16px;
       height: 16px;
       fill: #a8acc6;
       transition: transform 0.2s, fill 0.2s;
     }
-    .experience-content:hover .experience-arrow {
+    .experience-item:hover .experience-arrow {
       fill: #BB86FC;
       transform: translate(2px, -2px);
     }
-    .experience-content:hover .experience-title-text {
+    .experience-item:hover .experience-title-text {
       color: #BB86FC;
     }
     .role-company {
@@ -236,21 +249,21 @@
       margin-top: 0.6rem;
     }
     .tag {
-      background: rgba(187, 134, 252, 0.1);
-      border: 1px solid rgba(187, 134, 252, 0.2);
+      background: rgba(187,134,252,0.1);
+      border: 1px solid rgba(187,134,252,0.2);
       color: #BB86FC;
       font-size: 0.8rem;
       padding: 0.2rem 0.7rem;
-      border-radius: 9999px; /* pill shape */
+      border-radius: 9999px;
     }
 
-    /* PROJECT ITEM (no box unless hovered) */
+    /* PROJECT ITEM + HOVER */
     .project-item {
       background: none;
-      padding: 1rem;
-      border-radius: 4px;
-      transition: background 0.3s, box-shadow 0.3s;
       margin-bottom: 2rem;
+      padding: 1rem;
+      border-radius: 6px;
+      transition: background 0.3s, box-shadow 0.3s;
     }
     .project-item:hover {
       background: rgba(255,255,255,0.07);
@@ -280,12 +293,12 @@
       color: #BB86FC;
     }
 
-    /* COURSE ITEM (Education) */
+    /* COURSE ITEM */
     .course-item {
       background: none;
-      padding: 1rem;
       margin-bottom: 2rem;
-      border-radius: 4px;
+      padding: 1rem;
+      border-radius: 6px;
       transition: background 0.3s, box-shadow 0.3s;
     }
     .course-item:hover {
@@ -316,7 +329,7 @@
       color: #BB86FC;
     }
 
-    /* IN‐LINE LINKS for “See Full Resume” and “See More Projects” */
+    /* “See Full Resume” + “See More Projects” => diagonal arrow upward right */
     .section-link {
       display: inline-flex;
       align-items: center;
@@ -334,41 +347,40 @@
       transition: transform 0.2s;
     }
     .section-link:hover svg {
-      transform: translateX(4px);
+      transform: translate(2px, -2px);
     }
 
-    /* MEDIA QUERIES */
+    /* MOBILE */
     @media (max-width: 900px) {
       html, body {
-        overflow: auto; /* fallback for mobile */
+        overflow: auto;
       }
       .left-sidebar {
         position: static;
         width: auto;
-        margin: 2rem 1rem;
+        margin: 20px;
       }
       .right-content {
         position: static;
-        left: 0; 
-        right: 0;
-        margin: 2rem 1rem;
+        width: auto;
+        margin: 20px;
         padding: 0;
       }
     }
   </style>
 </head>
 <body>
-  <!-- SPOTLIGHT CURSOR EFFECT -->
+  <!-- SPOTLIGHT -->
   <div class="spotlight"></div>
 
-  <!-- LEFT SIDEBAR -->
+  <!-- LEFT SIDEBAR (25% of page, pinned) -->
   <div class="left-sidebar">
     <h1>Anish Dudeja</h1>
     <h2>Front End Engineer</h2>
     <p>
       I build accessible, pixel-perfect digital experiences for the web.
     </p>
-    <!-- NAV LINKS -->
+    <!-- NAV LINKS - table of contents -->
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#experience">Experience</a></li>
@@ -376,95 +388,44 @@
       <li><a href="#education">Education</a></li>
     </ul>
 
-    <!-- Social icons lower down the sidebar -->
+    <!-- LOGOS at very bottom (GitHub, LinkedIn, Instagram placeholders) -->
     <div class="sidebar-footer">
-      <!-- GitHub -->
       <a href="#" aria-label="GitHub" target="_blank" rel="noopener">
-        <svg viewBox="0 0 16 16">
-          <path
-            d="M8 0C3.58 
-             0 0 3.58 0 8c0 3.54 
-             2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 
-             0-.19-.01-.82-.01-1.49-2.01.37
-             -2.53-.49-2.69-.94-.09-.23
-             -.48-.94-.82-1.13-.28-.15
-             -.68-.52-.01-.53.63-.01 
-             1.08.58 1.23.82.72 1.21
-             1.87.87 2.33.66.07-.52
-             .28-.87.51-1.07-1.78-.2
-             -3.64-.89-3.64-3.95
-             0-.87.31-1.59.82-2.15
-             -.08-.2-.36-1.02.08-2.12
-             0 0 .67-.21 2.2.82
-             .64-.18 1.32-.27 2-.27
-             .68 0 1.36.09 2 .27
-             1.53-1.04 2.2-.82 
-             2.2-.82.44 1.1.16 
-             1.92.08 2.12.51.56
-             .82 1.27.82 2.15 
-             0 3.07-1.87 3.75
-             -3.65 3.95.29.25.54.73.54
-             1.48 0 1.07-.01 1.93
-             -.01 2.2 0 .21.15.46.55.38
-             A8.013 8.013 0 0016 8c0
-             -4.42-3.58-8-8-8z"
-          ></path>
-        </svg>
+        <!-- placeholder img or can do <svg> if you want -->
+        <img src="github-placeholder.png" alt="GitHub placeholder" />
       </a>
-      <!-- LinkedIn -->
       <a href="#" aria-label="LinkedIn" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24">
-          <path
-            d="M20.5 2h-17A1.5 
-             1.5 0 002 3.5v17A1.5 
-             1.5 0 003.5 22h17a1.5 1.5 
-             0 001.5-1.5v-17A1.5 
-             1.5 0 0020.5 2zM8 
-             19H5v-9h3zM6.5 
-             8.25A1.75 1.75 0 
-             118.3 6.5a1.78 
-             1.78 0 01-1.8 
-             1.75zM19 
-             19h-3v-4.74c0
-             -1.42-.6-1.93
-             -1.38-1.93a1.74 
-             1.74 0 00-1.62 
-             1.06.66.66 
-             0 000.14V19h-3v-9h2.9
-             v1.3a3.11 3.11 0 
-             012.7-1.4c1.55 
-             0 3.36.86
-             3.36 3.66z"
-          ></path>
-        </svg>
+        <img src="linkedin-placeholder.png" alt="LinkedIn placeholder" />
+      </a>
+      <a href="#" aria-label="Instagram" target="_blank" rel="noopener">
+        <img src="instagram-placeholder.png" alt="Instagram placeholder" />
       </a>
     </div>
   </div>
 
-  <!-- RIGHT CONTENT SCROLLABLE -->
+  <!-- RIGHT CONTENT (SCROLLABLE) -->
   <div class="right-content">
     <div class="content-inner">
-
       <!-- ABOUT SECTION -->
       <section id="about">
-        <p>
-          I’m a developer passionate about crafting accessible, pixel‐perfect user interfaces that
-          blend thoughtful design with robust engineering. My favorite work lies at the intersection
-          of design and development, creating experiences that not only look great but are meticulously 
-          built for performance and usability.
+        <p style="font-size:1.15rem;">
+          I’m a developer passionate about crafting accessible, pixel‐perfect user interfaces 
+          that blend thoughtful design with robust engineering. My favorite work lies at the 
+          intersection of design and development, creating experiences that not only look great 
+          but are meticulously built for performance and usability.
         </p>
         <p>
-          Currently, I'm a Senior Front‐End Engineer at <strong>Some Company</strong>, focusing on 
-          building highly performant and accessible user interfaces. 
+          Currently, I'm a Senior Front‐End Engineer at <strong>Some Company</strong>, building
+          highly performant and accessible user experiences.
         </p>
         <p>
-          I’ve worked at advertising agencies, large corporations, start‐ups, and small product 
-          studios, and released a video course that teaches developers how to build a Spotify‐connected 
-          web app.
+          I’ve worked in advertising agencies, large corporations, start‐ups, and small product 
+          studios. I also released a comprehensive video course that teaches how to build a 
+          Spotify‐connected web app.
         </p>
         <p>
-          In my spare time, I’m usually climbing, reading, or venturing into fantasy worlds 
-          for hidden secrets.
+          In my spare time, I’m usually climbing, reading, or exploring imaginary worlds
+          in search of hidden treasures.
         </p>
       </section>
 
@@ -474,26 +435,24 @@
 
         <!-- EXPERIENCE 1 -->
         <div class="experience-item">
-          <div class="experience-date">2024 – Present</div>
-          <div class="experience-content">
+          <div class="exp-date">2024 – Present</div>
+          <div class="exp-main">
             <a href="#" class="experience-title">
               <span class="experience-title-text">Senior Frontend Engineer, Accessibility</span>
               <svg class="experience-arrow" viewBox="0 0 20 20">
-                <path fill-rule="evenodd"
-                  d="M5.22 14.78a.75.75 
-                    0 001.06 0l7.22-7.22v5.69a.75.75 
-                    0 001.5 0v-7.5a.75.75 
-                    0 00-.75-.75h-7.5a.75.75 
-                    0 000 1.5h5.69l-7.22 
-                    7.22a.75.75 
-                    0 000 1.06z"
-                  clip-rule="evenodd" />
+                <path fill-rule="evenodd" d="M5.22 14.78a.75.75
+                  0 001.06 0l7.22-7.22v5.69a.75.75
+                  0 001.5 0v-7.5a.75.75
+                  0 00-.75-.75h-7.5a.75.75
+                  0 000 1.5h5.69l-7.22
+                  7.22a.75.75
+                  0 000 1.06z" clip-rule="evenodd"/>
               </svg>
             </a>
             <div class="role-company">Klaviyo</div>
             <p class="experience-desc">
-              Build and maintain core UI components used across the product, working closely
-              with design and product teams to ensure best practices in web accessibility.
+              Build and maintain critical UI components used across the entire frontend, collaborating 
+              with cross‐functional teams to ensure best practices in web accessibility.
             </p>
             <div class="skills">Skills: JavaScript, React, TypeScript, A11y</div>
             <div class="tags">
@@ -507,27 +466,24 @@
 
         <!-- EXPERIENCE 2 -->
         <div class="experience-item">
-          <div class="experience-date">2018 – 2023</div>
-          <div class="experience-content">
+          <div class="exp-date">2018 – 2023</div>
+          <div class="exp-main">
             <a href="#" class="experience-title">
               <span class="experience-title-text">Lead Engineer</span>
               <svg class="experience-arrow" viewBox="0 0 20 20">
-                <path fill-rule="evenodd"
-                  d="M5.22 14.78a.75.75 
-                    0 001.06 0l7.22-7.22v5.69a.75.75 
-                    0 001.5 0v-7.5a.75.75 
-                    0 00-.75-.75h-7.5a.75.75 
-                    0 000 1.5h5.69l-7.22 
-                    7.22a.75.75 
-                    0 000 1.06z"
-                  clip-rule="evenodd" />
+                <path fill-rule="evenodd" d="M5.22 14.78a.75.75
+                  0 001.06 0l7.22-7.22v5.69a.75.75
+                  0 001.5 0v-7.5a.75.75
+                  0 00-.75-.75h-7.5a.75.75
+                  0 000 1.5h5.69l-7.22
+                  7.22a.75.75
+                  0 000 1.06z" clip-rule="evenodd"/>
               </svg>
             </a>
             <div class="role-company">Upstatement</div>
             <p class="experience-desc">
-              Built, styled, and shipped high‐quality websites, design systems, and digital
-              experiences for a variety of clients. Provided leadership via knowledge shares
-              and internal tooling.
+              Built, styled, and shipped high‐quality websites, design systems, and digital experiences 
+              for diverse clients. Provided leadership with knowledge shares and internal tooling.
             </p>
             <div class="skills">Skills: JavaScript, HTML/CSS, React, Next.js</div>
             <div class="tags">
@@ -540,28 +496,26 @@
           </div>
         </div>
 
-        <!-- EXPERIENCE 3 (placeholder) -->
+        <!-- EXPERIENCE 3 -->
         <div class="experience-item">
-          <div class="experience-date">2016 – 2018</div>
-          <div class="experience-content">
+          <div class="exp-date">2016 – 2018</div>
+          <div class="exp-main">
             <a href="#" class="experience-title">
               <span class="experience-title-text">Front End Engineer</span>
               <svg class="experience-arrow" viewBox="0 0 20 20">
-                <path fill-rule="evenodd"
-                  d="M5.22 14.78a.75.75 
-                    0 001.06 0l7.22-7.22v5.69a.75.75 
-                    0 001.5 0v-7.5a.75.75 
-                    0 00-.75-.75h-7.5a.75.75 
-                    0 000 1.5h5.69l-7.22 
-                    7.22a.75.75 
-                    0 000 1.06z"
-                  clip-rule="evenodd" />
+                <path fill-rule="evenodd" d="M5.22 14.78a.75.75
+                  0 001.06 0l7.22-7.22v5.69a.75.75
+                  0 001.5 0v-7.5a.75.75
+                  0 00-.75-.75h-7.5a.75.75
+                  0 000 1.5h5.69l-7.22
+                  7.22a.75.75
+                  0 000 1.06z" clip-rule="evenodd"/>
               </svg>
             </a>
             <div class="role-company">Placeholder Corp</div>
             <p class="experience-desc">
-              Developed interactive UIs, focusing on performance and accessibility. 
-              Collaborated with cross‐functional teams in an agile setting.
+              Developed interactive UIs, focusing on performance and accessibility.
+              Collaborated with cross‐functional teams in an agile environment.
             </p>
             <div class="skills">Skills: ES6, Vue.js, CSS, Web Performance</div>
             <div class="tags">
@@ -573,28 +527,26 @@
           </div>
         </div>
 
-        <!-- EXPERIENCE 4 (placeholder) -->
+        <!-- EXPERIENCE 4 -->
         <div class="experience-item">
-          <div class="experience-date">2014 – 2016</div>
-          <div class="experience-content">
+          <div class="exp-date">2014 – 2016</div>
+          <div class="exp-main">
             <a href="#" class="experience-title">
               <span class="experience-title-text">Junior Developer</span>
               <svg class="experience-arrow" viewBox="0 0 20 20">
-                <path fill-rule="evenodd"
-                  d="M5.22 14.78a.75.75 
-                    0 001.06 0l7.22-7.22v5.69a.75.75 
-                    0 001.5 0v-7.5a.75.75 
-                    0 00-.75-.75h-7.5a.75.75 
-                    0 000 1.5h5.69l-7.22 
-                    7.22a.75.75 
-                    0 000 1.06z"
-                  clip-rule="evenodd" />
+                <path fill-rule="evenodd" d="M5.22 14.78a.75.75
+                  0 001.06 0l7.22-7.22v5.69a.75.75
+                  0 001.5 0v-7.5a.75.75
+                  0 00-.75-.75h-7.5a.75.75
+                  0 000 1.5h5.69l-7.22
+                  7.22a.75.75
+                  0 000 1.06z" clip-rule="evenodd"/>
               </svg>
             </a>
             <div class="role-company">Generic Tech</div>
             <p class="experience-desc">
-              Assisted in developing and maintaining web applications while learning best 
-              practices for code quality and modern design patterns.
+              Assisted in developing and maintaining web apps, learning best practices 
+              for code quality and modern design patterns.
             </p>
             <div class="skills">Skills: HTML, CSS, jQuery, Git</div>
             <div class="tags">
@@ -644,9 +596,8 @@
               />
             </svg>
           </a>
-          <p>A personalized Spotify data app featuring top artists, tracks, and new playlist suggestions.</p>
+          <p>A personalized Spotify data app featuring top artists, tracks, and recommended lists.</p>
         </div>
-
         <div class="project-item">
           <a href="#" class="project-title">
             <span class="project-title-text">Project 2</span>
@@ -663,10 +614,8 @@
               />
             </svg>
           </a>
-          <p>A minimal dark theme for code editors and terminals, supporting multiple IDEs and shells.</p>
+          <p>A minimal dark theme for editors/terminals, supporting VS Code, Sublime, etc.</p>
         </div>
-
-        <!-- 3 More Project placeholders as requested -->
         <div class="project-item">
           <a href="#" class="project-title">
             <span class="project-title-text">Project 3</span>
@@ -683,9 +632,8 @@
               />
             </svg>
           </a>
-          <p>Portfolio site with advanced CSS animations and Next.js SSG for lightning‐fast performance.</p>
+          <p>A personal portfolio with advanced CSS animations and a Next.js SSG approach.</p>
         </div>
-
         <div class="project-item">
           <a href="#" class="project-title">
             <span class="project-title-text">Project 4</span>
@@ -702,9 +650,8 @@
               />
             </svg>
           </a>
-          <p>A real‐time collaborative note‐taking app using WebSockets and offline caching for reliability.</p>
+          <p>A real‐time collaborative note‐taking app with offline support via Service Worker.</p>
         </div>
-
         <div class="project-item">
           <a href="#" class="project-title">
             <span class="project-title-text">Project 5</span>
@@ -721,9 +668,8 @@
               />
             </svg>
           </a>
-          <p>E‐commerce prototype with a headless CMS approach, fully decoupled front/back ends.</p>
+          <p>An e‐commerce prototype using a headless CMS and decoupled front/back end design.</p>
         </div>
-
         <!-- "See More Projects" inline link -->
         <a href="#" class="section-link">
           See More Projects
@@ -752,78 +698,78 @@
             <span class="course-title-text">Data Structures</span>
             <svg class="course-arrow" viewBox="0 0 20 20">
               <path fill-rule="evenodd"
-                d="M5.22 14.78a.75.75 
-                  0 001.06 0l7.22-7.22v5.69a.75.75 
-                  0 001.5 0v-7.5a.75.75 
-                  0 00-.75-.75h-7.5a.75.75 
-                  0 000 1.5h5.69l-7.22 
-                  7.22a.75.75 
+                d="M5.22 14.78a.75.75
+                  0 001.06 0l7.22-7.22v5.69a.75.75
+                  0 001.5 0v-7.5a.75.75
+                  0 00-.75-.75h-7.5a.75.75
+                  0 000 1.5h5.69l-7.22
+                  7.22a.75.75
                   0 000 1.06z"
                 clip-rule="evenodd"
               />
             </svg>
           </a>
-          <p>Focused on linked lists, trees, graphs, hashing, and performance considerations.</p>
+          <p>Explored linked lists, trees, graphs, hashing, with performance considerations.</p>
         </div>
         <div class="course-item">
           <a href="#" class="course-title">
             <span class="course-title-text">Algorithms</span>
             <svg class="course-arrow" viewBox="0 0 20 20">
               <path fill-rule="evenodd"
-                d="M5.22 14.78a.75.75 
-                  0 001.06 0l7.22-7.22v5.69a.75.75 
-                  0 001.5 0v-7.5a.75.75 
-                  0 00-.75-.75h-7.5a.75.75 
-                  0 000 1.5h5.69l-7.22 
-                  7.22a.75.75 
+                d="M5.22 14.78a.75.75
+                  0 001.06 0l7.22-7.22v5.69a.75.75
+                  0 001.5 0v-7.5a.75.75
+                  0 00-.75-.75h-7.5a.75.75
+                  0 000 1.5h5.69l-7.22
+                  7.22a.75.75
                   0 000 1.06z"
                 clip-rule="evenodd"
               />
             </svg>
           </a>
-          <p>Studied sorting, searching, graph algorithms, and runtime analysis for large data sets.</p>
+          <p>Studied sorting, searching, graph algorithms, dynamic programming, complexity analysis.</p>
         </div>
         <div class="course-item">
           <a href="#" class="course-title">
             <span class="course-title-text">Web Development</span>
             <svg class="course-arrow" viewBox="0 0 20 20">
               <path fill-rule="evenodd"
-                d="M5.22 14.78a.75.75 
-                  0 001.06 0l7.22-7.22v5.69a.75.75 
-                  0 001.5 0v-7.5a.75.75 
-                  0 00-.75-.75h-7.5a.75.75 
-                  0 000 1.5h5.69l-7.22 
-                  7.22a.75.75 
+                d="M5.22 14.78a.75.75
+                  0 001.06 0l7.22-7.22v5.69a.75.75
+                  0 001.5 0v-7.5a.75.75
+                  0 00-.75-.75h-7.5a.75.75
+                  0 000 1.5h5.69l-7.22
+                  7.22a.75.75
                   0 000 1.06z"
                 clip-rule="evenodd"
               />
             </svg>
           </a>
-          <p>Learned about modern front-end frameworks, REST APIs, and deployment best practices.</p>
+          <p>Covered modern front-end frameworks, RESTful APIs, and best deployment practices.</p>
         </div>
         <div class="course-item">
           <a href="#" class="course-title">
             <span class="course-title-text">Database Systems</span>
             <svg class="course-arrow" viewBox="0 0 20 20">
               <path fill-rule="evenodd"
-                d="M5.22 14.78a.75.75 
-                  0 001.06 0l7.22-7.22v5.69a.75.75 
-                  0 001.5 0v-7.5a.75.75 
-                  0 00-.75-.75h-7.5a.75.75 
-                  0 000 1.5h5.69l-7.22 
-                  7.22a.75.75 
+                d="M5.22 14.78a.75.75
+                  0 001.06 0l7.22-7.22v5.69a.75.75
+                  0 001.5 0v-7.5a.75.75
+                  0 00-.75-.75h-7.5a.75.75
+                  0 000 1.5h5.69l-7.22
+                  7.22a.75.75
                   0 000 1.06z"
                 clip-rule="evenodd"
               />
             </svg>
           </a>
-          <p>Covered SQL, indexing, transactions, and scaling distributed databases.</p>
+          <p>Covered SQL, indexing, transaction management, and distributed database architectures.</p>
         </div>
       </section>
     </div>
   </div>
 
-  <!-- SPOTLIGHT + INTERSECTION OBSERVER SCRIPTS -->
+  <!-- SCRIPTS: SPOTLIGHT & INTERSECTION OBSERVER -->
   <script>
     // Spotlight follows cursor
     const spotlight = document.querySelector('.spotlight');
@@ -837,20 +783,22 @@
       `;
     });
 
-    // Intersection Observer for nav link highlighting
+    // IntersectionObserver to highlight/dim nav links
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('.nav-links a');
 
-    const options = {
+    const observerOptions = {
       root: null,
-      rootMargin: '-10% 0px -60% 0px',
+      rootMargin: '-10% 0px -50% 0px',
       threshold: 0.01
     };
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
+          // remove 'active' from all
           navLinks.forEach(link => link.classList.remove('active'));
+          // find link for this section
           const id = entry.target.getAttribute('id');
           const activeLink = document.querySelector(`.nav-links a[href="#${id}"]`);
           if (activeLink) {
@@ -858,12 +806,9 @@
           }
         }
       });
-    }, options);
+    }, observerOptions);
 
-    sections.forEach(section => {
-      observer.observe(section);
-    });
+    sections.forEach(section => observer.observe(section));
   </script>
-
 </body>
 </html>
