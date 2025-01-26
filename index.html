@@ -15,8 +15,8 @@
     rel="stylesheet"
   />
 
-  <style>
-    /* RESET / GLOBAL */
+ <style>
+    /* RESET */
     * {
       margin: 0;
       padding: 0;
@@ -25,11 +25,11 @@
     html, body {
       width: 100%;
       height: 100%;
-      background: #0A0A0F; /* dark blackish background */
+      background: #0A0A0F; /* dark background */
       color: #a8acc6;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, 
-        "Helvetica Neue", sans-serif;
-      overflow: hidden; /* We'll scroll only the right content */
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, "Helvetica Neue", sans-serif;
+      overflow: hidden; /* pinned layout only scrolls on the right content, on larger screens */
     }
     a {
       text-decoration: none;
@@ -40,7 +40,7 @@
       opacity: 0.8;
     }
 
-    /* SPOTLIGHT BACKGROUND */
+    /* SPOTLIGHT */
     .spotlight {
       pointer-events: none;
       position: fixed;
@@ -50,34 +50,42 @@
       transition: background 0.2s;
     }
 
-    /* HIDING SCROLLBAR FOR RIGHT CONTENT */
+    /* HIDE SCROLLBAR IN RIGHT CONTENT */
     .right-content::-webkit-scrollbar {
-      width: 2px;
-      background: #a8acc6;
+      width: 0px; 
+      background: transparent;
     }
     .right-content {
       scrollbar-width: none; /* For Firefox */
     }
 
-    /* LEFT SIDEBAR pinned at top:6%, left:25% 
-       => 6% from top is blank, 25% from left is blank. */
+    /* =============
+       DEFAULT LAYOUT (Fluid approach) for Larger Screens
+       ============= */
+
+    /*
+      We'll assume an approach where:
+      - The sidebar is pinned at top: 6vh (6% of viewport height),
+      - left: calc(10vw), i.e. 10% of viewport width from the left
+      - The right content begins after the sidebar plus some gap.
+    */
+
+    /* LEFT SIDEBAR pinned fluidly using calc() */
     .left-sidebar {
       position: fixed;
-      top: 6%;
-      left: 25%;
-      width: 300px; /* ensures name fits on one line */
+      top: 6vh; /* 6% of viewport height from top */
+      left: calc(10vw); /* 10% of viewport width in from the left */
+      width: 320px; /* fixed sidebar width so the name stays on one line */
       display: flex;
       flex-direction: column;
       z-index: 2;
     }
-
-    /* NAME / SUBTITLE / INTRO */
     .left-sidebar h1 {
       font-size: 3.5rem;
       color: #e6f1ff;
       font-weight: 700;
       line-height: 1.2;
-      white-space: nowrap; /* keep it on one line */
+      white-space: nowrap; 
       margin-bottom: 1rem;
     }
     .left-sidebar h2 {
@@ -90,10 +98,10 @@
       font-size: 1rem;
       line-height: 1.6;
       margin-bottom: 3rem;
-      max-width: 300px;
+      max-width: 290px;
     }
 
-    /* NAV LINKS (TABLE OF CONTENTS) */
+    /* TABLE OF CONTENTS */
     .nav-links {
       list-style: none;
       margin-bottom: 2rem;
@@ -110,7 +118,7 @@
       font-weight: 500;
       color: #fff;
       position: relative;
-      opacity: 0.5; /* dim by default unless active */
+      opacity: 0.5;
       transition: opacity 0.2s;
     }
     .nav-links a::before {
@@ -137,14 +145,14 @@
       background: #BB86FC;
     }
 
-    /* LOGOS ~50% lower than last link => margin-top: 50vh */
+    /* LOGOS ~50% below last link => margin-top: 50vh */
     .logos-lower {
       margin-top: 50vh;
       display: flex;
       gap: 1.5rem;
     }
     .logos-lower a img {
-      width: 24px; 
+      width: 24px;
       height: 24px;
       object-fit: contain;
       transition: opacity 0.2s;
@@ -153,27 +161,32 @@
       opacity: 0.8;
     }
 
-    /* RIGHT CONTENT pinned from left:40% to right:12%.
-       => 25% blank on left plus 15% gap => 40%,
-          12% on the right blank => 88% used => 60% used? 
-       top:6% => matches left side top. */
+    /*
+      RIGHT CONTENT pinned fluidly:
+      top: 6vh
+      left: => after the sidebar + some gap:
+        -> The sidebar is at left: calc(10vw) and has width 320px,
+           we want, say, 5vw gap after the sidebar
+           so left => calc(10vw + 320px + 5vw)
+      right: -> maybe 8vw from right edge to leave a blank margin
+    */
     .right-content {
       position: absolute;
-      top: 6%;
-      left: 35%;
-      right: 7%;
+      top: 6vh;
+      left: calc(10vw + 320px + 5vw); /* 10% + 320px + 5% => ensures no overlap */
+      right: 8vw; /* 8% margin on the right for blank space */
       bottom: 0;
       overflow-y: scroll;
-      padding: 0px 0; /* top/bottom padding */
+      padding: 40px 0;
       z-index: 1;
     }
     .content-inner {
-      max-width: 600px;
+      max-width: 700px; /* main text column limit */
       margin: 0 auto;
       line-height: 1.8;
     }
 
-    /* ABOUT => bigger text than experiences (1.1rem) */
+    /* ABOUT => bigger text (1.1rem) than experiences */
     #about p {
       font-size: 1.1rem; 
     }
@@ -181,14 +194,14 @@
       margin-bottom: 5rem;
     }
 
-    /* HOVER‐DIMMING for placeholders */
+    /* HOVER‐DIMMING */
     .experience-section:hover .experience-item:not(:hover),
     .project-section:hover .project-item:not(:hover),
     .education-section:hover .course-item:not(:hover) {
       opacity: 0.4;
     }
 
-    /* EXPERIENCE ITEM (date + main => single hover area) */
+    /* EXPERIENCE, PROJECT, COURSE Styles (Boxes only on hover) */
     .experience-item {
       display: flex;
       margin-bottom: 2rem;
@@ -263,7 +276,6 @@
       border-radius: 9999px;
     }
 
-    /* PROJECT ITEM */
     .project-item {
       background: none;
       padding: 1rem;
@@ -298,7 +310,6 @@
       color: #BB86FC;
     }
 
-    /* COURSE ITEM */
     .course-item {
       background: none;
       margin-bottom: 2rem;
@@ -334,7 +345,7 @@
       color: #BB86FC;
     }
 
-    /* “See Full Resume” + “See More Projects” => diagonal arrow upward */
+    /* DIAGONAL ARROW LINKS */
     .section-link {
       display: inline-flex;
       align-items: center;
@@ -355,60 +366,24 @@
       transform: translate(2px, -2px);
     }
 
-   /* ============
-       MEDIA QUERIES
-       ============ */
-
     /*
-      1) SCREENS 1200px to 1600px 
-         => reduce left sidebar spacing a bit so no overlap
-    */
-    @media (max-width: 1600px) and (min-width: 1201px) {
-      .left-sidebar {
-        left: 20%;  /* was 25%, reduce so it doesn't overlap at 1600 wide */
-        width: 280px; /* a bit narrower if needed */
-      }
-      .right-content {
-        left: 35%;   /* was 40%, shift so we keep about 15% gap if needed */
-        right: 10%;  /* was 12%, more space for content? */
-      }
-    }
-
-    /*
-      2) SCREENS 900px to 1200px
-         => reduce pinned spacing further so layout fits
-    */
-    @media (max-width: 1200px) and (min-width: 901px) {
-      .left-sidebar {
-        left: 15%; 
-        width: 280px;
-      }
-      .right-content {
-        left: 30%;  
-        right: 10%;
-      }
-    }
-
-    /* 
-      3) SCREENS BELOW 900px => stacked layout 
-         => we remove pinned positioning
+      MEDIA QUERY for smaller screens => 
+      switch to stacked layout if width < 900px
     */
     @media (max-width: 900px) {
       html, body {
-        overflow: auto; /* let entire page scroll */
+        overflow: auto; /* fallback normal scrolling */
       }
-
       .left-sidebar {
         position: static;
         top: auto;
         left: auto;
         width: auto;
-        margin: 20px; 
+        margin: 20px;
       }
       .logos-lower {
-        margin-top: 2rem; 
+        margin-top: 2rem;
       }
-
       .right-content {
         position: static;
         top: auto;
@@ -417,9 +392,8 @@
         margin: 20px;
         padding: 20px;
         bottom: auto;
-        overflow-y: auto; 
+        overflow-y: auto;
       }
-
       .content-inner {
         max-width: 100%;
       }
