@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-  <link rel="icon" href="customa.jpg" type="image/jpg">
+   link rel="icon" href="customa.jpg" type="image/jpg">
 
   <title>Anish Dudeja</title>
 
-  <!-- Load "Inter" from Google Fonts -->
+  <!-- Load "Inter" from Google Fonts (Bold, SemiBold, Regular) -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
@@ -17,12 +17,15 @@
   <style>
     /* GLOBAL RESETS & BASE STYLES */
     * {
-      margin: 0; padding: 0; box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
     html, body {
-      width: 100%; height: 100%;
-      background: #0A192F; /* deep navy */
-      color: #8892B0;      /* muted light text */
+      width: 100%;
+      height: 100%;
+      background: #0A0A0F; /* off-black/dark background */
+      color: #a8acc6;     /* slightly lighter text than pure gray */
       font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
         Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
       overflow-x: hidden;
@@ -31,36 +34,37 @@
       text-decoration: none;
       cursor: pointer;
       transition: opacity 0.2s;
+      color: inherit; /* by default, take parent's color, we can adjust below */
     }
     a:hover { opacity: 0.8; }
 
-    /* HEADINGS & TEXT SIZES (increased) */
+    /* HEADINGS & TEXT SIZES (adjusted) */
     h1 {
-      font-size: 4rem;      /* bigger */
-      color: #CCD6F6;
-      font-weight: 700;     /* bold */
+      font-size: 3.5rem;
+      color: #e3e8ff; /* near-white for name */
+      font-weight: 700;
       margin-bottom: 0.5rem;
     }
     h2 {
-      font-size: 1.5rem;    /* bigger */
-      color: #CCD6F6;
+      font-size: 1.4rem;
+      color: #e3e8ff;
       font-weight: 400;
       margin-bottom: 1.5rem;
     }
     h3 {
       font-size: 1.3rem;
-      color: #CCD6F6;
+      color: #e3e8ff;
       margin-bottom: 1rem;
       font-weight: 600;
     }
     h4 {
       font-size: 1.1rem;
-      color: #CCD6F6;
+      color: #e3e8ff;
       margin-bottom: 0.5rem;
       font-weight: 600;
     }
     p {
-      font-size: 1.05rem;   /* bigger text */
+      font-size: 1.05rem;
       line-height: 1.7;
       margin-bottom: 1rem;
     }
@@ -71,18 +75,19 @@
       display: flex;
       max-width: 1200px;
       margin: 0 auto;
-      padding: 60px 20px; /* more padding; 20px side for smaller screens */
+      padding: 60px 20px; /* bigger top/bottom padding */
       min-height: 100vh;
+      /* Additional spacing between sidebar and main */
+      gap: 60px; 
     }
     .sidebar {
-      flex: 0 0 30%;
-      margin-right: 50px; /* extra space to push content more to the right */
+      flex: 0 0 25%; /* narrower sidebar */
     }
 
     /* SIDEBAR CONTENT */
     .sidebar p {
-      max-width: 320px;
-      margin-bottom: 3rem;
+      max-width: 270px;
+      margin-bottom: 2.5rem;
     }
 
     /* NAV LINKS with active highlight & “expanding line” effect */
@@ -100,7 +105,8 @@
       display: inline-flex;
       align-items: center;
       position: relative;
-      color: #ffffff; /* White for table of contents text */
+      color: #fff; /* White for table of contents text */
+      font-weight: 500;
     }
     /* The small horizontal line before the link text */
     .nav-links a::before {
@@ -108,19 +114,19 @@
       display: block;
       height: 1px;
       width: 20px;
-      background: #ffffff; /* white line */
+      background: #ffffff;
       margin-right: 8px;
       transition: width 0.3s, background 0.3s;
     }
     .nav-links a:hover::before,
     .nav-links a:focus::before {
       width: 40px;
-      background: #64FFDA; /* teal on hover */
+      background: #BB86FC; /* purple highlight on hover */
     }
     /* “Active” link style */
     .nav-links a.active::before {
       width: 40px;
-      background: #64FFDA;
+      background: #BB86FC;
     }
     .nav-links a.active {
       opacity: 1;
@@ -129,6 +135,7 @@
     /* MAIN AREA */
     .main {
       flex: 1;
+      /* Optional spacing around content */
     }
     section {
       margin-bottom: 5rem;
@@ -137,10 +144,12 @@
     /* We'll wrap each group of items in a "section-container" so we can do a group hover effect. */
     .experience-section:hover .experience-item,
     .project-section:hover .project-item {
-      opacity: 0.6;  /* dim them by default on hover */
+      opacity: 0.5; /* dim them by default on section hover */
+      transition: opacity 0.3s;
     }
-    .experience-item:hover, .project-item:hover {
-      opacity: 1;    /* fully visible on hover */
+    .experience-item:hover, 
+    .project-item:hover {
+      opacity: 1;  /* fully visible on hover */
     }
 
     /* EXPERIENCE “ITEM” CARDS */
@@ -148,16 +157,17 @@
       margin-bottom: 2rem;
       padding: 1.2rem;
       border-radius: 8px;
-      transition: background 0.3s, box-shadow 0.3s;
+      transition: background 0.3s, box-shadow 0.3s, opacity 0.3s;
+      background: rgba(255,255,255,0.02); /* slight subtle background at all times */
     }
     .experience-item:hover {
-      background: #112240; /* slightly lighter navy background */
+      background: rgba(255,255,255,0.07); 
       box-shadow: 0 4px 15px -5px rgba(0,0,0,0.4);
     }
     .date-range {
       font-size: 0.85rem;
       text-transform: uppercase;
-      color: #64FFDA; /* teal */
+      color: #BB86FC; /* purple highlight */
       margin-bottom: 0.4rem;
     }
     .role-title {
@@ -167,7 +177,7 @@
       transition: color 0.3s;
     }
     .role-title:hover {
-      color: #64FFDA; /* teal on hover */
+      color: #BB86FC; /* purple on hover */
     }
     .role-company {
       font-size: 1rem;
@@ -180,7 +190,7 @@
     .skills {
       margin-top: 0.8rem;
       font-size: 0.85rem;
-      color: #8892B0;
+      color: #a8acc6;
       font-style: italic;
     }
 
@@ -192,9 +202,9 @@
       gap: 0.5rem;
     }
     .tag {
-      background: rgba(100, 255, 218, 0.1);
-      border: 1px solid rgba(100, 255, 218, 0.2);
-      color: #64ffda;
+      background: rgba(187, 134, 252, 0.1);
+      border: 1px solid rgba(187, 134, 252, 0.2);
+      color: #BB86FC;
       font-size: 0.8rem;
       padding: 0.2rem 0.5rem;
       border-radius: 4px;
@@ -205,21 +215,27 @@
       margin-bottom: 2rem;
       padding: 1.2rem;
       border-radius: 8px;
-      transition: background 0.3s, box-shadow 0.3s;
+      transition: background 0.3s, box-shadow 0.3s, opacity 0.3s;
+      background: rgba(255,255,255,0.02);
     }
     .project-item:hover {
-      background: #112240;
+      background: rgba(255,255,255,0.07);
       box-shadow: 0 4px 15px -5px rgba(0,0,0,0.4);
     }
     .project-item h4 a {
-      color: #CCD6F6;
+      color: #e3e8ff;
       transition: color 0.2s;
     }
     .project-item h4 a:hover {
-      color: #64FFDA;
+      color: #BB86FC;
     }
     .project-item p {
       font-size: 1rem;
+    }
+
+    /* EDUCATION SECTION */
+    #education {
+      margin-bottom: 5rem;
     }
 
     /* FOOTER W/ TINY SOCIAL ICONS */
@@ -236,11 +252,11 @@
     .social-icons a svg {
       width: 18px; /* smaller icons */
       height: 18px;
-      fill: #8892B0;
+      fill: #a8acc6;
       transition: fill 0.2s;
     }
     .social-icons a:hover svg {
-      fill: #64ffda;
+      fill: #BB86FC;
     }
 
     /* SPOTLIGHT */
@@ -249,24 +265,23 @@
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
       z-index: 1;
-      background: radial-gradient(600px at 50% 50%, rgba(100,255,218,0.1), transparent 80%);
+      background: radial-gradient(600px at 50% 50%, rgba(187,134,252,0.1), transparent 80%);
       transition: background 0.2s;
     }
 
     /* Intersection Observer: highlight the nav link for the section in view */
     .nav-links a.active {
-      /* Could also style differently if desired */
       opacity: 1;
     }
 
-    @media (max-width: 800px) {
+    @media (max-width: 900px) {
       .container {
         flex-direction: column;
         padding: 40px 20px;
+        gap: 40px;
       }
       .sidebar {
-        margin-bottom: 2rem;
-        margin-right: 0;
+        flex: 0 0 auto;
       }
     }
   </style>
@@ -302,9 +317,9 @@
           meticulously built for performance and usability.
         </p>
         <p>
-          Currently, I'm a Senior Front‐End Engineer at Klaviyo, specializing in accessibility. I
-          contribute to the creation and maintenance of UI components that power Klaviyo’s frontend,
-          ensuring our platform meets web accessibility standards and best practices to deliver an
+          Currently, I'm a Senior Front‐End Engineer at <strong>Some Company</strong>, specializing in accessibility. 
+          I contribute to the creation and maintenance of UI components that power the frontend, ensuring 
+          our platform meets modern web accessibility standards and best practices to deliver an
           inclusive user experience.
         </p>
         <p>
@@ -315,7 +330,7 @@
         </p>
         <p>
           In my spare time, I’m usually climbing, reading, hanging out with my wife and two cats, or
-          running around Hyrule searching for Korok seeds.
+          running around Hyrule searching for secret seeds.
         </p>
       </section>
 
@@ -328,7 +343,7 @@
           <div class="role-title">Senior Frontend Engineer, Accessibility</div>
           <div class="role-company">Klaviyo</div>
           <div class="experience-desc">
-            Build and maintain critical components used to construct Klaviyo’s frontend. Work
+            Build and maintain critical components used to construct the company's frontend. Work
             closely with cross‐functional teams, including developers, designers, and product
             managers, to implement and advocate for best practices in web accessibility.
           </div>
@@ -380,7 +395,7 @@
         <div class="project-item">
           <h4><a href="#">Project 2</a></h4>
           <p>
-            A minimal dark blue theme for code editors and terminals. Supports Visual Studio Code,
+            A minimal dark theme for code editors and terminals. Supports Visual Studio Code,
             Sublime Text, Atom, and more.
           </p>
         </div>
@@ -403,29 +418,30 @@
         <svg viewBox="0 0 16 16" role="img">
           <title>GitHub icon</title>
           <path
-            d="M8 0C3.58 0 0 3.58 
-             0 8c0 3.54 2.29 6.53 
-             5.47 7.59.4.07.55-.17.55-.38 
+            d="M8 0C3.58 
+             0 0 3.58 0 8c0 3.54 
+             2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 
              0-.19-.01-.82-.01-1.49-2.01.37
-             -2.53-.49-2.69-.94
-             -.09-.23-.48-.94-.82-1.13
-             -.28-.15-.68-.52-.01-.53
-             .63-.01 1.08.58 1.23.82
-             .72 1.21 1.87.87 2.33.66
-             .07-.52.28-.87.51-1.07
-             -1.78-.2-3.64-.89-3.64-3.95
+             -2.53-.49-2.69-.94-.09-.23
+             -.48-.94-.82-1.13-.28-.15
+             -.68-.52-.01-.53.63-.01 
+             1.08.58 1.23.82.72 1.21
+             1.87.87 2.33.66.07-.52
+             .28-.87.51-1.07-1.78-.2
+             -3.64-.89-3.64-3.95
              0-.87.31-1.59.82-2.15
              -.08-.2-.36-1.02.08-2.12
              0 0 .67-.21 2.2.82
              .64-.18 1.32-.27 2-.27
              .68 0 1.36.09 2 .27
-             1.53-1.04 2.2-.82 2.2-.82
-             .44 1.1.16 1.92.08 2.12
-             .51.56.82 1.27.82 2.15
-             0 3.07-1.87 3.75-3.65 
-             3.95.29.25.54.73.54 1.48
-             0 1.07-.01 1.93-.01 
-             2.2 0 .21.15.46.55.38
+             1.53-1.04 2.2-.82 
+             2.2-.82.44 1.1.16 
+             1.92.08 2.12.51.56
+             .82 1.27.82 2.15 
+             0 3.07-1.87 3.75
+             -3.65 3.95.29.25.54.73.54
+             1.48 0 1.07-.01 1.93
+             -.01 2.2 0 .21.15.46.55.38
              A8.013 8.013 0 0016 8c0
              -4.42-3.58-8-8-8z"
           ></path>
@@ -497,36 +513,10 @@
           />
         </svg>
       </a>
-      <a href="#" aria-label="CodePen" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" role="img">
-          <title>CodePen icon</title>
-          <path
-            d="M21.438 8.161l-.031-.021-9-6a.998.998 
-             0 0 0-1.126 0l-9 6-.031.021A.999.999 
-             0 0 0 2 9v6c0 
-             .338.171.654.453.839l.031.021 
-             9 6c.164.107.352.16.539
-             .16s.375-.053.539-.16l9-6
-             .031-.021A.999.999 0 0 0 
-             22 15V9a.999.999 0 0 0-.562-.839zM4 
-             14.133l3.875 2.583L4 
-             19.3v-5.167zm0-4.266l3.875-2.584L4 
-             4.7v5.167zm8 6.619l-3.5-2.333 
-             3.5-2.333 3.5 2.333
-             -3.5 2.333zm4.125-3.77L20 
-             14.133v5.167l-3.875-2.584zm0
-             -4.266L20 9.867V4.7l-3.875 
-             2.583zM12 
-             4.248l3.375 2.25L12 
-             8.748l-3.375-2.25L12
-             4.248z"
-          />
-        </svg>
-      </a>
     </div>
   </footer>
 
-  <!-- SPOTLIGHT SCRIPT -->
+  <!-- SPOTLIGHT & INTERSECTION OBSERVER SCRIPTS -->
   <script>
     // Move spotlight with cursor
     const spotlight = document.querySelector('.spotlight');
@@ -536,28 +526,29 @@
       spotlight.style.background = `
         radial-gradient(
           600px at ${x}px ${y}px,
-          rgba(100,255,218,0.1),
+          rgba(187,134,252,0.1),
           transparent 80%
         )
       `;
     });
 
-    // Highlight the nav item for the section currently in view
+    // Intersection Observer: highlight current nav link
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('.nav-links a');
 
+    // Adjust threshold & rootMargin so shorter sections also get recognized
     const options = {
       root: null,
-      rootMargin: '0px',
-      threshold: 0.3 // section is “active” if 30% is in view
+      rootMargin: '-100px 0px -100px 0px', /* Slight offset top/bottom */
+      threshold: 0.2 /* 20% visible to mark active */
     };
 
-    let observer = new IntersectionObserver((entries) => {
+    const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          // remove all active classes
+          // remove active from all
           navLinks.forEach(link => link.classList.remove('active'));
-          // find the nav link that points to this section
+          // find the nav link
           const id = entry.target.getAttribute('id');
           const activeLink = document.querySelector(`.nav-links a[href="#${id}"]`);
           if (activeLink) {
@@ -567,9 +558,7 @@
       });
     }, options);
 
-    sections.forEach(section => {
-      observer.observe(section);
-    });
+    sections.forEach(section => observer.observe(section));
   </script>
 </body>
 </html>
