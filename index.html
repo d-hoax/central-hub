@@ -773,34 +773,40 @@
       `;
     });
 
-    // Intersection Observer for nav highlighting
-    const sections = document.querySelectorAll('section');
-    const navLinks = document.querySelectorAll('.nav-links a');
-
-    /* Adjust rootMargin so we properly catch all sections 
-       (like Projects & Education). */
-    const observerOptions = {
-      root: null,
-      rootMargin: '-10% 0px -30% 0px', 
-      threshold: 0.0
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          // remove active from all
-          navLinks.forEach(link => link.classList.remove('active'));
-          // find link for this section
-          const id = entry.target.getAttribute('id');
-          const activeLink = document.querySelector(`.nav-links a[href="#${id}"]`);
-          if (activeLink) {
-            activeLink.classList.add('active');
-          }
+  // Intersection Observer for nav highlighting
+  const sections = document.querySelectorAll('section');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  
+  /*
+    Approach:
+    - rootMargin: "-20% 0px -40% 0px" => top is more negative, so once we scroll 20% beyond a section, 
+      the next section can become "active" sooner.
+    - threshold: 0.1 => as soon as 10% of a section is visible, it's considered "intersecting."
+  */
+  const observerOptions = {
+    root: null,
+    rootMargin: '-20% 0px -40% 0px', 
+    threshold: 0.1
+  };
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // remove active from all
+        navLinks.forEach(link => link.classList.remove('active'));
+        // find the link for this section
+        const id = entry.target.getAttribute('id');
+        const activeLink = document.querySelector(`.nav-links a[href="#${id}"]`);
+        if (activeLink) {
+          activeLink.classList.add('active');
         }
-      });
-    }, observerOptions);
+      }
+    });
+  }, observerOptions);
 
-    sections.forEach(section => observer.observe(section));
+  sections.forEach(section => observer.observe(section));
+
+    
     navLinks.forEach(link => {
       link.addEventListener('click', (event) => {
         event.preventDefault(); 
