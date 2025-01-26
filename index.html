@@ -6,9 +6,9 @@
   <title>Anish Dudeja</title>
 
   <!-- Favicon -->
-  <link rel="icon" href="customa.jpg" type="image/jpeg" />
+  <link rel="icon" href="customm.jpg" type="image/jpg" />
 
-  <!-- Inter font -->
+  <!-- Load Inter font -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
@@ -25,10 +25,11 @@
     html, body {
       width: 100%;
       height: 100%;
-      background: #1b1122; /* blackish background with subtle purple tint */
+      background: #1A0E1C; /* a blackish background with a subtle purple hue */
       color: #a8acc6;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
-      overflow: hidden; /* We'll only scroll the right content */
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, 
+        "Helvetica Neue", sans-serif;
+      overflow: hidden; /* We will scroll only in the right content */
     }
     a {
       text-decoration: none;
@@ -39,7 +40,7 @@
       opacity: 0.8;
     }
 
-    /* SPOTLIGHT */
+    /* SPOTLIGHT BACKGROUND */
     .spotlight {
       pointer-events: none;
       position: fixed;
@@ -49,39 +50,40 @@
       transition: background 0.2s;
     }
 
-    /* NO VISIBLE SCROLLBAR TRICK (for the right content) */
-    /* WebKit-based browsers */
+    /* HIDE SCROLLBAR for the right content */
     .right-content::-webkit-scrollbar {
       width: 0px; 
-      background: transparent; /* or display: none; */
+      background: transparent;
     }
-    /* Firefox */
     .right-content {
-      scrollbar-width: none;
+      scrollbar-width: none; /* For Firefox */
     }
 
-    /* LEFT SIDEBAR pinned around 1/4 from left, 1/5 from top */
+    /* LEFT SIDEBAR pinned at top:10%, left:25% => means first 25% is blank, plus top 10% blank. */
     .left-sidebar {
       position: fixed;
-      top: 20%;     /* ~1/5 from top */
-      left: 25%;    /* ~1/4 from left */
-      width: 400px; /* wide enough so name fits one line at large size */
+      top: 10%;
+      left: 25%;
+      width: 300px; /* adjust as needed to keep name on one line */
       display: flex;
       flex-direction: column;
       z-index: 2;
     }
-    /* SHIFT the entire left column if you want to ensure it’s truly only 1/4 the page is blank
-       -> adjust left: 20% or 25% as you prefer
-       -> adjust top: 20% for ~1/5 from top
-    */
 
-    /* TITLE, SUBTITLE, INTRO */
+    /* Some space below the sidebar so that there's extra blank space at the bottom for logos. 
+       We'll handle logos with absolute positioning within the sidebar. */
+    .sidebar-content {
+      /* This holds the main name, nav, etc. We'll put logos in an absolutely positioned container. */
+      margin-bottom: 10%; /* so there's blank space above the logos */
+    }
+
+    /* NAME / SUBTITLE / INTRO TEXT */
     .left-sidebar h1 {
-      font-size: 3.5rem; 
+      font-size: 3.5rem;
       color: #e6f1ff;
       font-weight: 700;
-      white-space: nowrap;
       line-height: 1.2;
+      white-space: nowrap; /* force one line */
       margin-bottom: 1rem;
     }
     .left-sidebar h2 {
@@ -93,28 +95,29 @@
     .left-sidebar p {
       font-size: 1rem;
       line-height: 1.6;
-      margin-bottom: 2.5rem;
-      max-width: 380px; 
+      margin-bottom: 3rem;
+      max-width: 280px;
     }
 
-    /* NAV LINKS: smaller text, table of contents, dim unless active. */
+    /* TABLE OF CONTENTS / NAV LINKS */
     .nav-links {
       list-style: none;
       margin-bottom: 2rem;
     }
     .nav-links li {
       margin-bottom: 1rem;
-      font-size: 0.8rem;
+      font-size: 0.8rem; 
       text-transform: uppercase;
       letter-spacing: 2px;
     }
+    /* Dim non-active links by default; active link will be 1.0 */
     .nav-links a {
       display: inline-flex;
       align-items: center;
       font-weight: 500;
       color: #fff;
       position: relative;
-      opacity: 0.5; /* dim by default */
+      opacity: 0.5;
       transition: opacity 0.2s;
     }
     .nav-links a::before {
@@ -134,75 +137,87 @@
       opacity: 0.8;
     }
     .nav-links a.active {
-      opacity: 1;
+      opacity: 1.0;
     }
     .nav-links a.active::before {
       width: 40px;
       background: #BB86FC;
     }
 
-    /* LOGOS at the BOTTOM of the page on left side */
-    .left-logos {
+    /* LOGOS at the very bottom of the sidebar, so bottom 10% is blank => 
+       We'll position them absolutely inside .left-sidebar. 
+       Then push them near the bottom with some offset. */
+    .logos-bottom {
       position: absolute;
-      bottom: -60px; /* move them below everything in the sidebar */
+      bottom: 0; /* to the absolute bottom of the sidebar container */
       left: 0;
       display: flex;
       gap: 1.5rem;
     }
-    .left-logos a img {
-      width: 24px;
-      height: 24px;
+    .logos-bottom a img {
+      width: 24px; 
+      height: 24px; 
       object-fit: contain;
       transition: opacity 0.2s;
     }
-    .left-logos a:hover img {
+    .logos-bottom a:hover img {
       opacity: 0.8;
     }
 
-    /* RIGHT CONTENT SCROLLABLE => starts after the left column (which is at 25% + width of 400 = ~ 625? We'll do ~ 700) */
+    /* RIGHT CONTENT: pinned at top:10%, left: ??? => we want it to start after the left sidebar 
+       plus the left 25% blank. Let's guess left: 60%. Then also we want the right 25% blank => we 
+       can do right: 25%. This means from 60% to 75% is only 15% width though. 
+       Let's do left: 35% to right: 25% => that means 35 + 25 => 60% used. 
+       Adjust if you want more width for main content. */
     .right-content {
       position: absolute;
-      top: 0;
-      left: 60%; /* So about 25% blank + 15% for the sidebar itself => adjust as you like. */
-      right: 0;
+      top: 10%;   /* top 10% blank */
+      left: 35%;  /* there's 25% blank + 10% for the sidebar => adjust as needed */
+      right: 25%; /* 25% blank on the right */
       bottom: 0;
-      padding: 60px;
-      overflow-y: scroll;
+      overflow-y: scroll; 
+      padding: 40px 0; /* top/bottom padding in the content area */
       z-index: 1;
     }
     .content-inner {
-      max-width: 800px;
+      max-width: 600px; /* narrower text column, tweak as desired */
       margin: 0 auto;
       line-height: 1.8;
     }
+
+    /* ABOUT SECTION text a bit bigger than experiences */
+    #about p {
+      font-size: 1.1rem; /* bigger than the 1rem used in experiences */
+    }
+
     section {
       margin-bottom: 5rem;
     }
 
-    /* HOVER-DIMMING: experience, project, course placeholders. */
+    /* HOVER-DIMMING for placeholders: experience, projects, education */
     .experience-section:hover .experience-item:not(:hover),
     .project-section:hover .project-item:not(:hover),
     .education-section:hover .course-item:not(:hover) {
       opacity: 0.4;
     }
 
-    /* EXPERIENCE ITEM BOX includes the date -> single container */
+    /* EXPERIENCE BOX includes date & main in same container => single hover area */
     .experience-item {
-      margin-bottom: 2rem;
       display: flex;
-      transition: background 0.3s, box-shadow 0.3s;
+      margin-bottom: 2rem;
       border-radius: 6px;
-      background: none; /* no box unless hovered */
+      transition: background 0.3s, box-shadow 0.3s;
+      background: none;
     }
     .experience-item:hover {
       background: rgba(255,255,255,0.07);
       box-shadow: 0 4px 15px -5px rgba(0,0,0,0.4);
     }
     .experience-date {
-      padding: 1rem;
       flex: 0 0 100px;
+      padding: 1rem;
       font-size: 0.9rem;
-      color: #a8acc6;
+      color: #a8acc6; /* gray subtext color */
       text-transform: uppercase;
     }
     .experience-main {
@@ -217,8 +232,8 @@
       font-weight: 600;
       color: #fff;
       margin-bottom: 0.4rem;
+      transition: color 0.2s;
     }
-    .experience-title-text {}
     .experience-arrow {
       width: 16px;
       height: 16px;
@@ -258,16 +273,16 @@
       color: #BB86FC;
       font-size: 0.8rem;
       padding: 0.2rem 0.7rem;
-      border-radius: 9999px; /* pills */
+      border-radius: 9999px;
     }
 
     /* PROJECT ITEM */
     .project-item {
       background: none;
-      margin-bottom: 2rem;
       padding: 1rem;
       border-radius: 6px;
       transition: background 0.3s, box-shadow 0.3s;
+      margin-bottom: 2rem;
     }
     .project-item:hover {
       background: rgba(255,255,255,0.07);
@@ -281,6 +296,7 @@
       font-weight: 600;
       color: #fff;
       margin-bottom: 0.4rem;
+      transition: color 0.2s;
     }
     .project-arrow {
       width: 16px;
@@ -299,10 +315,10 @@
     /* COURSE ITEM */
     .course-item {
       background: none;
-      margin-bottom: 2rem;
       padding: 1rem;
       border-radius: 6px;
       transition: background 0.3s, box-shadow 0.3s;
+      margin-bottom: 2rem;
     }
     .course-item:hover {
       background: rgba(255,255,255,0.07);
@@ -331,8 +347,7 @@
       color: #BB86FC;
     }
 
-    /* Inline links for “See Full Resume” and “See More Projects” 
-       with diagonal arrow going up-right */
+    /* “See Full Resume” & “See More Projects” links w/ diagonal arrow upward-right */
     .section-link {
       display: inline-flex;
       align-items: center;
@@ -353,25 +368,24 @@
       transform: translate(2px, -2px);
     }
 
-    /* MEDIA QUERIES (mobile) */
+    /* MEDIA QUERIES */
     @media (max-width: 900px) {
       html, body {
-        overflow: auto; 
+        overflow: auto;
       }
       .left-sidebar {
         position: static;
         width: auto;
         margin: 20px;
       }
-      .left-logos {
+      .logos-bottom {
         position: static;
         margin-top: 2rem;
       }
       .right-content {
         position: static;
-        width: auto;
-        margin: 20px;
-        padding: 0;
+        padding: 20px;
+        left: 0; right: 0; top: 0;
       }
     }
   </style>
@@ -382,62 +396,65 @@
 
   <!-- LEFT SIDEBAR -->
   <div class="left-sidebar">
-    <h1>Anish Dudeja</h1>
-    <h2>Front End Engineer</h2>
-    <p>
-      I build accessible, pixel-perfect digital experiences for the web.
-    </p>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#education">Education</a></li>
-    </ul>
+    <div class="sidebar-content">
+      <h1>Anish Dudeja</h1>
+      <h2>Front End Engineer</h2>
+      <p>
+        I build accessible, pixel-perfect digital experiences for the web.
+      </p>
+      <!-- TABLE OF CONTENTS -->
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#education">Education</a></li>
+      </ul>
+    </div>
 
-    <!-- LOGOS AT BOTTOM (GITHUB, LINKEDIN, INSTAGRAM placeholders) -->
-    <div class="left-logos">
+    <!-- LOGOS BOTTOM (GitHub, LinkedIn, Instagram placeholders) -->
+    <div class="logos-bottom">
       <a href="#" aria-label="GitHub" target="_blank" rel="noopener">
-        <img src="github-placeholder.png" alt="GitHub" />
+        <img src="github-placeholder.png" alt="GitHub Placeholder" />
       </a>
       <a href="#" aria-label="LinkedIn" target="_blank" rel="noopener">
-        <img src="linkedin-placeholder.png" alt="LinkedIn" />
+        <img src="linkedin-placeholder.png" alt="LinkedIn Placeholder" />
       </a>
       <a href="#" aria-label="Instagram" target="_blank" rel="noopener">
-        <img src="instagram-placeholder.png" alt="Instagram" />
+        <img src="instagram-placeholder.png" alt="Instagram Placeholder" />
       </a>
     </div>
   </div>
 
-  <!-- RIGHT CONTENT SCROLLABLE -->
+  <!-- RIGHT CONTENT (SCROLLABLE) -->
   <div class="right-content">
     <div class="content-inner">
-      <!-- ABOUT -->
+      <!-- ABOUT SECTION: bigger text than experiences -->
       <section id="about">
-        <p style="font-size:1.15rem;">
-          I’m a developer passionate about crafting accessible, pixel‐perfect user interfaces 
-          that blend thoughtful design with robust engineering. My favorite work lies at the 
-          intersection of design and development, creating experiences that not only look great 
-          but are meticulously built for performance and usability.
+        <p>
+          I’m a developer passionate about crafting accessible, pixel‐perfect user interfaces that
+          blend thoughtful design with robust engineering. My favorite work lies at the intersection
+          of design and development, creating experiences that not only look great but are
+          meticulously built for performance and usability.
         </p>
         <p>
-          Currently, I'm a Senior Front‐End Engineer at <strong>Some Company</strong>, focusing
-          on building top-tier user experiences that prioritize both performance and accessibility.
+          Currently, I'm a Senior Front‐End Engineer at <strong>Some Company</strong>, building
+          top‐tier user experiences and ensuring best practices in performance and accessibility.
         </p>
         <p>
-          I’ve worked in advertising agencies, large corporations, start‐ups, and small product 
-          studios, and I also released a comprehensive video course teaching how to build a 
+          I’ve worked at advertising agencies, large corporations, start‐ups, and small digital
+          product studios. I also released a video course that teaches developers how to build a
           Spotify‐connected web app.
         </p>
         <p>
-          In my spare time, I’m usually climbing, reading, or exploring different fantasy worlds
-          in search of hidden treasures.
+          In my spare time, I’m usually climbing, reading, or exploring fantasy worlds in search
+          of hidden treasures.
         </p>
       </section>
 
       <!-- EXPERIENCE SECTION -->
       <section id="experience" class="experience-section">
         <h3>Experience</h3>
-        
+
         <!-- EXPERIENCE 1 -->
         <div class="experience-item">
           <div class="experience-date">2024 – Present</div>
@@ -447,22 +464,22 @@
               <svg class="experience-arrow" viewBox="0 0 20 20">
                 <path fill-rule="evenodd"
                   d="M5.22 14.78a.75.75 
-                   0 001.06 0l7.22-7.22v5.69a.75.75 
-                   0 001.5 0v-7.5a.75.75 
-                   0 00-.75-.75h-7.5a.75.75 
-                   0 000 1.5h5.69l-7.22 
-                   7.22a.75.75 
-                   0 000 1.06z"
+                    0 001.06 0l7.22-7.22v5.69a.75.75 
+                    0 001.5 0v-7.5a.75.75 
+                    0 00-.75-.75h-7.5a.75.75 
+                    0 000 1.5h5.69l-7.22 
+                    7.22a.75.75 
+                    0 000 1.06z"
                   clip-rule="evenodd"
                 />
               </svg>
             </a>
             <div class="role-company">Klaviyo</div>
             <p class="experience-desc">
-              Build and maintain key UI components across the product, collaborating with 
-              multi‐disciplinary teams to champion accessibility best practices.
+              Build and maintain core UI components used by the entire product, collaborating
+              with cross‐functional teams to promote accessibility best practices.
             </p>
-            <div class="skills">Skills: JavaScript, React, TypeScript, A11y</div>
+            <div class="skills">Skills: JavaScript, TypeScript, React, A11y</div>
             <div class="tags">
               <span class="tag">JavaScript</span>
               <span class="tag">TypeScript</span>
@@ -472,9 +489,9 @@
           </div>
         </div>
 
-        <!-- EXPERIENCE 2, 3, 4 placeholders, ... -->
+        <!-- EXPERIENCE 2 & 3 & 4 placeholders etc. -->
 
-        <!-- “See Full Resume” link -->
+        <!-- “See Full Résumé” link -->
         <a href="#" class="section-link">
           See Full Résumé
           <svg viewBox="0 0 20 20">
@@ -495,9 +512,31 @@
       <!-- PROJECTS SECTION -->
       <section id="projects" class="project-section">
         <h3>Projects</h3>
-        
-        <!-- Several project items + “See More Projects” link... -->
 
+        <div class="project-item">
+          <a href="#" class="project-title">
+            <span class="project-title-text">Project 1</span>
+            <svg class="project-arrow" viewBox="0 0 20 20">
+              <path fill-rule="evenodd"
+                d="M5.22 14.78a.75.75 
+                  0 001.06 0l7.22-7.22v5.69a.75.75 
+                  0 001.5 0v-7.5a.75.75 
+                  0 00-.75-.75h-7.5a.75.75 
+                  0 000 1.5h5.69l-7.22 
+                  7.22a.75.75 
+                  0 000 1.06z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </a>
+          <p>
+            A personalized Spotify data app featuring top artists, tracks, and recommended 
+            playlists.
+          </p>
+        </div>
+        <!-- More project items & placeholders ... -->
+
+        <!-- “See More Projects” link -->
         <a href="#" class="section-link">
           See More Projects
           <svg viewBox="0 0 20 20">
@@ -520,17 +559,36 @@
         <h3>Education</h3>
         <p>B.S. in Computer Science, Generic University (2014–2018)</p>
 
-        <!-- course-item placeholders... -->
+        <div class="course-item">
+          <a href="#" class="course-title">
+            <span class="course-title-text">Data Structures</span>
+            <svg class="course-arrow" viewBox="0 0 20 20">
+              <path fill-rule="evenodd"
+                d="M5.22 14.78a.75.75 
+                 0 001.06 0l7.22-7.22v5.69a.75.75 
+                 0 001.5 0v-7.5a.75.75 
+                 0 00-.75-.75h-7.5a.75.75 
+                 0 000 1.5h5.69l-7.22 
+                 7.22a.75.75 
+                 0 000 1.06z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </a>
+          <p>Explored linked lists, trees, graphs, hashing, focusing on performance.</p>
+        </div>
+        <!-- more course items placeholders... -->
+
       </section>
     </div>
   </div>
 
-  <!-- Intersection Observer & Spotlight Script -->
+  <!-- SPOTLIGHT & INTERSECTION OBSERVER -->
   <script>
-    // Spotlight on cursor
+    // Cursor spotlight
     document.addEventListener('mousemove', (e) => {
-      const sp = document.querySelector('.spotlight');
-      sp.style.background = `
+      const spotlight = document.querySelector('.spotlight');
+      spotlight.style.background = `
         radial-gradient(
           700px at ${e.pageX}px ${e.pageY}px,
           rgba(187,134,252,0.1),
@@ -539,19 +597,18 @@
       `;
     });
 
-    // IntersectionObserver
+    // Intersection Observer for nav highlighting
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('.nav-links a');
-
-    const options = {
+    const observerOptions = {
       root: null,
-      rootMargin: '-10% 0px -40% 0px', /* adjusted so it catches all sections, including Projects */
+      rootMargin: '-10% 0px -30% 0px', /* Adjust so we don't skip any sections */
       threshold: 0.0
     };
-
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
+          // remove active from all
           navLinks.forEach(link => link.classList.remove('active'));
           const id = entry.target.getAttribute('id');
           const activeLink = document.querySelector(`.nav-links a[href="#${id}"]`);
@@ -560,7 +617,7 @@
           }
         }
       });
-    }, options);
+    }, observerOptions);
 
     sections.forEach(section => observer.observe(section));
   </script>
