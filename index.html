@@ -29,7 +29,7 @@
       color: #a8acc6;
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, 
         "Helvetica Neue", sans-serif;
-      overflow: hidden; /* We'll scroll only in the right content */
+      overflow: hidden; /* We'll scroll only the right content */
     }
     a {
       text-decoration: none;
@@ -50,7 +50,7 @@
       transition: background 0.2s;
     }
 
-    /* HIDE SCROLLBAR ON RIGHT CONTENT */
+    /* HIDING SCROLLBAR FOR RIGHT CONTENT */
     .right-content::-webkit-scrollbar {
       width: 0px;
       background: transparent;
@@ -60,12 +60,12 @@
     }
 
     /* LEFT SIDEBAR pinned at top:6%, left:25% 
-       => first 25% of page is blank, plus top 6% is blank. */
+       => 6% from top is blank, 25% from left is blank. */
     .left-sidebar {
       position: fixed;
       top: 6%;
       left: 25%;
-      width: 300px; /* enough so name fits on one line */
+      width: 300px; /* ensures name fits on one line */
       display: flex;
       flex-direction: column;
       z-index: 2;
@@ -77,7 +77,7 @@
       color: #e6f1ff;
       font-weight: 700;
       line-height: 1.2;
-      white-space: nowrap; /* keep on one line */
+      white-space: nowrap; /* keep it on one line */
       margin-bottom: 1rem;
     }
     .left-sidebar h2 {
@@ -104,14 +104,13 @@
       text-transform: uppercase;
       letter-spacing: 2px;
     }
-    /* Non‐active = dim, active = full opacity */
     .nav-links a {
       display: inline-flex;
       align-items: center;
       font-weight: 500;
       color: #fff;
       position: relative;
-      opacity: 0.5; /* dim by default */
+      opacity: 0.5; /* dim by default unless active */
       transition: opacity 0.2s;
     }
     .nav-links a::before {
@@ -138,9 +137,9 @@
       background: #BB86FC;
     }
 
-    /* LOGOS ~50% lower than the last nav link => margin-top: 50vh */
+    /* LOGOS ~50% lower than last link => margin-top: 50vh */
     .logos-lower {
-      margin-top: 50vh; /* adjust to push them ~50% below last link */
+      margin-top: 50vh;
       display: flex;
       gap: 1.5rem;
     }
@@ -154,15 +153,15 @@
       opacity: 0.8;
     }
 
-    /* RIGHT CONTENT pinned from left:40% to right:15%. 
-       => 25% blank on the left + 15% for the sidebar + we want 15% gap => 
-          we interpret as: left: 40% to right: 15%. 
-       top: 6% => matches left side top. */
+    /* RIGHT CONTENT pinned from left:40% to right:12%.
+       => 25% blank on left plus 15% gap => 40%,
+          12% on the right blank => 88% used => 60% used? 
+       top:6% => matches left side top. */
     .right-content {
       position: absolute;
       top: 6%;
-      left: 40%; 
-      right: 15%;
+      left: 40%;
+      right: 12%;
       bottom: 0;
       overflow-y: scroll;
       padding: 40px 0; /* top/bottom padding */
@@ -189,7 +188,7 @@
       opacity: 0.4;
     }
 
-    /* EXPERIENCE BOX (date & content in same container => single hover) */
+    /* EXPERIENCE ITEM (date + main => single hover area) */
     .experience-item {
       display: flex;
       margin-bottom: 2rem;
@@ -261,7 +260,7 @@
       color: #BB86FC;
       font-size: 0.8rem;
       padding: 0.2rem 0.7rem;
-      border-radius: 9999px; 
+      border-radius: 9999px;
     }
 
     /* PROJECT ITEM */
@@ -335,7 +334,7 @@
       color: #BB86FC;
     }
 
-    /* “See Full Resume” + “See More Projects” => diagonal arrow upwards */
+    /* “See Full Resume” + “See More Projects” => diagonal arrow upward */
     .section-link {
       display: inline-flex;
       align-items: center;
@@ -398,7 +397,7 @@
       <li><a href="#education">Education</a></li>
     </ul>
 
-    <!-- GITHUB / LINKEDIN / INSTAGRAM 50% lower from the last link -->
+    <!-- LOGOS 50% lower from last nav link => margin-top: 50vh -->
     <div class="logos-lower">
       <a href="#" aria-label="GitHub" target="_blank" rel="noopener">
         <img src="github-placeholder.png" alt="GitHub" />
@@ -412,10 +411,10 @@
     </div>
   </div>
 
-  <!-- RIGHT CONTENT (SCROLLABLE) -->
+  <!-- RIGHT CONTENT SCROLLABLE -->
   <div class="right-content">
     <div class="content-inner">
-      <!-- ABOUT SECTION -->
+      <!-- ABOUT (bigger text) -->
       <section id="about">
         <p>
           I’m a developer passionate about crafting accessible, pixel‐perfect user interfaces that 
@@ -429,7 +428,7 @@
         </p>
         <p>
           I’ve worked at advertising agencies, large corporations, start‐ups, and small product
-          studios. I also released a video course that shows developers how to build a
+          studios. I also released a video course teaching developers how to build a
           Spotify‐connected web app.
         </p>
         <p>
@@ -438,43 +437,329 @@
         </p>
       </section>
 
-      <!-- EXPERIENCE SECTION (6 total) -->
+      <!-- EXPERIENCE (5 total) -->
       <section id="experience" class="experience-section">
         <h3>Experience</h3>
-        <!-- Add 6 placeholders as shown in the previous code example -->
-        <!-- ... -->
+
+        <!-- EXPERIENCE 1 -->
+        <div class="experience-item">
+          <div class="experience-date">2024 – Present</div>
+          <div class="experience-main">
+            <a href="#" class="experience-title">
+              <span class="experience-title-text">Senior Frontend Engineer, Accessibility</span>
+              <svg class="experience-arrow" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                  d="M5.22 14.78a.75.75 
+                   0 001.06 0l7.22-7.22v5.69a.75.75 
+                   0 001.5 0v-7.5a.75.75 
+                   0 00-.75-.75h-7.5a.75.75 
+                   0 000 1.5h5.69l-7.22 
+                   7.22a.75.75 
+                   0 000 1.06z"
+                  clip-rule="evenodd"/>
+              </svg>
+            </a>
+            <div class="role-company">Klaviyo</div>
+            <p class="experience-desc">
+              Build and maintain core UI components used across the product, collaborating
+              with cross‐functional teams to promote accessibility.
+            </p>
+            <div class="skills">Skills: JavaScript, React, TypeScript, A11y</div>
+            <div class="tags">
+              <span class="tag">JavaScript</span>
+              <span class="tag">TypeScript</span>
+              <span class="tag">React</span>
+              <span class="tag">Storybook</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- EXPERIENCE 2 -->
+        <div class="experience-item">
+          <div class="experience-date">2018 – 2023</div>
+          <div class="experience-main">
+            <a href="#" class="experience-title">
+              <span class="experience-title-text">Lead Engineer</span>
+              <svg class="experience-arrow" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                  d="M5.22 14.78a.75.75 
+                   0 001.06 0l7.22-7.22v5.69a.75.75 
+                   0 001.5 0v-7.5a.75.75 
+                   0 00-.75-.75h-7.5a.75.75 
+                   0 000 1.5h5.69l-7.22 
+                   7.22a.75.75 
+                   0 000 1.06z"
+                  clip-rule="evenodd"/>
+              </svg>
+            </a>
+            <div class="role-company">Upstatement</div>
+            <p class="experience-desc">
+              Built, styled, and shipped high‐quality websites, design systems, and digital 
+              experiences for various clients. Provided leadership via knowledge sharing.
+            </p>
+            <div class="skills">Skills: JavaScript, HTML/CSS, React, Next.js</div>
+            <div class="tags">
+              <span class="tag">JavaScript</span>
+              <span class="tag">TypeScript</span>
+              <span class="tag">HTML &amp; SCSS</span>
+              <span class="tag">React</span>
+              <span class="tag">Next.js</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- EXPERIENCE 3 -->
+        <div class="experience-item">
+          <div class="experience-date">2016 – 2018</div>
+          <div class="experience-main">
+            <a href="#" class="experience-title">
+              <span class="experience-title-text">Front End Engineer</span>
+              <svg class="experience-arrow" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                  d="M5.22 14.78a.75.75 
+                   0 001.06 0l7.22-7.22v5.69a.75.75 
+                   0 001.5 0v-7.5a.75.75 
+                   0 00-.75-.75h-7.5a.75.75 
+                   0 000 1.5h5.69l-7.22 
+                   7.22a.75.75 
+                   0 000 1.06z"
+                  clip-rule="evenodd"/>
+              </svg>
+            </a>
+            <div class="role-company">Placeholder Corp</div>
+            <p class="experience-desc">
+              Developed interactive UIs focusing on performance and accessibility in an agile team.
+            </p>
+            <div class="skills">Skills: ES6, Vue.js, CSS, Web Performance</div>
+            <div class="tags">
+              <span class="tag">Vue.js</span>
+              <span class="tag">ES6</span>
+              <span class="tag">CSS</span>
+              <span class="tag">Performance</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- EXPERIENCE 4 -->
+        <div class="experience-item">
+          <div class="experience-date">2014 – 2016</div>
+          <div class="experience-main">
+            <a href="#" class="experience-title">
+              <span class="experience-title-text">Junior Developer</span>
+              <svg class="experience-arrow" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                  d="M5.22 14.78a.75.75 
+                   0 001.06 0l7.22-7.22v5.69a.75.75 
+                   0 001.5 0v-7.5a.75.75 
+                   0 00-.75-.75h-7.5a.75.75 
+                   0 000 1.5h5.69l-7.22 
+                   7.22a.75.75 
+                   0 000 1.06z"
+                  clip-rule="evenodd"/>
+              </svg>
+            </a>
+            <div class="role-company">Generic Tech</div>
+            <p class="experience-desc">
+              Assisted in web app development, learning best practices for code quality and modern design patterns.
+            </p>
+            <div class="skills">Skills: HTML, CSS, jQuery, Git</div>
+            <div class="tags">
+              <span class="tag">HTML</span>
+              <span class="tag">CSS</span>
+              <span class="tag">jQuery</span>
+              <span class="tag">Git</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- EXPERIENCE 5 (placeholder) -->
+        <div class="experience-item">
+          <div class="experience-date">2012 – 2014</div>
+          <div class="experience-main">
+            <a href="#" class="experience-title">
+              <span class="experience-title-text">Intern Developer</span>
+              <svg class="experience-arrow" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M5.22 14.78a.75.75 
+                  0 001.06 0l7.22-7.22v5.69a.75.75 
+                  0 001.5 0v-7.5a.75.75
+                  0 00-.75-.75h-7.5a.75.75
+                  0 000 1.5h5.69l-7.22
+                  7.22a.75.75
+                  0 000 1.06z"
+                  clip-rule="evenodd"/>
+              </svg>
+            </a>
+            <div class="role-company">Tech Interns, Inc.</div>
+            <p class="experience-desc">
+              Learned modern JavaScript patterns and helped fix bugs across various front-end apps.
+            </p>
+            <div class="skills">Skills: JavaScript, DOM, Git</div>
+            <div class="tags">
+              <span class="tag">JavaScript</span>
+              <span class="tag">DOM</span>
+              <span class="tag">Git</span>
+            </div>
+          </div>
+        </div>
 
         <!-- “See Full Résumé” link -->
         <a href="#" class="section-link">
           See Full Résumé
-          <svg viewBox="0 0 20 20"><path ... /></svg>
+          <svg viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M3 10a.75.75 
+              0 01.75-.75h10.638L10.23 
+              5.29a.75.75 0 
+              111.04-1.08l5.5 5.25a.75.75 
+              0 010 1.08l-5.5 5.25a.75.75 
+              0 01-1.04-1.08l4.158-3.96H3.75A.75.75 
+              0 013 10z" clip-rule="evenodd"/>
+          </svg>
         </a>
       </section>
 
-      <!-- PROJECTS SECTION (9 total) -->
+      <!-- PROJECTS (5 placeholders) -->
       <section id="projects" class="project-section">
         <h3>Projects</h3>
-        <!-- Add 9 project placeholders as shown above -->
-        <!-- ... -->
+        <!-- Project 1 -->
+        <div class="project-item">
+          <a href="#" class="project-title">
+            <span class="project-title-text">Project 1</span>
+            <svg class="project-arrow" viewBox="0 0 20 20">
+              <path fill-rule="evenodd"
+                d="M5.22 14.78a.75.75 
+                 0 001.06 0l7.22-7.22v5.69a.75.75 
+                 0 001.5 0v-7.5a.75.75 
+                 0 00-.75-.75h-7.5a.75.75 
+                 0 000 1.5h5.69l-7.22 
+                 7.22a.75.75 
+                 0 000 1.06z"
+                clip-rule="evenodd"/>
+            </svg>
+          </a>
+          <p>A personalized Spotify data app featuring top artists, tracks, and recommended playlists.</p>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="project-item">
+          <a href="#" class="project-title">
+            <span class="project-title-text">Project 2</span>
+            <svg class="project-arrow" viewBox="0 0 20 20"><path ... /></svg>
+          </a>
+          <p>A minimal dark theme for editors/terminals, supporting VS Code, Sublime, etc.</p>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="project-item">
+          <a href="#" class="project-title">
+            <span class="project-title-text">Project 3</span>
+            <svg class="project-arrow" viewBox="0 0 20 20"><path ... /></svg>
+          </a>
+          <p>Portfolio site with advanced CSS animations and Next.js static generation.</p>
+        </div>
+
+        <!-- Project 4 -->
+        <div class="project-item">
+          <a href="#" class="project-title">
+            <span class="project-title-text">Project 4</span>
+            <svg class="project-arrow" viewBox="0 0 20 20"><path ... /></svg>
+          </a>
+          <p>Real‐time collaborative note‐taking app with offline caching and conflict resolution.</p>
+        </div>
+
+        <!-- Project 5 -->
+        <div class="project-item">
+          <a href="#" class="project-title">
+            <span class="project-title-text">Project 5</span>
+            <svg class="project-arrow" viewBox="0 0 20 20"><path ... /></svg>
+          </a>
+          <p>An e‐commerce prototype using a headless CMS, fully decoupled front/back end.</p>
+        </div>
 
         <!-- “See More Projects” link -->
         <a href="#" class="section-link">
           See More Projects
-          <svg viewBox="0 0 20 20"><path ... /></svg>
+          <svg viewBox="0 0 20 20">
+            <path fill-rule="evenodd"
+              d="M3 10a.75.75 
+               0 01.75-.75h10.638L10.23 
+               5.29a.75.75 0 
+               111.04-1.08l5.5 5.25a.75.75 
+               0 010 1.08l-5.5 5.25a.75.75 
+               0 01-1.04-1.08l4.158-3.96H3.75A.75.75 
+               0 013 10z"
+              clip-rule="evenodd"
+            />
+          </svg>
         </a>
       </section>
 
-      <!-- EDUCATION (12 placeholders) -->
+      <!-- EDUCATION (8 placeholders) -->
       <section id="education" class="education-section">
         <h3>Education</h3>
         <p>B.S. in Computer Science, Generic University (2014–2018)</p>
-        <!-- 12 course placeholders as shown above -->
-        <!-- ... -->
+
+        <!-- 8 course placeholders -->
+        <div class="course-item">
+          <a href="#" class="course-title">
+            <span class="course-title-text">Data Structures</span>
+            <svg class="course-arrow" viewBox="0 0 20 20"><path ... /></svg>
+          </a>
+          <p>Explored linked lists, trees, graphs, hashing, focusing on performance.</p>
+        </div>
+        <div class="course-item">
+          <a href="#" class="course-title">
+            <span class="course-title-text">Algorithms</span>
+            <svg class="course-arrow" viewBox="0 0 20 20"><path ... /></svg>
+          </a>
+          <p>Sorting, searching, graph algorithms, dynamic programming, complexity analysis.</p>
+        </div>
+        <div class="course-item">
+          <a href="#" class="course-title">
+            <span class="course-title-text">Course 3</span>
+            <svg class="course-arrow" viewBox="0 0 20 20"><path ... /></svg>
+          </a>
+          <p>Placeholder text for course 3.</p>
+        </div>
+        <div class="course-item">
+          <a href="#" class="course-title">
+            <span class="course-title-text">Course 4</span>
+            <svg class="course-arrow" viewBox="0 0 20 20"><path ... /></svg>
+          </a>
+          <p>Placeholder text for course 4.</p>
+        </div>
+        <div class="course-item">
+          <a href="#" class="course-title">
+            <span class="course-title-text">Course 5</span>
+            <svg class="course-arrow" viewBox="0 0 20 20"><path ... /></svg>
+          </a>
+          <p>Placeholder text for course 5.</p>
+        </div>
+        <div class="course-item">
+          <a href="#" class="course-title">
+            <span class="course-title-text">Course 6</span>
+            <svg class="course-arrow" viewBox="0 0 20 20"><path ... /></svg>
+          </a>
+          <p>Placeholder text for course 6.</p>
+        </div>
+        <div class="course-item">
+          <a href="#" class="course-title">
+            <span class="course-title-text">Course 7</span>
+            <svg class="course-arrow" viewBox="0 0 20 20"><path ... /></svg>
+          </a>
+          <p>Placeholder text for course 7.</p>
+        </div>
+        <div class="course-item">
+          <a href="#" class="course-title">
+            <span class="course-title-text">Course 8</span>
+            <svg class="course-arrow" viewBox="0 0 20 20"><path ... /></svg>
+          </a>
+          <p>Placeholder text for course 8.</p>
+        </div>
       </section>
     </div>
   </div>
 
-  <!-- SPOTLIGHT & INTERSECTION OBSERVER -->
+  <!-- SPOTLIGHT & INTERSECTION OBSERVER SCRIPT -->
   <script>
     // Cursor spotlight
     document.addEventListener('mousemove', (e) => {
@@ -488,21 +773,22 @@
       `;
     });
 
-    // Intersection Observer for table of contents highlight
+    // Intersection Observer for nav highlighting
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('.nav-links a');
 
-    // Try adjusting rootMargin so none get skipped
+    /* Adjust rootMargin so we properly catch all sections 
+       (like Projects & Education). */
     const observerOptions = {
       root: null,
-      rootMargin: '-10% 0px -30% 0px',
+      rootMargin: '-10% 0px -30% 0px', 
       threshold: 0.0
     };
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          // remove 'active' from all
+          // remove active from all
           navLinks.forEach(link => link.classList.remove('active'));
           // find link for this section
           const id = entry.target.getAttribute('id');
