@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
@@ -7,36 +7,37 @@
   <link rel="icon" href="customa.jpg" type="image/jpg">
 
   <style>
-    /* BASE STYLES */
+    /* BASIC RESET / GLOBAL STYLES */
     * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      margin: 0; padding: 0; box-sizing: border-box;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+        sans-serif;
     }
     html, body {
-      background-color: #0A192F; /* Dark navy */
-      color: #8892B0;           /* Muted light text */
-      height: 100%;
+      width: 100%; height: 100%;
+      background: #0A192F; /* deep navy */
+      color: #8892B0;      /* muted light text */
+      overflow-x: hidden;
     }
+
     a {
-      color: #64FFDA; /* Teal highlight */
+      color: #64FFDA; /* teal highlight */
       text-decoration: none;
+      transition: opacity 0.2s;
     }
     a:hover {
       opacity: 0.8;
     }
-    h1, h2, h3 {
-      color: #CCD6F6; /* Lighter heading color */
-      font-weight: 600;
-    }
-    ul {
-      list-style: none;
+
+    h1, h2, h3, h4 {
+      color: #CCD6F6; /* lighter heading color */
+      margin-bottom: 0.5rem;
     }
 
-    /* LAYOUT */
+    /* LAYOUT: container with a left sidebar and main content */
     .container {
+      position: relative;
       display: flex;
       flex-direction: row;
       max-width: 1200px;
@@ -44,17 +45,13 @@
       padding: 40px;
       min-height: 100vh;
     }
-    /* LEFT SIDEBAR */
     .sidebar {
       flex: 0 0 35%;
       padding-right: 40px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
     }
     .sidebar h1 {
       font-size: 3rem;
-      margin-bottom: 10px;
+      margin-bottom: 0.5rem;
     }
     .sidebar h2 {
       font-size: 1.2rem;
@@ -66,46 +63,70 @@
       margin-bottom: 3rem;
       max-width: 300px;
     }
-    .nav-links li {
-      font-size: 0.85rem;
-      margin-bottom: 1rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      cursor: pointer;
+
+    /* NAV LINKS with “expanding underline” on hover */
+    .nav-links {
+      list-style: none;
     }
-    .nav-links li:hover {
-      color: #64ffda;
+    .nav-links li {
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 0.9rem;
+    }
+    .nav-links a {
+      display: inline-flex;
+      align-items: center;
+      position: relative;
+    }
+    .nav-links a::before {
+      /* The horizontal line */
+      content: "";
+      display: block;
+      height: 1px;
+      width: 20px;
+      background: #8892B0;
+      margin-right: 8px;
+      transition: width 0.3s, background 0.3s;
+    }
+    .nav-links a:hover::before,
+    .nav-links a:focus::before {
+      width: 40px;
+      background: #64FFDA;
     }
 
-    /* MAIN CONTENT */
+    /* MAIN CONTENT AREA */
     .main {
       flex: 1;
     }
-    .section {
+    section {
       margin-bottom: 4rem;
     }
-    .section h3 {
-      font-size: 1.1rem;
-      margin-bottom: 0.5rem;
-    }
-    .section p {
+    section p {
       line-height: 1.6;
       margin-bottom: 1rem;
     }
 
-    /* EXPERIENCE TIMELINE */
+    /* EXPERIENCE “TIMELINE”‐like styling */
     .experience-item {
       margin-bottom: 2rem;
+      padding: 1rem;
+      border-radius: 8px;
+      transition: background 0.3s, box-shadow 0.3s;
+    }
+    .experience-item:hover {
+      background: #112240; /* slightly lighter navy background */
+      box-shadow: 0 4px 15px -5px rgba(0,0,0,0.4);
     }
     .date-range {
       font-size: 0.8rem;
       text-transform: uppercase;
       color: #64ffda;
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.2rem;
     }
     .role-title {
       font-size: 1rem;
-      margin-bottom: 0.3rem;
+      margin-bottom: 0.2rem;
     }
     .role-company {
       font-size: 0.95rem;
@@ -113,44 +134,49 @@
       margin-bottom: 0.6rem;
     }
     .experience-desc {
-      line-height: 1.6;
       font-size: 0.9rem;
-      margin-bottom: 0.5rem;
+      line-height: 1.6;
     }
     .tags {
+      margin-top: 0.8rem;
       display: flex;
       flex-wrap: wrap;
       gap: 0.5rem;
     }
     .tag {
-      background-color: rgba(100, 255, 218, 0.1);
+      background: rgba(100, 255, 218, 0.1);
       border: 1px solid rgba(100, 255, 218, 0.2);
-      color: #64FFDA;
+      color: #64ffda;
       font-size: 0.75rem;
       padding: 0.2rem 0.5rem;
       border-radius: 4px;
-      white-space: nowrap;
     }
 
-    /* PROJECTS */
-    .project-list li {
+    /* PROJECT CARDS with hover highlight */
+    .project-item {
       margin-bottom: 2rem;
+      padding: 1rem;
+      border-radius: 8px;
+      transition: background 0.3s, box-shadow 0.3s;
     }
-    .project-list h4 {
+    .project-item:hover {
+      background: #112240;
+      box-shadow: 0 4px 15px -5px rgba(0,0,0,0.4);
+    }
+    .project-item h4 {
       font-size: 1rem;
       margin-bottom: 0.4rem;
-      color: #CCD6F6;
     }
-    .project-list p {
-      line-height: 1.6;
+    .project-item p {
       font-size: 0.9rem;
+      line-height: 1.6;
     }
 
-    /* FOOTER / SOCIAL ICONS */
+    /* FOOTER w/ TINY SOCIAL ICONS */
     footer {
-      width: 100%;
       display: flex;
       justify-content: center;
+      align-items: center;
       padding: 20px 0;
     }
     .social-icons {
@@ -158,16 +184,26 @@
       gap: 1.2rem;
     }
     .social-icons a svg {
-      width: 20px;
-      height: 20px;
+      width: 18px; /* smaller icons */
+      height: 18px;
       fill: #8892B0;
       transition: fill 0.2s;
     }
     .social-icons a:hover svg {
-      fill: #64FFDA;
+      fill: #64ffda;
     }
 
-    /* MEDIA QUERIES (adjust as needed) */
+    /* SPOTLIGHT */
+    .spotlight {
+      pointer-events: none; /* don't block clicks */
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 1; /* behind content */
+      background: radial-gradient(600px at 50% 50%, rgba(100,255,218,0.1), transparent 80%);
+      transition: background 0.2s;
+    }
+
+    /* MEDIA QUERIES */
     @media (max-width: 800px) {
       .container {
         flex-direction: column;
@@ -175,30 +211,32 @@
       .sidebar {
         flex: 0 0 auto;
         margin-bottom: 2rem;
+        padding-right: 0;
       }
     }
   </style>
 </head>
 <body>
+  <!-- The "spotlight" background that follows the cursor -->
+  <div class="spotlight"></div>
 
   <div class="container">
-    <!-- LEFT SIDEBAR -->
+    <!-- SIDEBAR -->
     <div class="sidebar">
-      <h1>Brittany Chiang</h1>
+      <h1>Anish Dudeja</h1>
       <h2>Front End Engineer</h2>
       <p>I build accessible, pixel-perfect digital experiences for the web.</p>
-
       <ul class="nav-links">
-        <li>About</li>
-        <li>Experience</li>
-        <li>Projects</li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
       </ul>
     </div>
 
     <!-- MAIN CONTENT -->
     <div class="main">
-      <!-- ABOUT -->
-      <section class="section" id="about">
+      <!-- ABOUT SECTION -->
+      <section id="about">
         <p>
           I’m a developer passionate about crafting accessible, pixel‐perfect user interfaces that
           blend thoughtful design with robust engineering. My favorite work lies at the intersection
@@ -213,8 +251,8 @@
         </p>
         <p>
           In the past, I've developed software in a variety of settings—from advertising agencies and
-          large corporations to start‐ups and small product studios. I also released a comprehensive
-          video course a while back, guiding learners through building a web app with the Spotify
+          large corporations to start‐ups and small digital product studios. I also released a
+          comprehensive video course guiding learners through building a web app with the Spotify
           API.
         </p>
         <p>
@@ -223,16 +261,16 @@
         </p>
       </section>
 
-      <!-- EXPERIENCE -->
-      <section class="section" id="experience">
+      <!-- EXPERIENCE SECTION -->
+      <section id="experience">
         <div class="experience-item">
           <div class="date-range">2024 — Present</div>
           <div class="role-title">Senior Frontend Engineer, Accessibility</div>
           <div class="role-company">Klaviyo</div>
           <div class="experience-desc">
-            Build and maintain critical components used to construct Klaviyo’s frontend. Work closely
-            with cross‐functional teams, including developers, designers, and product managers, to
-            implement and advocate for best practices in web accessibility.
+            Build and maintain critical components used to construct Klaviyo’s frontend. Work
+            closely with cross‐functional teams, including developers, designers, and product
+            managers, to implement and advocate for best practices in web accessibility.
           </div>
           <div class="tags">
             <span class="tag">JavaScript</span>
@@ -247,9 +285,9 @@
           <div class="role-title">Lead Engineer</div>
           <div class="role-company">Upstatement</div>
           <div class="experience-desc">
-            Built, styled, and shipped high‐quality websites, design systems, mobile apps, and
-            digital experiences for a diverse array of projects. Provided leadership within the
-            engineering department through collaboration, knowledge shares, and tools.
+            Built, styled, and shipped high‐quality websites, design systems, mobile apps, and digital
+            experiences for a diverse array of clients. Provided leadership within the engineering
+            department through collaboration, knowledge shares, and internal tool development.
           </div>
           <div class="tags">
             <span class="tag">JavaScript</span>
@@ -264,86 +302,200 @@
             <span class="tag">PHP</span>
           </div>
         </div>
-
-        <!-- Add more experience items as needed -->
+        <!-- Add more experience items if needed -->
       </section>
 
-      <!-- PROJECTS -->
-      <section class="section" id="projects">
-        <h3>Selected Projects</h3>
-        <ul class="project-list">
-          <li>
-            <h4><a href="#">Project 1</a></h4>
-            <p>
-              A web application demonstrating personalized Spotify data. Features top artists, top
-              tracks, recently played tracks, plus recommended tracks to create new playlists.
-            </p>
-          </li>
-          <li>
-            <h4><a href="#">Project 2</a></h4>
-            <p>
-              Minimal dark blue theme for code editors and terminals. Supports Visual Studio Code,
-              Sublime Text, Atom, iTerm, and more.
-            </p>
-          </li>
-        </ul>
+      <!-- PROJECTS SECTION -->
+      <section id="projects">
+        <h3 style="margin-bottom: 1rem;">Projects</h3>
+        <div class="project-item">
+          <h4><a href="#">Project 1</a></h4>
+          <p>
+            A web application demonstrating personalized Spotify data. Features top artists, top
+            tracks, and recommended tracks to create new playlists.
+          </p>
+        </div>
+        <div class="project-item">
+          <h4><a href="#">Project 2</a></h4>
+          <p>
+            A minimal dark blue theme for code editors and terminals. Supports Visual Studio Code,
+            Sublime Text, Atom, and more.
+          </p>
+        </div>
+        <!-- Add more project items if needed -->
       </section>
     </div>
   </div>
 
-  <!-- FOOTER (Social icons) -->
+  <!-- FOOTER W/ TINY SOCIAL ICONS -->
   <footer>
     <div class="social-icons">
-      <!-- GitHub -->
-      <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+      <a href="#" aria-label="GitHub" target="_blank" rel="noopener">
         <svg viewBox="0 0 16 16" role="img">
           <title>GitHub icon</title>
           <path
-            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 
-               2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94
-               -.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 
-               1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2
-               -3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12
-               0 0 .67-.21 2.2.82.64-.18 
-               1.32-.27 2-.27.68 0 1.36.09 
-               2 .27 1.53-1.04 2.2-.82 
-               2.2-.82.44 1.1.16 1.92.08 
-               2.12.51.56.82 1.27.82 2.15 0 
-               3.07-1.87 3.75-3.65 
-               3.95.29.25.54.73.54 1.48 0 
-               1.07-.01 1.93-.01 
-               2.2 0 .21.15.46.55.38A8.013 
-               8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+            d="M8 0C3.58 0 0 3.58 0 8c0 
+             3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 
+             0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94
+             -.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53
+             .63-.01 1.08.58 1.23.82.72 1.21 1.87.87 
+             2.33.66.07-.52.28-.87.51-1.07-1.78-.2
+             -3.64-.89-3.64-3.95 0-.87.31-1.59
+             .82-2.15-.08-.2-.36-1.02.08-2.12
+             0 0 .67-.21 2.2.82.64-.18 
+             1.32-.27 2-.27.68 0 
+             1.36.09 2 .27 1.53-1.04 
+             2.2-.82 2.2-.82.44 1.1.16 
+             1.92.08 2.12.51.56.82 1.27.82
+             2.15 0 3.07-1.87 3.75
+             -3.65 3.95.29.25.54.73.54
+             1.48 0 1.07-.01 1.93-.01 
+             2.2 0 .21.15.46.55.38A8.013 
+             8.013 0 0016 8c0-4.42
+             -3.58-8-8-8z"
           ></path>
         </svg>
       </a>
-      <!-- LinkedIn -->
-      <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+      <a href="#" aria-label="LinkedIn" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" role="img">
           <title>LinkedIn icon</title>
           <path
-            d="M20.5 2h-17A1.5 1.5 0 
-               002 3.5v17A1.5 1.5 0 
-               003.5 22h17a1.5 1.5 
-               0 001.5-1.5v-17A1.5 
-               1.5 0 0020.5 2zM8 
-               19H5v-9h3zm-1.5-10.75A1.75 
-               1.75 0 118.3 6.5a1.78 
+            d="M20.5 2h-17A1.5 
+               1.5 0 002 3.5v17A1.5 1.5 
+               0 003.5 22h17a1.5 1.5 
+               0 001.5-1.5v-17A1.5 1.5 
+               0 0020.5 2zM8 
+               19H5v-9h3zM6.5 
+               8.25A1.75 1.75 0 
+               118.3 6.5a1.78 
                1.78 0 01-1.8 
-               1.75zM19 19h-3v-4.74c0-1.42
-               -.6-1.93-1.38-1.93a1.74 
+               1.75zM19 
+               19h-3v-4.74c0
+               -1.42-.6-1.93
+               -1.38-1.93a1.74 
                1.74 0 00-1.62 
-               1.06.66.66 0 000 
-               .14V19h-3v-9h2.9v1.3a3.11 
-               3.11 0 012.7-1.4c1.55 0 
-               3.36.86 3.36 
-               3.66z"
+               1.06.66.66 
+               0 000.14V19h-3v-9h2.9v1.3
+               a3.11 3.11 0 
+               012.7-1.4c1.55 
+               0 3.36.86
+               3.36 3.66z"
           ></path>
         </svg>
       </a>
-      <!-- Add more if desired (Instagram, CodePen, etc.) but made smaller. -->
+      <a href="#" aria-label="Instagram" target="_blank" rel="noopener">
+        <svg viewBox="0 0 512 512" role="img">
+          <title>Instagram icon</title>
+          <path
+            d="M349.33 69.33H162.67A93.37 
+               93.37 0 0069.33 
+               162.67v186.66a93.37 
+               93.37 0 0093.34 
+               93.34h186.66a93.37 
+               93.37 0 0093.34-93.34V162.67
+               a93.37 93.37 0 
+               00-93.34-93.34zM448 
+               349.33A98.7 98.7 0 01349.33
+               448H162.67A98.7 98.7 0 
+               0164 349.33V162.67
+               A98.7 98.7 0 01162.67 
+               64h186.66A98.7 98.7 0 
+               01448 162.67z"
+          />
+          <path
+            d="M377.33 
+               162.67a28.67 28.67 
+               0 1128.67-28.67 
+               28.7 28.7 0 01-28.67 
+               28.67z"
+          />
+          <path
+            d="M256 170.67a85.33 
+               85.33 0 1085.33 
+               85.33A85.41 85.41 
+               0 00256 
+               170.67zm0 
+               141.33a56 56 0 
+               1156-56 56.06 56.06
+               0 01-56 
+               56z"
+          />
+        </svg>
+      </a>
+      <a href="#" aria-label="CodePen" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" role="img">
+          <title>CodePen icon</title>
+          <path
+            d="M21.438 8.161l-.031-.021-9-6a.998.998 
+             0 0 0-1.126 0l-9 6-.031.021A.999.999 
+             0 0 0 2 9v6c0 
+             .338.171.654.453.839l.031.021 
+             9 6c.164.107.352.16.539
+             .16s.375-.053.539-.16l9-6
+             .031-.021A.999.999 0 0 0 
+             22 15V9a.999.999 0 0 0-.562-.839zM4 
+             14.133l3.875 2.583L4 
+             19.3v-5.167zm0-4.266l3.875-2.584L4 
+             4.7v5.167zm8 6.619l-3.5-2.333 
+             3.5-2.333 3.5 2.333
+             -3.5 2.333zm4.125-3.77L20 
+             14.133v5.167l-3.875-2.584zm0
+             -4.266L20 9.867V4.7l-3.875 
+             2.583zM12 
+             4.248l3.375 2.25L12 
+             8.748l-3.375-2.25L12
+             4.248z"
+          />
+        </svg>
+      </a>
+      <a href="#" aria-label="Goodreads" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" role="img">
+          <title>Goodreads icon</title>
+          <path
+            d="M11.997 0c-5.572 
+               0-10.098 4.526-10.098 10.102 
+               0 5.568 4.526 
+               10.094 10.098 10.094a9.98 
+               9.98 0 0 0 3.98-.82c.599.653 
+               1.657 1.516 
+               2.791 1.69-.088-.671
+               -.175-1.502-.175-2.14 
+               0-.82.263-1.632.263-2.448 
+               0 0 
+               0-.175-.088-.175.526-.789 
+               .877-1.841 
+               .877-3.07 0-4.006-2.614-5.71-5.85-5.71
+               -3.324 0-6.225 2.186
+               -6.225 5.675 
+               0 3.506 
+               2.984 5.622 
+               6.225 5.622
+               1.929 
+               0 3.552-.704 
+               4.412-1.753.088-.087.175-.087.175 
+               0 .09.789-.088
+               2.359.26 2.889.017.028 
+               0 0 0 0z"
+          ></path>
+        </svg>
+      </a>
     </div>
   </footer>
 
+  <!-- SPOTLIGHT SCRIPT -->
+  <script>
+    const spotlight = document.querySelector('.spotlight');
+    document.addEventListener('mousemove', (e) => {
+      const x = e.pageX;
+      const y = e.pageY;
+      spotlight.style.background = `
+        radial-gradient(
+          600px at ${x}px ${y}px,
+          rgba(100,255,218,0.1),
+          transparent 80%
+        )
+      `;
+    });
+  </script>
 </body>
 </html>
