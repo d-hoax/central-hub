@@ -4,113 +4,149 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
   <link rel="icon" href="customa.jpg" type="image/jpg">
+
   <title>Anish Dudeja</title>
 
+  <!-- Load "Inter" from Google Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+    rel="stylesheet"
+  />
+
   <style>
-    /* BASIC RESET / GLOBAL STYLES */
+    /* GLOBAL RESETS & BASE STYLES */
     * {
       margin: 0; padding: 0; box-sizing: border-box;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
-        sans-serif;
     }
     html, body {
       width: 100%; height: 100%;
       background: #0A192F; /* deep navy */
       color: #8892B0;      /* muted light text */
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
       overflow-x: hidden;
     }
-
     a {
-      color: #64FFDA; /* teal highlight */
       text-decoration: none;
+      cursor: pointer;
       transition: opacity 0.2s;
     }
-    a:hover {
-      opacity: 0.8;
-    }
+    a:hover { opacity: 0.8; }
 
-    h1, h2, h3, h4 {
-      color: #CCD6F6; /* lighter heading color */
+    /* HEADINGS & TEXT SIZES (increased) */
+    h1 {
+      font-size: 4rem;      /* bigger */
+      color: #CCD6F6;
+      font-weight: 700;     /* bold */
       margin-bottom: 0.5rem;
     }
+    h2 {
+      font-size: 1.5rem;    /* bigger */
+      color: #CCD6F6;
+      font-weight: 400;
+      margin-bottom: 1.5rem;
+    }
+    h3 {
+      font-size: 1.3rem;
+      color: #CCD6F6;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+    h4 {
+      font-size: 1.1rem;
+      color: #CCD6F6;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+    p {
+      font-size: 1.05rem;   /* bigger text */
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
 
-    /* LAYOUT: container with a left sidebar and main content */
+    /* LAYOUT: container with left sidebar + main content */
     .container {
       position: relative;
       display: flex;
-      flex-direction: row;
       max-width: 1200px;
       margin: 0 auto;
-      padding: 40px;
+      padding: 60px 20px; /* more padding; 20px side for smaller screens */
       min-height: 100vh;
     }
     .sidebar {
-      flex: 0 0 35%;
-      padding-right: 40px;
-    }
-    .sidebar h1 {
-      font-size: 3rem;
-      margin-bottom: 0.5rem;
-    }
-    .sidebar h2 {
-      font-size: 1.2rem;
-      opacity: 0.9;
-      margin-bottom: 1.5rem;
-    }
-    .sidebar p {
-      line-height: 1.6;
-      margin-bottom: 3rem;
-      max-width: 300px;
+      flex: 0 0 30%;
+      margin-right: 50px; /* extra space to push content more to the right */
     }
 
-    /* NAV LINKS with “expanding underline” on hover */
+    /* SIDEBAR CONTENT */
+    .sidebar p {
+      max-width: 320px;
+      margin-bottom: 3rem;
+    }
+
+    /* NAV LINKS with active highlight & “expanding line” effect */
     .nav-links {
       list-style: none;
     }
     .nav-links li {
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
       text-transform: uppercase;
       letter-spacing: 2px;
-      font-size: 0.9rem;
     }
+
     .nav-links a {
       display: inline-flex;
       align-items: center;
       position: relative;
+      color: #ffffff; /* White for table of contents text */
     }
+    /* The small horizontal line before the link text */
     .nav-links a::before {
-      /* The horizontal line */
       content: "";
       display: block;
       height: 1px;
       width: 20px;
-      background: #8892B0;
+      background: #ffffff; /* white line */
       margin-right: 8px;
       transition: width 0.3s, background 0.3s;
     }
     .nav-links a:hover::before,
     .nav-links a:focus::before {
       width: 40px;
+      background: #64FFDA; /* teal on hover */
+    }
+    /* “Active” link style */
+    .nav-links a.active::before {
+      width: 40px;
       background: #64FFDA;
     }
+    .nav-links a.active {
+      opacity: 1;
+    }
 
-    /* MAIN CONTENT AREA */
+    /* MAIN AREA */
     .main {
       flex: 1;
     }
     section {
-      margin-bottom: 4rem;
-    }
-    section p {
-      line-height: 1.6;
-      margin-bottom: 1rem;
+      margin-bottom: 5rem;
     }
 
-    /* EXPERIENCE “TIMELINE”‐like styling */
+    /* We'll wrap each group of items in a "section-container" so we can do a group hover effect. */
+    .experience-section:hover .experience-item,
+    .project-section:hover .project-item {
+      opacity: 0.6;  /* dim them by default on hover */
+    }
+    .experience-item:hover, .project-item:hover {
+      opacity: 1;    /* fully visible on hover */
+    }
+
+    /* EXPERIENCE “ITEM” CARDS */
     .experience-item {
       margin-bottom: 2rem;
-      padding: 1rem;
+      padding: 1.2rem;
       border-radius: 8px;
       transition: background 0.3s, box-shadow 0.3s;
     }
@@ -119,24 +155,36 @@
       box-shadow: 0 4px 15px -5px rgba(0,0,0,0.4);
     }
     .date-range {
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       text-transform: uppercase;
-      color: #64ffda;
-      margin-bottom: 0.2rem;
+      color: #64FFDA; /* teal */
+      margin-bottom: 0.4rem;
     }
     .role-title {
-      font-size: 1rem;
-      margin-bottom: 0.2rem;
+      font-size: 1.15rem;
+      color: #FFFFFF;  /* white unless hovered */
+      margin-bottom: 0.3rem;
+      transition: color 0.3s;
+    }
+    .role-title:hover {
+      color: #64FFDA; /* teal on hover */
     }
     .role-company {
-      font-size: 0.95rem;
+      font-size: 1rem;
       opacity: 0.8;
       margin-bottom: 0.6rem;
     }
     .experience-desc {
-      font-size: 0.9rem;
-      line-height: 1.6;
+      font-size: 1rem;
     }
+    .skills {
+      margin-top: 0.8rem;
+      font-size: 0.85rem;
+      color: #8892B0;
+      font-style: italic;
+    }
+
+    /* TAGS */
     .tags {
       margin-top: 0.8rem;
       display: flex;
@@ -147,15 +195,15 @@
       background: rgba(100, 255, 218, 0.1);
       border: 1px solid rgba(100, 255, 218, 0.2);
       color: #64ffda;
-      font-size: 0.75rem;
+      font-size: 0.8rem;
       padding: 0.2rem 0.5rem;
       border-radius: 4px;
     }
 
-    /* PROJECT CARDS with hover highlight */
+    /* PROJECT ITEM CARDS */
     .project-item {
       margin-bottom: 2rem;
-      padding: 1rem;
+      padding: 1.2rem;
       border-radius: 8px;
       transition: background 0.3s, box-shadow 0.3s;
     }
@@ -163,16 +211,18 @@
       background: #112240;
       box-shadow: 0 4px 15px -5px rgba(0,0,0,0.4);
     }
-    .project-item h4 {
-      font-size: 1rem;
-      margin-bottom: 0.4rem;
+    .project-item h4 a {
+      color: #CCD6F6;
+      transition: color 0.2s;
+    }
+    .project-item h4 a:hover {
+      color: #64FFDA;
     }
     .project-item p {
-      font-size: 0.9rem;
-      line-height: 1.6;
+      font-size: 1rem;
     }
 
-    /* FOOTER w/ TINY SOCIAL ICONS */
+    /* FOOTER W/ TINY SOCIAL ICONS */
     footer {
       display: flex;
       justify-content: center;
@@ -195,29 +245,34 @@
 
     /* SPOTLIGHT */
     .spotlight {
-      pointer-events: none; /* don't block clicks */
+      pointer-events: none;
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
-      z-index: 1; /* behind content */
+      z-index: 1;
       background: radial-gradient(600px at 50% 50%, rgba(100,255,218,0.1), transparent 80%);
       transition: background 0.2s;
     }
 
-    /* MEDIA QUERIES */
+    /* Intersection Observer: highlight the nav link for the section in view */
+    .nav-links a.active {
+      /* Could also style differently if desired */
+      opacity: 1;
+    }
+
     @media (max-width: 800px) {
       .container {
         flex-direction: column;
+        padding: 40px 20px;
       }
       .sidebar {
-        flex: 0 0 auto;
         margin-bottom: 2rem;
-        padding-right: 0;
+        margin-right: 0;
       }
     }
   </style>
 </head>
 <body>
-  <!-- The "spotlight" background that follows the cursor -->
+  <!-- SPOTLIGHT BG -->
   <div class="spotlight"></div>
 
   <div class="container">
@@ -225,17 +280,20 @@
     <div class="sidebar">
       <h1>Anish Dudeja</h1>
       <h2>Front End Engineer</h2>
-      <p>I build accessible, pixel-perfect digital experiences for the web.</p>
+      <p>
+        I build accessible, pixel-perfect digital experiences for the web.
+      </p>
       <ul class="nav-links">
         <li><a href="#about">About</a></li>
         <li><a href="#experience">Experience</a></li>
         <li><a href="#projects">Projects</a></li>
+        <li><a href="#education">Education</a></li>
       </ul>
     </div>
 
     <!-- MAIN CONTENT -->
     <div class="main">
-      <!-- ABOUT SECTION -->
+      <!-- ABOUT -->
       <section id="about">
         <p>
           I’m a developer passionate about crafting accessible, pixel‐perfect user interfaces that
@@ -252,8 +310,8 @@
         <p>
           In the past, I've developed software in a variety of settings—from advertising agencies and
           large corporations to start‐ups and small digital product studios. I also released a
-          comprehensive video course guiding learners through building a web app with the Spotify
-          API.
+          comprehensive video course a while back, guiding learners through building a web app with
+          the Spotify API.
         </p>
         <p>
           In my spare time, I’m usually climbing, reading, hanging out with my wife and two cats, or
@@ -261,8 +319,10 @@
         </p>
       </section>
 
-      <!-- EXPERIENCE SECTION -->
-      <section id="experience">
+      <!-- EXPERIENCE -->
+      <section id="experience" class="experience-section">
+        <h3>Experience</h3>
+
         <div class="experience-item">
           <div class="date-range">2024 — Present</div>
           <div class="role-title">Senior Frontend Engineer, Accessibility</div>
@@ -272,6 +332,7 @@
             closely with cross‐functional teams, including developers, designers, and product
             managers, to implement and advocate for best practices in web accessibility.
           </div>
+          <div class="skills">Skills: JavaScript, React, TypeScript, Accessibility</div>
           <div class="tags">
             <span class="tag">JavaScript</span>
             <span class="tag">TypeScript</span>
@@ -289,6 +350,7 @@
             experiences for a diverse array of clients. Provided leadership within the engineering
             department through collaboration, knowledge shares, and internal tool development.
           </div>
+          <div class="skills">Skills: JavaScript, TypeScript, HTML/CSS, React, Next.js</div>
           <div class="tags">
             <span class="tag">JavaScript</span>
             <span class="tag">TypeScript</span>
@@ -302,17 +364,17 @@
             <span class="tag">PHP</span>
           </div>
         </div>
-        <!-- Add more experience items if needed -->
+        <!-- More experience items as needed -->
       </section>
 
-      <!-- PROJECTS SECTION -->
-      <section id="projects">
-        <h3 style="margin-bottom: 1rem;">Projects</h3>
+      <!-- PROJECTS -->
+      <section id="projects" class="project-section">
+        <h3>Projects</h3>
         <div class="project-item">
           <h4><a href="#">Project 1</a></h4>
           <p>
-            A web application demonstrating personalized Spotify data. Features top artists, top
-            tracks, and recommended tracks to create new playlists.
+            A web application demonstrating personalized Spotify data. Features top artists,
+            top tracks, and recommended tracks to create new playlists.
           </p>
         </div>
         <div class="project-item">
@@ -322,37 +384,50 @@
             Sublime Text, Atom, and more.
           </p>
         </div>
-        <!-- Add more project items if needed -->
       </section>
+
+      <!-- EDUCATION -->
+      <section id="education">
+        <h3>Education</h3>
+        <p>Bachelor of Science in Computer Science, Generic University (2014-2018)</p>
+        <p>Relevant Courses: Data Structures, Algorithms, Web Development, Database Systems</p>
+      </section>
+
     </div>
   </div>
 
-  <!-- FOOTER W/ TINY SOCIAL ICONS -->
+  <!-- FOOTER -->
   <footer>
     <div class="social-icons">
       <a href="#" aria-label="GitHub" target="_blank" rel="noopener">
         <svg viewBox="0 0 16 16" role="img">
           <title>GitHub icon</title>
           <path
-            d="M8 0C3.58 0 0 3.58 0 8c0 
-             3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 
-             0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94
-             -.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53
-             .63-.01 1.08.58 1.23.82.72 1.21 1.87.87 
-             2.33.66.07-.52.28-.87.51-1.07-1.78-.2
-             -3.64-.89-3.64-3.95 0-.87.31-1.59
-             .82-2.15-.08-.2-.36-1.02.08-2.12
-             0 0 .67-.21 2.2.82.64-.18 
-             1.32-.27 2-.27.68 0 
-             1.36.09 2 .27 1.53-1.04 
-             2.2-.82 2.2-.82.44 1.1.16 
-             1.92.08 2.12.51.56.82 1.27.82
-             2.15 0 3.07-1.87 3.75
-             -3.65 3.95.29.25.54.73.54
-             1.48 0 1.07-.01 1.93-.01 
-             2.2 0 .21.15.46.55.38A8.013 
-             8.013 0 0016 8c0-4.42
-             -3.58-8-8-8z"
+            d="M8 0C3.58 0 0 3.58 
+             0 8c0 3.54 2.29 6.53 
+             5.47 7.59.4.07.55-.17.55-.38 
+             0-.19-.01-.82-.01-1.49-2.01.37
+             -2.53-.49-2.69-.94
+             -.09-.23-.48-.94-.82-1.13
+             -.28-.15-.68-.52-.01-.53
+             .63-.01 1.08.58 1.23.82
+             .72 1.21 1.87.87 2.33.66
+             .07-.52.28-.87.51-1.07
+             -1.78-.2-3.64-.89-3.64-3.95
+             0-.87.31-1.59.82-2.15
+             -.08-.2-.36-1.02.08-2.12
+             0 0 .67-.21 2.2.82
+             .64-.18 1.32-.27 2-.27
+             .68 0 1.36.09 2 .27
+             1.53-1.04 2.2-.82 2.2-.82
+             .44 1.1.16 1.92.08 2.12
+             .51.56.82 1.27.82 2.15
+             0 3.07-1.87 3.75-3.65 
+             3.95.29.25.54.73.54 1.48
+             0 1.07-.01 1.93-.01 
+             2.2 0 .21.15.46.55.38
+             A8.013 8.013 0 0016 8c0
+             -4.42-3.58-8-8-8z"
           ></path>
         </svg>
       </a>
@@ -363,8 +438,8 @@
             d="M20.5 2h-17A1.5 
                1.5 0 002 3.5v17A1.5 1.5 
                0 003.5 22h17a1.5 1.5 
-               0 001.5-1.5v-17A1.5 1.5 
-               0 0020.5 2zM8 
+               0 001.5-1.5v-17A1.5 
+               1.5 0 0020.5 2zM8 
                19H5v-9h3zM6.5 
                8.25A1.75 1.75 0 
                118.3 6.5a1.78 
@@ -375,8 +450,8 @@
                -1.38-1.93a1.74 
                1.74 0 00-1.62 
                1.06.66.66 
-               0 000.14V19h-3v-9h2.9v1.3
-               a3.11 3.11 0 
+               0 000.14V19h-3v-9h2.9
+               v1.3a3.11 3.11 0 
                012.7-1.4c1.55 
                0 3.36.86
                3.36 3.66z"
@@ -448,42 +523,12 @@
           />
         </svg>
       </a>
-      <a href="#" aria-label="Goodreads" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" role="img">
-          <title>Goodreads icon</title>
-          <path
-            d="M11.997 0c-5.572 
-               0-10.098 4.526-10.098 10.102 
-               0 5.568 4.526 
-               10.094 10.098 10.094a9.98 
-               9.98 0 0 0 3.98-.82c.599.653 
-               1.657 1.516 
-               2.791 1.69-.088-.671
-               -.175-1.502-.175-2.14 
-               0-.82.263-1.632.263-2.448 
-               0 0 
-               0-.175-.088-.175.526-.789 
-               .877-1.841 
-               .877-3.07 0-4.006-2.614-5.71-5.85-5.71
-               -3.324 0-6.225 2.186
-               -6.225 5.675 
-               0 3.506 
-               2.984 5.622 
-               6.225 5.622
-               1.929 
-               0 3.552-.704 
-               4.412-1.753.088-.087.175-.087.175 
-               0 .09.789-.088
-               2.359.26 2.889.017.028 
-               0 0 0 0z"
-          ></path>
-        </svg>
-      </a>
     </div>
   </footer>
 
   <!-- SPOTLIGHT SCRIPT -->
   <script>
+    // Move spotlight with cursor
     const spotlight = document.querySelector('.spotlight');
     document.addEventListener('mousemove', (e) => {
       const x = e.pageX;
@@ -495,6 +540,35 @@
           transparent 80%
         )
       `;
+    });
+
+    // Highlight the nav item for the section currently in view
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    const options = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.3 // section is “active” if 30% is in view
+    };
+
+    let observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // remove all active classes
+          navLinks.forEach(link => link.classList.remove('active'));
+          // find the nav link that points to this section
+          const id = entry.target.getAttribute('id');
+          const activeLink = document.querySelector(`.nav-links a[href="#${id}"]`);
+          if (activeLink) {
+            activeLink.classList.add('active');
+          }
+        }
+      });
+    }, options);
+
+    sections.forEach(section => {
+      observer.observe(section);
     });
   </script>
 </body>
