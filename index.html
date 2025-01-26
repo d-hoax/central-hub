@@ -1,158 +1,237 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Your Portfolio">
-    <link rel="icon" href="customa.jpg" type="image/jpg">
-    <title>Anish Dudeja</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Inter', sans-serif;
-            background-color: #0f172a;
-            color: #94a3b8;
-        }
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            max-width: 1200px;
-            margin: auto;
-            padding: 2rem;
-        }
-        header {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-        header h1 {
-            color: #e2e8f0;
-            font-size: 3rem;
-            margin: 0;
-        }
-        header h2 {
-            color: #e2e8f0;
-            font-size: 1.5rem;
-            margin-top: 0.5rem;
-        }
-        header p {
-            max-width: 600px;
-            margin-top: 1rem;
-        }
-        .social-icons {
-            margin-top: 1rem;
-            display: flex;
-            gap: 1rem;
-        }
-        .social-icons a {
-            color: #94a3b8;
-            font-size: 1.5rem;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        .social-icons a:hover {
-            color: #38bdf8;
-        }
-        .profile-picture {
-            margin-top: 2rem;
-            border-radius: 50%;
-            width: 150px;
-            height: 150px;
-            background-size: cover;
-            background-position: center;
-        }
-        nav {
-            margin-top: 2rem;
-        }
-        nav ul {
-            list-style: none;
-            padding: 0;
-            display: flex;
-            gap: 2rem;
-        }
-        nav a {
-            color: #94a3b8;
-            text-decoration: none;
-            font-size: 1rem;
-            transition: color 0.3s ease;
-        }
-        nav a:hover {
-            color: #38bdf8;
-        }
-        .section {
-            margin-top: 3rem;
-            padding: 2rem;
-            border-radius: 8px;
-            background: #1e293b;
-            max-width: 800px;
-            width: 100%;
-        }
-        footer {
-            margin-top: 3rem;
-            text-align: center;
-        }
-        footer p {
-            margin: 0;
-            font-size: 0.9rem;
-        }
-        footer a {
-            color: #38bdf8;
-            text-decoration: none;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Portfolio</title>
+  <link rel="icon" href="customa.jpg" type="image/jpg">
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #0f172a;
+      color: #cbd5e1;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    /* Custom Cursor */
+    .cursor {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 30px;
+      height: 30px;
+      background: rgba(148, 163, 184, 0.5);
+      border: 2px solid #38bdf8;
+      border-radius: 50%;
+      transform: translate(-50%, -50%) scale(1);
+      pointer-events: none;
+      transition: transform 0.1s ease;
+    }
+
+    .cursor.hover {
+      transform: translate(-50%, -50%) scale(2);
+      background: rgba(148, 163, 184, 0.3);
+    }
+
+    /* Layout */
+    .container {
+      display: flex;
+      min-height: 100vh;
+      max-width: 1200px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .sidebar {
+      width: 30%;
+      padding: 20px;
+      border-right: 1px solid rgba(148, 163, 184, 0.2);
+    }
+
+    .content {
+      flex: 1;
+      padding: 20px;
+    }
+
+    .profile {
+      text-align: center;
+    }
+
+    .profile img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      margin-bottom: 15px;
+      border: 2px solid rgba(56, 189, 248, 0.5);
+    }
+
+    .profile h1 {
+      font-size: 2rem;
+      color: #f8fafc;
+    }
+
+    .profile h2 {
+      font-size: 1.2rem;
+      color: #94a3b8;
+    }
+
+    nav ul li {
+      margin: 15px 0;
+      font-size: 1rem;
+      font-weight: bold;
+      color: #94a3b8;
+    }
+
+    nav ul li:hover {
+      color: #38bdf8;
+      cursor: pointer;
+    }
+
+    .section {
+      margin-bottom: 40px;
+    }
+
+    .section h2 {
+      font-size: 1.5rem;
+      color: #f8fafc;
+      margin-bottom: 10px;
+      border-bottom: 2px solid #38bdf8;
+      display: inline-block;
+      padding-bottom: 5px;
+    }
+
+    .card {
+      background: rgba(15, 23, 42, 0.8);
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .card h3 {
+      color: #f8fafc;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      font-size: 0.9rem;
+      color: #94a3b8;
+    }
+
+    /* Social Media Links */
+    .socials {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .socials a {
+      margin: 0 10px;
+      font-size: 1.5rem;
+      color: #94a3b8;
+      transition: color 0.3s ease;
+    }
+
+    .socials a:hover {
+      color: #38bdf8;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <div class="profile-picture" style="background-image: url('your-photo-url.jpg');"></div>
-            <h1>Your Name</h1>
-            <h2>Front-End Engineer</h2>
-            <p>I build accessible, pixel-perfect digital experiences for the web.</p>
-            <div class="social-icons">
-                <a href="https://github.com/yourusername" target="_blank"><i class="fab fa-github"></i></a>
-                <a href="https://linkedin.com/in/yourusername" target="_blank"><i class="fab fa-linkedin"></i></a>
-                <a href="https://instagram.com/yourusername" target="_blank"><i class="fab fa-instagram"></i></a>
-                <a href="https://twitter.com/yourusername" target="_blank"><i class="fab fa-twitter"></i></a>
-            </div>
-        </header>
+  <div class="cursor"></div>
 
-        <nav>
-            <ul>
-                <li><a href="#about">About</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#projects">Projects</a></li>
-            </ul>
-        </nav>
+  <div class="container">
+    <div class="sidebar">
+      <div class="profile">
+        <img src="your-photo-url.jpg" alt="Your Photo">
+        <h1>Your Name</h1>
+        <h2>Your Title</h2>
+      </div>
 
-        <section id="about" class="section">
-            <h3>About Me</h3>
-            <p>I’m a developer passionate about crafting accessible, pixel-perfect user interfaces that blend thoughtful design with robust engineering.</p>
-        </section>
+      <nav>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#projects">Projects</a></li>
+        </ul>
+      </nav>
 
-        <section id="experience" class="section">
-            <h3>Experience</h3>
-            <ul>
-                <li><strong>Senior Front-End Engineer</strong> at Klaviyo (2024 - Present)</li>
-                <li><strong>Lead Engineer</strong> at Upstatement (2018 - 2024)</li>
-                <li><strong>UI Engineer Co-op</strong> at Apple (2017)</li>
-            </ul>
-        </section>
-
-        <section id="projects" class="section">
-            <h3>Projects</h3>
-            <ul>
-                <li><a href="https://github.com/yourusername/project1" target="_blank">Project 1</a></li>
-                <li><a href="https://github.com/yourusername/project2" target="_blank">Project 2</a></li>
-                <li><a href="https://github.com/yourusername/project3" target="_blank">Project 3</a></li>
-            </ul>
-        </section>
-
-        <footer>
-            <p>Designed and built by <a href="https://github.com/yourusername">Your Name</a>.</p>
-        </footer>
+      <div class="socials">
+        <a href="https://github.com/yourusername" target="_blank">GitHub</a>
+        <a href="https://linkedin.com/in/yourusername" target="_blank">LinkedIn</a>
+        <a href="https://instagram.com/yourusername" target="_blank">Instagram</a>
+      </div>
     </div>
+
+    <div class="content">
+      <section id="about" class="section">
+        <h2>About Me</h2>
+        <p>
+          I’m a developer passionate about creating pixel-perfect digital
+          experiences that are accessible and inclusive.
+        </p>
+      </section>
+
+      <section id="experience" class="section">
+        <h2>Experience</h2>
+        <div class="card">
+          <h3>Job Title - Company</h3>
+          <p>Job description goes here.</p>
+        </div>
+        <div class="card">
+          <h3>Job Title - Company</h3>
+          <p>Job description goes here.</p>
+        </div>
+      </section>
+
+      <section id="projects" class="section">
+        <h2>Projects</h2>
+        <div class="card">
+          <h3>Project Name</h3>
+          <p>Project description goes here.</p>
+        </div>
+        <div class="card">
+          <h3>Project Name</h3>
+          <p>Project description goes here.</p>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    // Custom Cursor Logic
+    const cursor = document.querySelector('.cursor');
+
+    document.addEventListener('mousemove', (e) => {
+      cursor.style.top = `${e.clientY}px`;
+      cursor.style.left = `${e.clientX}px`;
+    });
+
+    document.querySelectorAll('a, .card').forEach((el) => {
+      el.addEventListener('mouseover', () => cursor.classList.add('hover'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+    });
+  </script>
 </body>
 </html>
