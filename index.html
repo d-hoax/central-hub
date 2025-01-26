@@ -355,25 +355,53 @@
       transform: translate(2px, -2px);
     }
 
-    /* MEDIA QUERIES */
-    @media (max-width: 900px) {
-      html, body {
-        overflow: auto;
-      }
+   /* =========================
+       MEDIA QUERIES
+       ========================= */
+
+    /* 1) MEDIUM SCREENS: under 1200px, above 900px 
+       => reduce left pinned or widths as needed */
+    @media (max-width: 1200px) and (min-width: 901px) {
       .left-sidebar {
-        position: static;
-        width: auto;
-        margin: 20px;
-      }
-      .logos-lower {
-        margin-top: 2rem;
+        left: 18%;    /* reduce spacing so it doesn't get cramped */
+        width: 280px; /* a bit narrower if needed */
       }
       .right-content {
-        position: static;
-        left: 0;
-        right: 0;
-        margin: 20px;
+        left: 35%;
+        right: 10%;
+      }
+    }
+
+    /* 2) SMALL SCREENS: under 900px => stacked layout */
+    @media (max-width: 900px) {
+      html, body {
+        overflow: auto; /* let the entire page scroll normally */
+      }
+
+      .left-sidebar {
+        position: static;  /* no longer pinned */
+        top: auto;
+        left: auto;
+        width: auto;
+        margin: 20px;      /* some margin around it */
+      }
+      .logos-lower {
+        margin-top: 2rem;  /* place icons below nav links, not at 50vh */
+      }
+
+      .right-content {
+        position: static; /* unpin */
+        top: auto;
+        left: auto;
+        right: auto;
+        margin: 20px; 
         padding: 20px;
+        bottom: auto;
+        overflow-y: auto; /* fallback normal scrolling */
+      }
+
+      .content-inner {
+        max-width: 100%; /* let it fill screen width */
       }
     }
   </style>
