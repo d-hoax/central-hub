@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
   <title>Anish Dudeja</title>
 
-  <!-- Load Inter font -->
+  <!-- Use customa.jpg as the Favicon -->
+  <link rel="icon" type="image/jpeg" href="customa.jpg" />
+
+  <!-- Load Inter font from Google Fonts -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
@@ -15,117 +18,75 @@
   <style>
     /* GLOBAL / BASE STYLES */
     * {
-      margin: 0; 
-      padding: 0; 
+      margin: 0;
+      padding: 0;
       box-sizing: border-box;
     }
     html, body {
       width: 100%;
       height: 100%;
-      background: #0A0A0F;  /* near-black background */
-      color: #a8acc6;       /* slightly lighter text */
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", 
+      background: #0A0A0F; /* near-black background */
+      color: #a8acc6;      /* slightly lighter text color */
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI",
         Roboto, "Helvetica Neue", sans-serif;
       overflow-x: hidden;
     }
     a {
       text-decoration: none;
       transition: opacity 0.2s;
-      color: inherit; 
+      color: inherit;
     }
     a:hover {
       opacity: 0.8;
     }
 
-    /* TOP MENUBAR */
-    .header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 60px;
-      background: #0A0A0F;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 1.5rem;
-      z-index: 999; /* above everything */
-    }
-    .logo-container {
-      display: flex;
-      align-items: center;
-    }
-    .logo {
-      height: 40px; 
-      width: auto;
-      object-fit: contain;
-    }
-
-    /* SOCIAL ICONS in menubar */
-    .menubar-icons {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-    }
-    .menubar-icons a svg {
-      width: 20px; 
-      height: 20px;
-      fill: #a8acc6;
-      transition: fill 0.2s;
-    }
-    .menubar-icons a:hover svg {
-      fill: #BB86FC; /* purple highlight on hover */
-    }
-
-    /* CONTAINER WITH LEFT + RIGHT */
+    /* MAIN LAYOUT: LEFT SIDEBAR + RIGHT CONTENT */
     .container {
-      position: relative;
       display: flex;
-      max-width: 1200px;
       margin: 0 auto;
-      padding: 120px 20px 60px; /* top padding to avoid menubar overlap */
-      min-height: 100vh;
-      gap: 100px; /* bigger gap between left and right */
+      max-width: 1200px;
+      padding: 60px 30px; /* bigger top/side padding */
+      gap: 120px;         /* large gap between left & right */
+      line-height: 1.8;   /* improved line spacing */
     }
 
     /* LEFT SIDEBAR */
     .sidebar {
-      flex: 0 0 25%;
+      flex: 0 0 35%; /* wider left area for big name + nav */
     }
     .sidebar h1 {
-      /* smaller so it fits on one line */
-      font-size: 2rem;
+      font-size: 3.5rem;  /* large name, as in reference image */
       color: #e3e8ff;
       font-weight: 700;
-      margin-bottom: 0.5rem;
+      margin-bottom: 1rem;
+      line-height: 1.2;
     }
     .sidebar h2 {
-      font-size: 1.1rem;
+      font-size: 1.3rem;
       color: #e3e8ff;
-      margin-bottom: 1.5rem;
+      margin-bottom: 2rem;
       font-weight: 400;
     }
     .sidebar p {
-      font-size: 0.9rem;
-      max-width: 270px;
-      margin-bottom: 2rem;
-      line-height: 1.6;
+      font-size: 1rem;
+      margin-bottom: 3rem;
+      max-width: 300px;
     }
     .nav-links {
       list-style: none;
     }
     .nav-links li {
-      margin-bottom: 1.2rem;
-      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
       text-transform: uppercase;
       letter-spacing: 2px;
     }
     .nav-links a {
+      color: #fff;
+      font-weight: 500;
+      position: relative;
       display: inline-flex;
       align-items: center;
-      position: relative;
-      color: #fff; 
-      font-weight: 500;
     }
     .nav-links a::before {
       content: "";
@@ -136,10 +97,9 @@
       margin-right: 8px;
       transition: width 0.3s, background 0.3s;
     }
-    .nav-links a:hover::before,
-    .nav-links a:focus::before {
+    .nav-links a:hover::before {
       width: 40px;
-      background: #BB86FC; 
+      background: #BB86FC; /* purple highlight on hover */
     }
     .nav-links a.active::before {
       width: 40px;
@@ -149,52 +109,79 @@
       opacity: 1;
     }
 
-    /* MAIN CONTENT */
+    /* RIGHT MAIN CONTENT */
     .main {
       flex: 1;
     }
     section {
-      margin-bottom: 5rem;
+      margin-bottom: 6rem;
     }
 
-    /* EXPERIENCE & PROJECTS SECTION HOVER DIM */
+    /* EXPERIENCE & PROJECT & EDUCATION: hover dims siblings */
     .experience-section:hover .experience-item:not(:hover) {
-      opacity: 0.5;
+      opacity: 0.4;
     }
     .project-section:hover .project-item:not(:hover) {
-      opacity: 0.5;
+      opacity: 0.4;
     }
     .education-section:hover .course-item:not(:hover) {
-      opacity: 0.5;
+      opacity: 0.4;
     }
 
-    /* EXPERIENCE ITEM */
+    /* EXPERIENCE ITEM: DATE on the left, rest on the right */
     .experience-item {
+      display: flex;
+      align-items: flex-start;
       margin-bottom: 2rem;
-      padding: 1.2rem;
-      border-radius: 8px;
-      transition: background 0.3s, box-shadow 0.3s;
-      background: rgba(255,255,255,0.02);
+      gap: 20px;
     }
-    .experience-item:hover {
+    .experience-date {
+      flex: 0 0 100px; /* or so, adjust if needed */
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      color: #BB86FC;
+      margin-top: 0.3rem;
+    }
+    .experience-content {
+      flex: 1;
+      background: rgba(255,255,255,0.02);
+      border-radius: 8px;
+      padding: 1.2rem;
+      transition: background 0.3s, box-shadow 0.3s;
+      position: relative;
+    }
+    .experience-content:hover {
       background: rgba(255,255,255,0.07);
       box-shadow: 0 4px 15px -5px rgba(0,0,0,0.4);
     }
-    .experience-item:hover .role-title {
-      color: #BB86FC; /* highlight heading on hover */
+    .experience-content:hover .experience-title-text {
+      color: #BB86FC; /* heading changes color on hover */
     }
-    .date-range {
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      color: #BB86FC;
-      margin-bottom: 0.4rem;
+    .experience-title {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 0.5rem;
+      text-decoration: none;
+      transition: color 0.2s;
     }
-    .role-title {
-      font-size: 1.1rem;
-      color: #FFFFFF;
-      margin-bottom: 0.3rem;
-      transition: color 0.3s;
+    .experience-title-text {
+      /* separate span for the text so we can color it on hover */
     }
+    .experience-arrow {
+      width: 16px;
+      height: 16px;
+      fill: #a8acc6;
+      transition: transform 0.2s, fill 0.2s;
+    }
+    .experience-title:hover .experience-arrow {
+      fill: #BB86FC;
+      transform: translate(2px, -2px); /* small diagonal move */
+    }
+
     .role-company {
       font-size: 1rem;
       opacity: 0.8;
@@ -206,12 +193,10 @@
     }
     .skills {
       margin-top: 0.4rem;
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       color: #a8acc6;
       font-style: italic;
     }
-
-    /* TAGS => fully rounded corners */
     .tags {
       margin-top: 0.6rem;
       display: flex;
@@ -224,89 +209,124 @@
       color: #BB86FC;
       font-size: 0.8rem;
       padding: 0.2rem 0.7rem;
-      border-radius: 9999px; /* fully rounded pill */
+      border-radius: 9999px; /* pill shape */
     }
 
-    /* PROJECT ITEM */
+    /* PROJECTS */
     .project-item {
-      margin-bottom: 2rem;
-      padding: 1.2rem;
-      border-radius: 8px;
       background: rgba(255,255,255,0.02);
+      border-radius: 8px;
+      padding: 1.2rem;
       transition: background 0.3s, box-shadow 0.3s;
+      margin-bottom: 2rem;
+      position: relative;
     }
     .project-item:hover {
       background: rgba(255,255,255,0.07);
       box-shadow: 0 4px 15px -5px rgba(0,0,0,0.4);
     }
-    .project-item:hover h4 a {
-      color: #BB86FC;
+    .project-title {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 0.5rem;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .project-title-text {}
+    .project-arrow {
+      width: 16px;
+      height: 16px;
+      fill: #a8acc6;
+      transition: transform 0.2s, fill 0.2s;
+    }
+    .project-title:hover .project-arrow {
+      fill: #BB86FC;
+      transform: translate(2px, -2px);
     }
 
-    /* EDUCATION => course-item boxes w/ heading hover effect */
+    /* EDUCATION -> course items with arrow */
     .course-item {
-      margin-bottom: 2rem;
-      padding: 1.2rem;
-      border-radius: 8px;
       background: rgba(255,255,255,0.02);
+      border-radius: 8px;
+      padding: 1.2rem;
       transition: background 0.3s, box-shadow 0.3s;
+      margin-bottom: 2rem;
+      position: relative;
     }
     .course-item:hover {
       background: rgba(255,255,255,0.07);
       box-shadow: 0 4px 15px -5px rgba(0,0,0,0.4);
     }
-    .course-item:hover h4 {
-      color: #BB86FC;
-    }
-
-    /* LINK-STYLE “BUTTONS” for resume & projects (no big box) */
-    .section-link {
+    .course-title {
       display: inline-flex;
       align-items: center;
-      font-size: 1rem;
-      color: #BB86FC;
-      text-transform: uppercase;
-      font-weight: 600;
-      margin-top: 1.5rem;
       gap: 0.3rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 0.5rem;
+      text-decoration: none;
+      transition: color 0.2s;
     }
-    .section-link svg {
-      width: 16px;
-      height: 16px;
+    .course-title-text {}
+    .course-arrow {
+      width: 14px;
+      height: 14px;
+      fill: #a8acc6;
+      transition: transform 0.2s, fill 0.2s;
+    }
+    .course-title:hover .course-arrow {
       fill: #BB86FC;
-      transition: transform 0.2s;
-    }
-    .section-link:hover svg {
-      transform: translateX(4px);
+      transform: translate(2px, -2px);
     }
 
-    /* SPOTLIGHT */
+    /* FOOTER SOCIAL ICONS (like Brittany’s original site, bottom) */
+    footer {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 0;
+    }
+    .footer-icons {
+      display: flex;
+      gap: 1.5rem;
+    }
+    .footer-icons a svg {
+      width: 20px;
+      height: 20px;
+      fill: #8892b0;
+      transition: fill 0.2s;
+    }
+    .footer-icons a:hover svg {
+      fill: #BB86FC;
+    }
+
+    /* SPOTLIGHT BG */
     .spotlight {
       pointer-events: none;
       position: fixed;
-      top: 0; 
-      left: 0; 
-      right: 0; 
-      bottom: 0;
+      top: 0; left: 0; right: 0; bottom: 0;
       z-index: 1;
-      background: radial-gradient(600px at 50% 50%, rgba(187,134,252,0.1), transparent 80%);
+      background: radial-gradient(700px at 50% 50%, rgba(187,134,252,0.1), transparent 80%);
       transition: background 0.2s;
     }
 
-    /* Intersection Observer active link style */
+    /* Intersection Observer active nav link style */
     .nav-links a.active {
       opacity: 1;
     }
 
     /* MEDIA QUERIES */
     @media (max-width: 900px) {
-      .header {
-        height: 50px;
-      }
       .container {
         flex-direction: column;
-        padding: 100px 20px 40px;
-        gap: 40px;
+        padding: 60px 20px;
+        gap: 60px;
       }
       .sidebar {
         flex: 0 0 auto;
@@ -315,16 +335,255 @@
   </style>
 </head>
 <body>
-  <!-- TOP MENUBAR w/ LOGO + SOCIAL ICONS -->
-  <header class="header">
-    <div class="logo-container">
-      <img src="a.jpg" alt="My Logo" class="logo" />
+  <!-- Spotlight background for cursor effect -->
+  <div class="spotlight"></div>
+
+  <!-- MAIN CONTAINER -->
+  <div class="container">
+    <!-- LEFT SIDEBAR -->
+    <div class="sidebar">
+      <h1>Anish Dudeja</h1>
+      <h2>Front End Engineer</h2>
+      <p>I build accessible, pixel-perfect digital experiences for the web.</p>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#education">Education</a></li>
+      </ul>
     </div>
-    <div class="menubar-icons">
+
+    <!-- RIGHT CONTENT AREA -->
+    <div class="main">
+      <!-- ABOUT SECTION -->
+      <section id="about">
+        <p>
+          I’m a developer passionate about crafting accessible, pixel‐perfect user interfaces that
+          blend thoughtful design with robust engineering. My favorite work lies at the intersection
+          of design and development, creating experiences that not only look great but are
+          meticulously built for performance and usability.
+        </p>
+        <p>
+          Currently, I'm a Senior Front‐End Engineer at <strong>Some Company</strong>. I work 
+          on building highly performant interfaces while keeping accessibility in mind.
+        </p>
+        <p>
+          I've developed software in a variety of settings—advertising agencies, large corporations,
+          start‐ups, and small product studios. I also released a video course guiding learners
+          through building a web app with the Spotify API.
+        </p>
+        <p>
+          In my free time, I’m usually climbing, reading, or traveling different worlds in
+          search of hidden secrets.
+        </p>
+      </section>
+
+      <!-- EXPERIENCE SECTION -->
+      <section id="experience" class="experience-section">
+        <h3>Experience</h3>
+        
+        <!-- EXPERIENCE 1 -->
+        <div class="experience-item">
+          <div class="experience-date">2024 – Present</div>
+          <div class="experience-content">
+            <a href="#" class="experience-title">
+              <span class="experience-title-text">Senior Frontend Engineer, Accessibility</span>
+              <svg class="experience-arrow" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                  d="M5.22 14.78a.75.75 
+                    0 001.06 0l7.22-7.22v5.69a.75.75 
+                    0 001.5 0v-7.5a.75.75 
+                    0 00-.75-.75h-7.5a.75.75 
+                    0 000 1.5h5.69l-7.22 
+                    7.22a.75.75 
+                    0 000 1.06z"
+                  clip-rule="evenodd" />
+              </svg>
+            </a>
+            <div class="role-company">Klaviyo</div>
+            <div class="experience-desc">
+              Build and maintain critical components used to construct the company's frontend.
+              Collaborate with cross‐functional teams to promote best practices in web accessibility.
+            </div>
+            <div class="skills">Skills: JavaScript, React, TypeScript, Accessibility</div>
+            <div class="tags">
+              <span class="tag">JavaScript</span>
+              <span class="tag">TypeScript</span>
+              <span class="tag">React</span>
+              <span class="tag">Storybook</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- EXPERIENCE 2 -->
+        <div class="experience-item">
+          <div class="experience-date">2018 – 2023</div>
+          <div class="experience-content">
+            <a href="#" class="experience-title">
+              <span class="experience-title-text">Lead Engineer</span>
+              <svg class="experience-arrow" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                  d="M5.22 14.78a.75.75 
+                    0 001.06 0l7.22-7.22v5.69a.75.75 
+                    0 001.5 0v-7.5a.75.75 
+                    0 00-.75-.75h-7.5a.75.75 
+                    0 000 1.5h5.69l-7.22 
+                    7.22a.75.75 
+                    0 000 1.06z"
+                  clip-rule="evenodd" />
+              </svg>
+            </a>
+            <div class="role-company">Upstatement</div>
+            <div class="experience-desc">
+              Built, styled, and shipped high‐quality websites, design systems, and digital
+              experiences for a diverse array of clients. Provided leadership with knowledge 
+              shares and internal tooling.
+            </div>
+            <div class="skills">Skills: JavaScript, TypeScript, HTML/CSS, React, Next.js</div>
+            <div class="tags">
+              <span class="tag">JavaScript</span>
+              <span class="tag">TypeScript</span>
+              <span class="tag">HTML &amp; SCSS</span>
+              <span class="tag">React</span>
+              <span class="tag">Next.js</span>
+              <span class="tag">React Native</span>
+              <span class="tag">WordPress</span>
+              <span class="tag">Contentful</span>
+              <span class="tag">Node.js</span>
+              <span class="tag">PHP</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- EXPERIENCE 3 -->
+        <div class="experience-item">
+          <div class="experience-date">2016 – 2018</div>
+          <div class="experience-content">
+            <a href="#" class="experience-title">
+              <span class="experience-title-text">Front End Engineer</span>
+              <svg class="experience-arrow" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                  d="M5.22 14.78a.75.75 
+                    0 001.06 0l7.22-7.22v5.69a.75.75 
+                    0 001.5 0v-7.5a.75.75 
+                    0 00-.75-.75h-7.5a.75.75 
+                    0 000 1.5h5.69l-7.22 
+                    7.22a.75.75 
+                    0 000 1.06z"
+                  clip-rule="evenodd" />
+              </svg>
+            </a>
+            <div class="role-company">Placeholder Corp</div>
+            <div class="experience-desc">
+              Developed interactive user interfaces, focusing on performance and accessibility.
+              Collaborated with cross-functional teams in an agile environment.
+            </div>
+            <div class="skills">Skills: ES6, Vue.js, CSS, Web Performance</div>
+            <div class="tags">
+              <span class="tag">Vue.js</span>
+              <span class="tag">ES6</span>
+              <span class="tag">CSS</span>
+              <span class="tag">Performance</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROJECTS SECTION -->
+      <section id="projects" class="project-section">
+        <h3>Projects</h3>
+
+        <div class="project-item">
+          <a href="#" class="project-title">
+            <span class="project-title-text">Project 1</span>
+            <svg class="project-arrow" viewBox="0 0 20 20">
+              <path fill-rule="evenodd"
+                d="M5.22 14.78a.75.75 
+                  0 001.06 0l7.22-7.22v5.69a.75.75 
+                  0 001.5 0v-7.5a.75.75 
+                  0 00-.75-.75h-7.5a.75.75 
+                  0 000 1.5h5.69l-7.22 
+                  7.22a.75.75 
+                  0 000 1.06z"
+                clip-rule="evenodd" />
+            </svg>
+          </a>
+          <p>
+            Web app demonstrating personalized Spotify data. Includes top artists, tracks, 
+            and recommended songs.
+          </p>
+        </div>
+
+        <div class="project-item">
+          <a href="#" class="project-title">
+            <span class="project-title-text">Project 2</span>
+            <svg class="project-arrow" viewBox="0 0 20 20">
+              <path fill-rule="evenodd"
+                d="M5.22 14.78a.75.75 
+                  0 001.06 0l7.22-7.22v5.69a.75.75 
+                  0 001.5 0v-7.5a.75.75 
+                  0 00-.75-.75h-7.5a.75.75 
+                  0 000 1.5h5.69l-7.22 
+                  7.22a.75.75 
+                  0 000 1.06z"
+                clip-rule="evenodd" />
+            </svg>
+          </a>
+          <p>
+            Minimal dark theme for code editors and terminals, supporting VS Code, Sublime, Atom, etc.
+          </p>
+        </div>
+      </section>
+
+      <!-- EDUCATION SECTION -->
+      <section id="education" class="education-section">
+        <h3>Education</h3>
+        <p>B.S. in Computer Science, Generic University (2014–2018)</p>
+
+        <div class="course-item">
+          <a href="#" class="course-title">
+            <span class="course-title-text">Data Structures</span>
+            <svg class="course-arrow" viewBox="0 0 20 20">
+              <path fill-rule="evenodd"
+                d="M5.22 14.78a.75.75 
+                  0 001.06 0l7.22-7.22v5.69a.75.75 
+                  0 001.5 0v-7.5a.75.75 
+                  0 00-.75-.75h-7.5a.75.75 
+                  0 000 1.5h5.69l-7.22 
+                  7.22a.75.75 
+                  0 000 1.06z"
+                clip-rule="evenodd" />
+            </svg>
+          </a>
+          <p>Understanding linked lists, trees, graphs, hashing, etc.</p>
+        </div>
+        <div class="course-item">
+          <a href="#" class="course-title">
+            <span class="course-title-text">Algorithms</span>
+            <svg class="course-arrow" viewBox="0 0 20 20">
+              <path fill-rule="evenodd"
+                d="M5.22 14.78a.75.75 
+                  0 001.06 0l7.22-7.22v5.69a.75.75 
+                  0 001.5 0v-7.5a.75.75 
+                  0 00-.75-.75h-7.5a.75.75 
+                  0 000 1.5h5.69l-7.22 
+                  7.22a.75.75 
+                  0 000 1.06z"
+                clip-rule="evenodd" />
+            </svg>
+          </a>
+          <p>Focus on complexity, sorting, searching, graph traversal, dynamic programming.</p>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- FOOTER SOCIAL ICONS (bottom) -->
+  <footer>
+    <div class="footer-icons">
       <!-- GitHub -->
       <a href="#" aria-label="GitHub" target="_blank" rel="noopener">
-        <svg viewBox="0 0 16 16" role="img">
-          <title>GitHub</title>
+        <svg viewBox="0 0 16 16">
           <path
             d="M8 0C3.58 
              0 0 3.58 0 8c0 3.54 
@@ -351,363 +610,58 @@
              1.48 0 1.07-.01 1.93
              -.01 2.2 0 .21.15.46.55.38
              A8.013 8.013 0 0016 8c0
-             -4.42-3.58-8-8-8z"
-          ></path>
+             -4.42-3.58-8-8-8z" />
         </svg>
       </a>
       <!-- LinkedIn -->
       <a href="#" aria-label="LinkedIn" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" role="img">
-          <title>LinkedIn</title>
+        <svg viewBox="0 0 24 24">
           <path
-            fill-rule="evenodd"
-            d="M3.5 3A1.5 1.5 
-             0 002 4.5v15A1.5 
-             1.5 0 003.5 21h17a1.5 
-             1.5 0 001.5-1.5v-15A1.5 
-             1.5 0 0020.5 3h-17zm3.75 
-             13.5h-2.5v-7h2.5v7zm-.5
-             -8.25a1.25 1.25 
-             0 110-2.5 1.25 1.25 
-             0 010 2.5zM18 
-             16.5h-2.5v-3.25c0
-             -.69-.31-1.25-1-1.25s
-             -1.25.56-1.25 1.25V16.5h
-             -2.5v-7h2.5v1c.41-.59
-             1.09-1 1.75-1 
-             1.41 0 2.5 1.09
-             2.5 2.5v4.5z"
-          ></path>
-        </svg>
-      </a>
-      <!-- Instagram -->
-      <a href="#" aria-label="Instagram" target="_blank" rel="noopener">
-        <svg viewBox="0 0 512 512" role="img">
-          <title>Instagram</title>
-          <path
-            d="M349.33 69.33H162.67A93.37 
-               93.37 0 0069.33 
-               162.67v186.66a93.37 
-               93.37 0 0093.34 
-               93.34h186.66a93.37 
-               93.37 0 0093.34-93.34V162.67
-               a93.37 93.37 0 
-               00-93.34-93.34zM448 
-               349.33A98.7 98.7 0 01349.33
-               448H162.67A98.7 98.7 0 
-               0164 349.33V162.67
-               A98.7 98.7 0 01162.67 
-               64h186.66A98.7 98.7 0 
-               01448 162.67z"
-          />
-          <path
-            d="M377.33 
-               162.67a28.67 28.67 
-               0 1128.67-28.67 
-               28.7 28.7 0 01-28.67 
-               28.67z"
-          />
-          <path
-            d="M256 170.67a85.33 
-               85.33 0 1085.33 
-               85.33A85.41 85.41 
-               0 00256 
-               170.67zm0 
-               141.33a56 56 0 
-               1156-56 56.06 56.06
-               0 01-56 
-               56z"
-          />
-        </svg>
-      </a>
-      <!-- Gmail -->
-      <a href="#" aria-label="Gmail" target="_blank" rel="noopener">
-        <svg viewBox="0 0 512 512" role="img">
-          <title>Gmail</title>
-          <path
-            d="M467 61H45C20.2 61 0 81.2 
-               0 106v300c0 24.8 20.2 
-               45 45 45h422c24.8 0 45-20.2 
-               45-45V106c0-24.8-20.2-45-45-45zM464 
-               118.7l-198.2 148c-5.3 4-12.4 
-               4-17.6 0L50 
-               118.7V106l206.2 
-               154.2c3.5 2.6 7.7 3.8 
-               11.8 3.8s8.3-1.3 
-               11.8-3.8L464 106v12.7z"
-          />
+            d="M20.5 2h-17A1.5 
+             1.5 0 002 3.5v17A1.5 
+             1.5 0 003.5 22h17a1.5 1.5 
+             0 001.5-1.5v-17A1.5 
+             1.5 0 0020.5 2zM8 
+             19H5v-9h3zM6.5 
+             8.25A1.75 1.75 0 
+             118.3 6.5a1.78 
+             1.78 0 01-1.8 
+             1.75zM19 
+             19h-3v-4.74c0
+             -1.42-.6-1.93
+             -1.38-1.93a1.74 
+             1.74 0 00-1.62 
+             1.06.66.66 
+             0 000.14V19h-3v-9h2.9
+             v1.3a3.11 3.11 0 
+             012.7-1.4c1.55 
+             0 3.36.86
+             3.36 3.66z" />
         </svg>
       </a>
     </div>
-  </header>
+  </footer>
 
-  <!-- SPOTLIGHT -->
-  <div class="spotlight"></div>
-
-  <!-- MAIN CONTAINER -->
-  <div class="container">
-    <!-- LEFT SIDEBAR -->
-    <div class="sidebar">
-      <h1>Anish Dudeja</h1>
-      <h2>Front End Engineer</h2>
-      <p>
-        I build accessible, pixel-perfect digital experiences for the web.
-      </p>
-      <ul class="nav-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#education">Education</a></li>
-      </ul>
-    </div>
-
-    <!-- RIGHT MAIN CONTENT -->
-    <div class="main">
-      <!-- ABOUT -->
-      <section id="about">
-        <p>
-          I’m a developer passionate about crafting accessible, pixel‐perfect user interfaces that
-          blend thoughtful design with robust engineering. My favorite work lies at the intersection
-          of design and development, creating experiences that not only look great but are
-          meticulously built for performance and usability.
-        </p>
-        <p>
-          Currently, I'm a Senior Front‐End Engineer at <strong>Some Company</strong>. I work 
-          on building highly performant interfaces while keeping accessibility in mind.
-        </p>
-        <p>
-          In the past, I've developed software in a variety of settings—from advertising agencies and
-          large corporations to start‐ups and small digital product studios. I also released a
-          comprehensive video course a while back, guiding learners through building a web app with
-          the Spotify API.
-        </p>
-        <p>
-          In my spare time, I’m usually climbing, reading, hanging out with my wife and two cats, or
-          exploring fantasy worlds for hidden items.
-        </p>
-      </section>
-
-      <!-- EXPERIENCE -->
-      <section id="experience" class="experience-section">
-        <h3>Experience</h3>
-
-        <!-- EXPERIENCE 1 -->
-        <div class="experience-item">
-          <div class="date-range">Jan 2024 – Present</div>
-          <div class="role-title">Senior Frontend Engineer, Accessibility</div>
-          <div class="role-company">Klaviyo</div>
-          <div class="experience-desc">
-            Build and maintain critical components used to construct the company's frontend. Collaborate
-            with cross‐functional teams (developers, designers, product managers) to promote best
-            practices in web accessibility.
-          </div>
-          <div class="skills">Skills: JavaScript, React, TypeScript, A11y</div>
-          <div class="tags">
-            <span class="tag">JavaScript</span>
-            <span class="tag">TypeScript</span>
-            <span class="tag">React</span>
-            <span class="tag">Storybook</span>
-          </div>
-        </div>
-
-        <!-- EXPERIENCE 2 -->
-        <div class="experience-item">
-          <div class="date-range">Jun 2018 – Dec 2023</div>
-          <div class="role-title">Lead Engineer</div>
-          <div class="role-company">Upstatement</div>
-          <div class="experience-desc">
-            Built, styled, and shipped high‐quality websites, design systems, mobile apps, and digital
-            experiences for a diverse array of clients. Provided leadership through knowledge shares
-            and internal tooling.
-          </div>
-          <div class="skills">Skills: JavaScript, TypeScript, HTML/CSS, React, Next.js</div>
-          <div class="tags">
-            <span class="tag">JavaScript</span>
-            <span class="tag">TypeScript</span>
-            <span class="tag">HTML &amp; SCSS</span>
-            <span class="tag">React</span>
-            <span class="tag">Next.js</span>
-            <span class="tag">React Native</span>
-            <span class="tag">WordPress</span>
-            <span class="tag">Contentful</span>
-            <span class="tag">Node.js</span>
-            <span class="tag">PHP</span>
-          </div>
-        </div>
-
-        <!-- EXPERIENCE 3 -->
-        <div class="experience-item">
-          <div class="date-range">Sep 2016 – May 2018</div>
-          <div class="role-title">Front End Engineer</div>
-          <div class="role-company">Placeholder Corp</div>
-          <div class="experience-desc">
-            Developed interactive user interfaces, focusing on performance and accessibility.
-            Collaborated with cross-functional teams in an agile environment.
-          </div>
-          <div class="skills">Skills: ES6, Vue.js, CSS, Web Performance</div>
-          <div class="tags">
-            <span class="tag">Vue.js</span>
-            <span class="tag">ES6</span>
-            <span class="tag">CSS</span>
-            <span class="tag">Performance</span>
-          </div>
-        </div>
-
-        <!-- EXPERIENCE 4 -->
-        <div class="experience-item">
-          <div class="date-range">Jan 2014 – Aug 2016</div>
-          <div class="role-title">Junior Developer</div>
-          <div class="role-company">Generic Tech</div>
-          <div class="experience-desc">
-            Assisted in building and maintaining web applications, learning best practices for code
-            quality, security, and modern design patterns.
-          </div>
-          <div class="skills">Skills: HTML, CSS, jQuery, Git</div>
-          <div class="tags">
-            <span class="tag">HTML</span>
-            <span class="tag">CSS</span>
-            <span class="tag">jQuery</span>
-            <span class="tag">Git</span>
-          </div>
-        </div>
-
-        <!-- See Full Resume link below experiences -->
-        <a href="#" class="section-link" style="margin-top:2rem;">
-          See Full Résumé
-          <!-- Simple arrow icon (use your own if desired) -->
-          <svg viewBox="0 0 20 20">
-            <path
-              fill-rule="evenodd"
-              d="M3 10a.75.75 0 
-              01.75-.75h10.638L10.23 
-              5.29a.75.75 0 
-              111.04-1.08l5.5 5.25a.75.75 
-              0 010 1.08l-5.5 5.25a.75.75 
-              0 01-1.04-1.08l4.158-3.96H3.75A.75.75 
-              0 013 10z"
-              clip-rule="evenodd"
-            ></path>
-          </svg>
-        </a>
-      </section>
-
-      <!-- PROJECTS -->
-      <section id="projects" class="project-section">
-        <h3>Projects</h3>
-
-        <div class="project-item">
-          <h4><a href="#">Project 1</a></h4>
-          <p>
-            A web application demonstrating personalized Spotify data. Includes top artists,
-            top tracks, and recommended tracks to create custom playlists.
-          </p>
-        </div>
-        <div class="project-item">
-          <h4><a href="#">Project 2</a></h4>
-          <p>
-            A minimal dark theme for popular code editors and terminals. Supports VS Code, Sublime,
-            Atom, and more.
-          </p>
-        </div>
-        <div class="project-item">
-          <h4><a href="#">Project 3</a></h4>
-          <p>
-            A personal portfolio showcasing advanced CSS animations, interactive case studies, 
-            and blog integration.
-          </p>
-        </div>
-        <div class="project-item">
-          <h4><a href="#">Project 4</a></h4>
-          <p>
-            A real‐time collaborative note‐taking app with offline support and conflict resolution.
-          </p>
-        </div>
-        <div class="project-item">
-          <h4><a href="#">Project 5</a></h4>
-          <p>
-            A lightweight e‐commerce prototype using a headless CMS approach and custom back‐end.
-          </p>
-        </div>
-
-        <!-- See More Projects link -->
-        <a href="#" class="section-link">
-          See More Projects
-          <svg viewBox="0 0 20 20">
-            <path
-              fill-rule="evenodd"
-              d="M3 10a.75.75 0 
-              01.75-.75h10.638L10.23 
-              5.29a.75.75 0 
-              111.04-1.08l5.5 5.25a.75.75 
-              0 010 1.08l-5.5 5.25a.75.75 
-              0 01-1.04-1.08l4.158-3.96H3.75A.75.75 
-              0 013 10z"
-              clip-rule="evenodd"
-            ></path>
-          </svg>
-        </a>
-      </section>
-
-      <!-- EDUCATION -->
-      <section id="education" class="education-section">
-        <h3>Education</h3>
-        <p>Bachelor of Science in Computer Science, Generic University (2014–2018)</p>
-
-        <!-- Courses with hover effect on heading -->
-        <div class="course-item">
-          <h4>Data Structures</h4>
-          <p>
-            Learned fundamentals of linked lists, trees, graphs, and more with efficient
-            implementations.
-          </p>
-        </div>
-        <div class="course-item">
-          <h4>Algorithms</h4>
-          <p>
-            Studied algorithmic complexity, sorting, searching, graph algorithms, and
-            dynamic programming.
-          </p>
-        </div>
-        <div class="course-item">
-          <h4>Web Development</h4>
-          <p>
-            Covered modern front-end frameworks, REST APIs, and deployment best practices.
-          </p>
-        </div>
-        <div class="course-item">
-          <h4>Database Systems</h4>
-          <p>
-            Focused on SQL, normalization, indexing, transactions, and distributed databases.
-          </p>
-        </div>
-      </section>
-    </div>
-  </div>
-
-  <!-- Intersection Observer Script -->
+  <!-- SPOTLIGHT & OBSERVER SCRIPT -->
   <script>
-    // Move spotlight with cursor
+    // Spotlight follows cursor
     const spotlight = document.querySelector('.spotlight');
     document.addEventListener('mousemove', (e) => {
-      const x = e.pageX;
-      const y = e.pageY;
-      spotlight.style.background = `
-        radial-gradient(
-          600px at ${x}px ${y}px,
-          rgba(187,134,252,0.1),
-          transparent 80%
-        )
-      `;
+      spotlight.style.background = `radial-gradient(
+        700px at ${e.pageX}px ${e.pageY}px,
+        rgba(187,134,252,0.1),
+        transparent 80%
+      )`;
     });
 
-    // Intersection Observer for active nav link
+    // Intersection Observer for active links
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('.nav-links a');
 
     const options = {
       root: null,
-      rootMargin: '-10% 0px -50% 0px', 
-      threshold: 0.01 /* nearly any visibility triggers it */
+      rootMargin: '-10% 0px -60% 0px',
+      threshold: 0.01
     };
 
     const observer = new IntersectionObserver((entries) => {
@@ -723,10 +677,7 @@
       });
     }, options);
 
-    sections.forEach(section => {
-      observer.observe(section);
-    });
+    sections.forEach(section => observer.observe(section));
   </script>
-
 </body>
 </html>
