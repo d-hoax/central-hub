@@ -801,6 +801,21 @@
     }, observerOptions);
 
     sections.forEach(section => observer.observe(section));
+    navLinks.forEach(link => {
+      link.addEventListener('click', (event) => {
+        event.preventDefault(); 
+        // 1) remove active from all
+        navLinks.forEach(l => l.classList.remove('active'));
+        // 2) add active to the clicked link
+        link.classList.add('active');
+        // 3) smooth scroll to the target
+        const targetID = link.getAttribute('href');
+        const targetSection = document.querySelector(targetID);
+        if (targetSection) {
+          targetSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
   </script>
 </body>
 </html>
