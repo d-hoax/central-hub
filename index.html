@@ -82,7 +82,7 @@
     }
    
     .left-sidebar h1 {
-      font-size: 3.5rem;
+      font-size: 3.2rem;
       color: #e6f1ff;
       font-weight: 700;
       line-height: 1.2;
@@ -191,21 +191,21 @@ But typically you'd keep them in normal flow with a margin.
       position: absolute;
       top: 6vh;
       left: calc(10vw + 320px + 5vw); /* 10% + 320px + 5% => ensures no overlap */
-      right: 8vw; /* 8% margin on the right for blank space */
+      right: 2vw; /* 8% margin on the right for blank space */
       bottom: 0;
       overflow-y: scroll;
       padding: 40px 0;
       z-index: 1;
     }
     .content-inner {
-      max-width: 700px; /* main text column limit */
+      max-width: 725px; /* main text column limit */
       margin: 0 auto;
       line-height: 1.8;
     }
 
     /* ABOUT => bigger text (1.1rem) than experiences */
     #about p {
-      font-size: 1.1rem; 
+      font-size: 1rem; 
     }
     section {
       margin-bottom: 5rem;
@@ -233,9 +233,9 @@ But typically you'd keep them in normal flow with a margin.
     .experience-date {
       flex: 0 0 100px;
       padding: 1rem;
-      font-size: 0.9rem;
+      font-size: 0.8rem;
       color: #a8acc6;
-      text-transform: uppercase;
+      text-transform: none;
     }
     .experience-main {
       flex: 1;
@@ -245,7 +245,7 @@ But typically you'd keep them in normal flow with a margin.
       display: inline-flex;
       align-items: center;
       gap: 0.3rem;
-      font-size: 1.2rem;
+      font-size: 1rem;
       font-weight: 600;
       color: #fff;
       margin-bottom: 0.4rem;
@@ -265,15 +265,16 @@ But typically you'd keep them in normal flow with a margin.
       color: #BB86FC;
     }
     .role-company {
-      font-size: 1rem;
+      font-size: 0.8rem;
       opacity: 0.8;
       margin-bottom: 0.5rem;
     }
     .experience-desc {
       margin-bottom: 0.4rem;
+      font-size: 0.8rem
     }
     .skills {
-      font-size: 0.9rem;
+      font-size: 0.7rem;
       font-style: italic;
       color: #a8acc6;
       margin-top: 0.4rem;
@@ -288,11 +289,18 @@ But typically you'd keep them in normal flow with a margin.
       background: rgba(187,134,252,0.1);
       border: 1px solid rgba(187,134,252,0.2);
       color: #BB86FC;
-      font-size: 0.8rem;
+      font-size: 0.7rem;
       padding: 0.2rem 0.7rem;
       border-radius: 9999px;
     }
-
+    .experience-image {
+    width: 115px; /* Adjust the width as needed */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 5px; /* Optional: Add rounded corners */
+    display: block; /* Ensure proper alignment */
+    margin: 0 auto; /* Center the image */
+    padding: 1rem;
+    }
     .project-item {
       background: none;
       padding: 1rem;
@@ -308,7 +316,7 @@ But typically you'd keep them in normal flow with a margin.
       display: inline-flex;
       align-items: center;
       gap: 0.3rem;
-      font-size: 1.2rem;
+      font-size: 1rem;
       font-weight: 600;
       color: #fff;
       margin-bottom: 0.4rem;
@@ -461,7 +469,7 @@ But typically you'd keep them in normal flow with a margin.
         
           <p style="margin-bottom: 20px;">Previously, I was a Technology Consulting Intern at <span style="color: white;">Ernst & Young</span>, 
             contributing to the development and deployment of AI and data analytics solutions 
-            that drive insights and enhance decision-making processes. Previously, I’ve worked on projects ranging from building <span style="color: white;">Reconciliation Reports </span> in Power BI and
+            that drive insights and enhance decision-making processes. I have also worked on projects ranging from building <span style="color: white;">Reconciliation Reports </span> in Power BI and
             <span style="color: white;">Token Automation</span> through Python scripting 
             to researching <span style="color: white;">Penguin Movement Prediction</span>. I’ve also honed my teaching and leadership skills as 
             a <span style="color: white;">Teaching Assistant</span> at UMD, helping students master programming concepts.</p>
@@ -476,10 +484,10 @@ But typically you'd keep them in normal flow with a margin.
 
         <!-- EXPERIENCE 1 -->
         <div class="experience-item">
-          <div class="experience-date">2024 – Present</div>
+          <div class="experience-date">Mar - Aug 2024</div>
           <div class="experience-main">
             <a href="#" class="experience-title">
-              <span class="experience-title-text">Senior Frontend Engineer, Accessibility</span>
+              <span class="experience-title-text">Technology Consulting Intern </span>
               <svg class="experience-arrow" viewBox="0 0 20 20">
                 <path fill-rule="evenodd"
                   d="M5.22 14.78a.75.75 
@@ -492,27 +500,28 @@ But typically you'd keep them in normal flow with a margin.
                   clip-rule="evenodd"/>
               </svg>
             </a>
-            <div class="role-company">Klaviyo</div>
+            <div class="role-company">Ernst & Young | New York City, NY </div>
             <p class="experience-desc">
-              Build and maintain core UI components used across the product, collaborating
-              with cross‐functional teams to promote accessibility.
+              Design  and implement an end-to-end data pipeline using Azure Data Factory and Databricks to support efficient data ingestion, transformation, and loading processes.  
+              Manage and collaborate with an offshore UI/UX design team to develop the front-end design for a client dashboard, ensuring seamless integration with backend analytics.  
+              Conduct in-depth client interviews to gather data requirements, develop detailed user stories, and provide value to the client.
             </p>
-            <div class="skills">Skills: JavaScript, React, TypeScript, A11y</div>
             <div class="tags">
-              <span class="tag">JavaScript</span>
-              <span class="tag">TypeScript</span>
-              <span class="tag">React</span>
-              <span class="tag">Storybook</span>
+              <span class="tag">Azure Data Factory</span>
+              <span class="tag">Databricks</span>
+              <span class="tag">Python</span>
+              <span class="tag">SQL</span>
+              <span class="tag">Figma</span>
             </div>
           </div>
         </div>
 
         <!-- EXPERIENCE 2 -->
         <div class="experience-item">
-          <div class="experience-date">2018 – 2023</div>
+          <div class="experience-date">2023 - Present</div>
           <div class="experience-main">
             <a href="#" class="experience-title">
-              <span class="experience-title-text">Lead Engineer</span>
+              <span class="experience-title-text">Teaching Assistant</span>
               <svg class="experience-arrow" viewBox="0 0 20 20">
                 <path fill-rule="evenodd"
                   d="M5.22 14.78a.75.75 
@@ -525,28 +534,25 @@ But typically you'd keep them in normal flow with a margin.
                   clip-rule="evenodd"/>
               </svg>
             </a>
-            <div class="role-company">Upstatement</div>
+            <div class="role-company">Department of Computer Science, University of Maryland | College Park, MD</div>
             <p class="experience-desc">
-              Built, styled, and shipped high‐quality websites, design systems, and digital 
-              experiences for various clients. Provided leadership via knowledge sharing.
+              Provide instructional support, facilitate discussions, create and assist with projects, and offer valuable guidance to students, 
+              thereby fostering a conducive learning environment for Object Oriented Programming II and Discrete Structures.
             </p>
-            <div class="skills">Skills: JavaScript, HTML/CSS, React, Next.js</div>
             <div class="tags">
-              <span class="tag">JavaScript</span>
-              <span class="tag">TypeScript</span>
-              <span class="tag">HTML &amp; SCSS</span>
-              <span class="tag">React</span>
-              <span class="tag">Next.js</span>
+              <span class="tag">Java</span>
+              <span class="tag">Discrete Structures</span>
+              <span class="tag">Object Oriented Programming</span>
             </div>
           </div>
         </div>
 
         <!-- EXPERIENCE 3 -->
         <div class="experience-item">
-          <div class="experience-date">2016 – 2018</div>
+          <div class="experience-date">Jun - Aug 2023</div>
           <div class="experience-main">
             <a href="#" class="experience-title">
-              <span class="experience-title-text">Front End Engineer</span>
+              <span class="experience-title-text">Software Engineering Intern</span>
               <svg class="experience-arrow" viewBox="0 0 20 20">
                 <path fill-rule="evenodd"
                   d="M5.22 14.78a.75.75 
@@ -559,26 +565,27 @@ But typically you'd keep them in normal flow with a margin.
                   clip-rule="evenodd"/>
               </svg>
             </a>
-            <div class="role-company">Placeholder Corp</div>
+            <div class="role-company">Corning | Ithaca, NY</div>
             <p class="experience-desc">
-              Developed interactive UIs focusing on performance and accessibility in an agile team.
+              Develop interactive Power BI dashboards, including Reconciliation Reports, to visualize and analyze organizational KPIs and trends, enhancing decision-making capabilities through clear and actionable insights.  
+              Automate authentication processes by implementing token-based authentication using Python scripting within Databricks and Qlik software environments, ensuring secure and efficient access to critical resources.  
+              Improve dashboard scalability and usability by designing modular and reusable components, optimizing performance for large datasets. 
             </p>
-            <div class="skills">Skills: ES6, Vue.js, CSS, Web Performance</div>
             <div class="tags">
-              <span class="tag">Vue.js</span>
-              <span class="tag">ES6</span>
-              <span class="tag">CSS</span>
-              <span class="tag">Performance</span>
+              <span class="tag">Power BI</span>
+              <span class="tag">Python</span>
+              <span class="tag">Databricks</span>
+              <span class="tag">Qlik</span>
             </div>
           </div>
         </div>
 
         <!-- EXPERIENCE 4 -->
         <div class="experience-item">
-          <div class="experience-date">2014 – 2016</div>
+          <div class="experience-date">2023 - 2024</div>
           <div class="experience-main">
             <a href="#" class="experience-title">
-              <span class="experience-title-text">Junior Developer</span>
+              <span class="experience-title-text">Research Assistant</span>
               <svg class="experience-arrow" viewBox="0 0 20 20">
                 <path fill-rule="evenodd"
                   d="M5.22 14.78a.75.75 
@@ -591,15 +598,16 @@ But typically you'd keep them in normal flow with a margin.
                   clip-rule="evenodd"/>
               </svg>
             </a>
-            <div class="role-company">Generic Tech</div>
+            <div class="role-company">Bill Fagan Laboratory, University of Maryland | College Park, MD</div>
             <p class="experience-desc">
-              Assisted in web app development, learning best practices for code quality and modern design patterns.
+              Conduct research on the movement ecology of penguins in Antarctica using GPS-derived time-series data ({x, y, time}), analyzing spatiotemporal movement patterns to provide ecological insights into penguin behavior.  
+              Pre-process raw GPS datasets and developed comprehensive visualizations, including hexmaps, to examine activity distributions across various locations and timeframes.  
+              Leverage data analysis tools and programming languages, including Python and R to model penguin activity and generate actionable results for ecological studies.
             </p>
-            <div class="skills">Skills: HTML, CSS, jQuery, Git</div>
             <div class="tags">
-              <span class="tag">HTML</span>
-              <span class="tag">CSS</span>
-              <span class="tag">jQuery</span>
+              <span class="tag">Python</span>
+              <span class="tag">R</span>
+              <span class="tag">Spatiotemporal Analysis</span>
               <span class="tag">Git</span>
             </div>
           </div>
@@ -607,10 +615,10 @@ But typically you'd keep them in normal flow with a margin.
 
         <!-- EXPERIENCE 5 (placeholder) -->
         <div class="experience-item">
-          <div class="experience-date">2012 – 2014</div>
+          <div class="experience-date">2021 - 2022</div>
           <div class="experience-main">
             <a href="#" class="experience-title">
-              <span class="experience-title-text">Intern Developer</span>
+              <span class="experience-title-text">Research Intern</span>
               <svg class="experience-arrow" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M5.22 14.78a.75.75 
                   0 001.06 0l7.22-7.22v5.69a.75.75 
@@ -622,15 +630,18 @@ But typically you'd keep them in normal flow with a margin.
                   clip-rule="evenodd"/>
               </svg>
             </a>
-            <div class="role-company">Tech Interns, Inc.</div>
+            <div class="role-company">Information and Decision Sciences Laboratory, The University of Delaware | Newark, DE</div>
             <p class="experience-desc">
-              Learned modern JavaScript patterns and helped fix bugs across various front-end apps.
+              Research and analyze autonomous vehicle datasets, performing exploratory data analysis (EDA) to identify key trends and correlations.  
+              Create effective visualizations using Python and SQL to communicate findings, enabling actionable insights for ongoing projects.  
+              Present findings through detailed reports and oral presentations to faculty and peers.
             </p>
-            <div class="skills">Skills: JavaScript, DOM, Git</div>
             <div class="tags">
-              <span class="tag">JavaScript</span>
-              <span class="tag">DOM</span>
-              <span class="tag">Git</span>
+              <span class="tag">Python</span>
+              <span class="tag">Flask</span>
+              <span class="tag">Seaborn</span>
+              <span class="tag">TensorFlow</span>
+              <span class="tag">SQL</span>
             </div>
           </div>
         </div>
@@ -654,10 +665,14 @@ But typically you'd keep them in normal flow with a margin.
       <section id="projects" class="project-section">
         <h3>Projects</h3>
         <!-- Project 1 -->
-        <div class="project-item">
-          <a href="#" class="project-title">
-            <span class="project-title-text">Project 1</span>
-            <svg class="project-arrow" viewBox="0 0 20 20">
+        <div class="experience-item">
+          <div class="experience-date"> 
+            <img src="discord-bot.jpeg" alt="Project Image" class="experience-image" />
+           </div>
+          <div class="experience-main">
+          <a href="https://d-hoax.github.io/discord-bot-data-manager/" class="experience-title">
+            <span class="experience-title-text">Discord Bot</span>
+            <svg class="experience-arrow" viewBox="0 0 20 20">
               <path fill-rule="evenodd"
                 d="M5.22 14.78a.75.75 
                  0 001.06 0l7.22-7.22v5.69a.75.75 
@@ -669,16 +684,50 @@ But typically you'd keep them in normal flow with a margin.
                 clip-rule="evenodd"/>
             </svg>
           </a>
-          <p>A personalized Spotify data app featuring top artists, tracks, and recommended playlists.</p>
+          <p class = "experience-desc"'>Personalized Discord bot that acts as a data manager. By leveraging Discord’s 
+            interactive commands, users can efficiently retrieve, update, and manage rows of data without needing direct access to it.
+            Bot serves as a bridge between Discord users and data management, allowing for seamless collaboration in a shared environment. 
+          </p>
+          <div class="tags">
+            <span class="tag">Python</span>
+            <span class="tag">Discord Developer API</span>
+            <span class="tag">Github</span>
+            <span class="tag">Openpyxl</span>
+          </div>
+        </div>
         </div>
 
         <!-- Project 2 -->
-        <div class="project-item">
-          <a href="#" class="project-title">
-            <span class="project-title-text">Project 2</span>
-            <svg class="project-arrow" viewBox="0 0 20 20"><path ... /></svg>
+        <div class="experience-item">
+          <div class="experience-date"> 
+            <img src="fs-stroke.jpeg" alt="Project Image" class="experience-image" />
+           </div>
+          <div class="experience-main">
+          <a href="https://d-hoax.github.io/Stroke-Prediction-Model/" class="experience-title">
+            <span class="experience-title-text">Discord Bot</span>
+            <svg class="experience-arrow" viewBox="0 0 20 20">
+              <path fill-rule="evenodd"
+                d="M5.22 14.78a.75.75 
+                 0 001.06 0l7.22-7.22v5.69a.75.75 
+                 0 001.5 0v-7.5a.75.75 
+                 0 00-.75-.75h-7.5a.75.75 
+                 0 000 1.5h5.69l-7.22 
+                 7.22a.75.75 
+                 0 000 1.06z"
+                clip-rule="evenodd"/>
+            </svg>
           </a>
-          <p>A minimal dark theme for editors/terminals, supporting VS Code, Sublime, etc.</p>
+          <p class = "experience-desc"'>Personalized Discord bot that acts as a data manager. By leveraging Discord’s 
+            interactive commands, users can efficiently retrieve, update, and manage rows of data without needing direct access to it.
+            Bot serves as a bridge between Discord users and data management, allowing for seamless collaboration in a shared environment. 
+          </p>
+          <div class="tags">
+            <span class="tag">Python</span>
+            <span class="tag">Discord Developer API</span>
+            <span class="tag">Github</span>
+            <span class="tag">Openpyxl</span>
+          </div>
+        </div>
         </div>
 
         <!-- Project 3 -->
